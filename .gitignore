@@ -223,3 +223,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# PII-GuardBench: full external dataset downloads are cached here and never committed.
+data/external/*/_cache/
+data/external/**/*.parquet
+data/external/**/*.arrow

@@ -1,10 +1,18 @@
-"""Mock and stub adapter tests. No network or real guardrail APIs."""
+"""Adapter tests. No network and no paid APIs.
+
+Real-engine smoke tests are skipped when the optional dependency (or its
+spaCy model) is not installed; the availability tests simulate a missing
+dependency so they pass either way.
+"""
 
 from __future__ import annotations
 
+import importlib.util
+import sys
+
 import pytest
 
-from pii_guardbench.adapters import get_adapter, list_adapters
+from pii_guardbench.adapters import AdapterUnavailableError, get_adapter, list_adapters
 from pii_guardbench.adapters.mock import MockAdapter
 from pii_guardbench.adapters.nemo import NemoGuardrailsAdapter
 from pii_guardbench.adapters.piiguard import PiiguardAdapter
@@ -14,9 +22,16 @@ CARD_PROMPT = "charge card 4111 1111 1111 1111 please"
 CONTROL = "Please confirm invoice 123456 is paid."
 
 
-def test_registry_contains_mocks_and_stubs() -> None:
+def _installed(module: str) -> bool:
+    return importlib.util.find_spec(module) is not None
+
+
+def test_registry_contains_mocks_and_real_adapters() -> None:
     names = list_adapters()
-    for name in ("mock", "mock-leaky", "mock-redact", "piiguard", "presidio", "nemo-guardrails"):
+    for name in (
+        "mock", "mock-leaky", "mock-redact",
+        "piiguard", "piiguard-presidio", "presidio", "nemo-guardrails",
+    ):
         assert name in names
     leaky = get_adapter("mock-leaky")
     assert isinstance(leaky, MockAdapter)
@@ -49,20 +64,63 @@ def test_mock_block_marks_prompt_blocked() -> None:
     assert result.redacted_text == ""
 
 
-@pytest.mark.parametrize(
-    "adapter_cls,request_payload",
-    [
-        (PiiguardAdapter, {"text": "hello"}),
-        (PresidioAdapter, {"text": "hello", "language": "en"}),
-        (NemoGuardrailsAdapter, {"prompt": "hello"}),
-    ],
+def test_presidio_reports_unavailable_without_dependency(monkeypatch) -> None:
+    monkeypatch.setitem(sys.modules, "presidio_analyzer", None)
+    with pytest.raises(AdapterUnavailableError, match="presidio-analyzer"):
+        PresidioAdapter().warmup()
+
+
+def test_nemo_reports_unavailable_without_dependency(monkeypatch) -> None:
+    monkeypatch.setitem(sys.modules, "nemoguardrails", None)
+    with pytest.raises(AdapterUnavailableError, match="nemoguardrails"):
+        NemoGuardrailsAdapter().warmup()
+
+
+def test_piiguard_reports_unavailable_without_package_or_guard_dir(monkeypatch, tmp_path) -> None:
+    monkeypatch.setitem(sys.modules, "piiguard", None)
+    monkeypatch.setitem(sys.modules, "piiguard.pii", None)
+    monkeypatch.setitem(sys.modules, "piiguard.pii.guard", None)
+    with pytest.raises(AdapterUnavailableError, match="piiguard"):
+        PiiguardAdapter(guard_dir=tmp_path).warmup()
+
+
+@pytest.mark.skipif(not _installed("piiguard"), reason="piiguard not installed")
+def test_piiguard_missing_guard_dir_message(monkeypatch, tmp_path) -> None:
+    monkeypatch.delenv("PIIGUARD_GUARD_DIR", raising=False)
+    with pytest.raises(AdapterUnavailableError, match="guard directory"):
+        PiiguardAdapter(guard_dir=tmp_path).warmup()
+
+
+@pytest.mark.skipif(not _installed("piiguard"), reason="piiguard not installed")
+def test_piiguard_rules_only_with_inline_rules(tmp_path) -> None:
+    (tmp_path / "rules.yaml").write_text(
+        "version: 1\nrules:\n- name: ssn\n  pattern: '\\b\\d{3}-\\d{2}-\\d{4}\\b'\n",
+        encoding="utf-8",
+    )
+    adapter = PiiguardAdapter(guard_dir=tmp_path)
+    result = adapter.run("ssn 078-05-1120 ok")
+    assert "078-05-1120" not in result.redacted_text
+    assert "ssn" in result.flags.detected_categories
+    assert adapter.describe()["piiguard_package"]
+
+
+@pytest.mark.skipif(
+    not (_installed("presidio_analyzer") and _installed("en_core_web_lg")),
+    reason="presidio/spaCy model not installed",
 )
-def test_stub_adapters_raise_without_calling_a_service(
-    adapter_cls: type, request_payload: dict
-) -> None:
-    adapter = adapter_cls()
-    with pytest.raises(NotImplementedError, match="not installed|stub"):
-        adapter.call(request_payload)
+def test_presidio_default_engine_redacts_card_and_email() -> None:
+    result = PresidioAdapter().run("mail jane@example.org card 4111 1111 1111 1111")
+    assert "jane@example.org" not in result.redacted_text
+    assert "4111 1111 1111 1111" not in result.redacted_text
+
+
+@pytest.mark.skipif(
+    not (_installed("nemoguardrails") and _installed("en_core_web_lg")),
+    reason="nemoguardrails/spaCy model not installed",
+)
+def test_nemo_pii_rail_masks_email_offline() -> None:
+    result = NemoGuardrailsAdapter().run("mail jane@example.org please")
+    assert "jane@example.org" not in result.redacted_text
 
 
 def test_unknown_adapter_name_lists_known_options() -> None:

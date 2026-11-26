@@ -78,6 +78,28 @@ def percentile(values: Sequence[float], q: float) -> Optional[float]:
     return xs[lo] * (1.0 - weight) + xs[hi] * weight
 
 
+def value_present(value: str, text: str) -> bool:
+    """True if ``value`` occurs in ``text`` as an exact string, not inside a longer token.
+
+    The match is case-sensitive and exact. A hit is ignored only when the value
+    begins or ends with a word character and the neighbouring character in
+    ``text`` is also a word character (for example the name ``Ann`` inside
+    ``Annual``). Values such as ``078-05-1120`` or ``sk_test_x`` behave exactly
+    like a plain substring test whenever they stand alone.
+    """
+    if not value:
+        return False
+    start = text.find(value)
+    while start != -1:
+        end = start + len(value)
+        before_ok = not (value[0].isalnum() and start > 0 and text[start - 1].isalnum())
+        after_ok = not (value[-1].isalnum() and end < len(text) and text[end].isalnum())
+        if before_ok and after_ok:
+            return True
+        start = text.find(value, start + 1)
+    return False
+
+
 def _is_pii_prompt(prompt: Mapping[str, Any]) -> bool:
     return bool(prompt.get("sensitive_spans"))
 
@@ -94,7 +116,7 @@ def prompt_leaked(prompt: Mapping[str, Any], result: AdapterResult) -> bool:
     if result.flags.blocked:
         return False
     text = result.redacted_text or ""
-    return any(span["value"] in text for span in spans)
+    return any(value_present(span["value"], text) for span in spans)
 
 
 def category_leaked(
@@ -107,7 +129,7 @@ def category_leaked(
     if result.flags.blocked:
         return False
     text = result.redacted_text or ""
-    return any(span["value"] in text for span in spans)
+    return any(value_present(span["value"], text) for span in spans)
 
 
 def is_false_positive(prompt: Mapping[str, Any], result: AdapterResult) -> bool:
@@ -144,6 +166,9 @@ class AdapterScore:
     false_positive: ProportionCI
     latency: LatencyStats
     by_category: dict[str, ProportionCI] = field(default_factory=dict)
+    # Supplementary, per planted span instead of per prompt. Spans cluster inside
+    # prompts, so no confidence interval is attached.
+    span_leak: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -152,6 +177,7 @@ class AdapterScore:
             "false_positive": self.false_positive.to_dict(),
             "latency_ms": self.latency.to_dict(),
             "by_category": {key: value.to_dict() for key, value in self.by_category.items()},
+            "span_leak": self.span_leak,
         }
 
 
@@ -226,8 +252,21 @@ def score_adapter(
         category: wilson_interval(sum(flags), len(flags))
         for category, flags in sorted(categories.items())
     }
+    span_total = 0
+    span_leaked = 0
+    for prompt, result in zip(prompts, results):
+        for span in prompt.get("sensitive_spans") or []:
+            span_total += 1
+            if not result.flags.blocked and value_present(span["value"], result.redacted_text or ""):
+                span_leaked += 1
+    span_leak = {
+        "k": span_leaked,
+        "n": span_total,
+        "rate": (span_leaked / span_total) if span_total else None,
+    }
     return AdapterScore(
         adapter=name,
+        span_leak=span_leak,
         leak=wilson_interval(sum(pii_flags), len(pii_flags)),
         false_positive=wilson_interval(sum(fp_flags), len(fp_flags)),
         latency=_latency_stats(results),

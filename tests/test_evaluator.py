@@ -10,6 +10,7 @@ from pii_guardbench.evaluator import (
     percentile,
     prompt_leaked,
     score_adapter,
+    value_present,
     wilson_interval,
 )
 
@@ -166,3 +167,13 @@ def test_percentile_edges() -> None:
 def test_length_mismatch_raises() -> None:
     with pytest.raises(ValueError, match="length mismatch"):
         score_adapter("x", PROMPTS, [_result("only one")])
+
+
+def test_value_present_respects_token_boundaries() -> None:
+    assert value_present("Ann", "Ann approved")
+    assert not value_present("Ann", "Annual review")
+    assert value_present("Ann", "Annual review, but Ann signed")
+    assert value_present("078-05-1120", "ssn 078-05-1120.")
+    assert value_present("sk_test_example123", "key=sk_test_example123;")
+    assert not value_present("", "anything")
+    assert not value_present("4111", "x41111")

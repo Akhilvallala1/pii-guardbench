@@ -1,0 +1,76 @@
+PII-GuardBench results
+  prompts : data/external/gretel-en-v1/sample.jsonl
+  counts  : 500 total, 500 PII, 0 control
+
+Adapter            Leak rate        95% CI          FPR        FPR 95% CI  Latency ms (mean/p50/p95)
+-----------------  ---------------  --------------  ---------  ----------  -------------------------
+mock-leaky         1.000 (500/500)  [0.992, 1.000]  n/a (0/0)  n/a         1.50 / 1.50 / 1.50       
+mock-redact        0.932 (466/500)  [0.906, 0.951]  n/a (0/0)  n/a         8.00 / 8.00 / 8.00       
+presidio           0.418 (209/500)  [0.376, 0.462]  n/a (0/0)  n/a         8.99 / 8.19 / 15.44      
+nemo-guardrails    0.672 (336/500)  [0.630, 0.712]  n/a (0/0)  n/a         8.69 / 7.82 / 15.38      
+piiguard           0.932 (466/500)  [0.906, 0.951]  n/a (0/0)  n/a         0.29 / 0.25 / 0.59       
+piiguard-presidio  0.684 (342/500)  [0.642, 0.723]  n/a (0/0)  n/a         8.75 / 7.95 / 14.87      
+
+Category breakdown
+Adapter            Category        Leak rate        95% CI        
+-----------------  --------------  ---------------  --------------
+mock-leaky         account_number  1.000 (33/33)    [0.896, 1.000]
+mock-leaky         address         1.000 (147/147)  [0.975, 1.000]
+mock-leaky         api_key         1.000 (24/24)    [0.862, 1.000]
+mock-leaky         credit_card     1.000 (68/68)    [0.947, 1.000]
+mock-leaky         email           1.000 (120/120)  [0.969, 1.000]
+mock-leaky         mrn             1.000 (203/203)  [0.981, 1.000]
+mock-leaky         name            1.000 (198/198)  [0.981, 1.000]
+mock-leaky         password        1.000 (27/27)    [0.875, 1.000]
+mock-leaky         phone           1.000 (88/88)    [0.958, 1.000]
+mock-leaky         ssn             1.000 (141/141)  [0.973, 1.000]
+mock-redact        account_number  0.576 (19/33)    [0.408, 0.728]
+mock-redact        address         0.966 (142/147)  [0.923, 0.985]
+mock-redact        api_key         1.000 (24/24)    [0.862, 1.000]
+mock-redact        credit_card     0.044 (3/68)     [0.015, 0.122]
+mock-redact        email           1.000 (120/120)  [0.969, 1.000]
+mock-redact        mrn             0.759 (154/203)  [0.695, 0.812]
+mock-redact        name            1.000 (198/198)  [0.981, 1.000]
+mock-redact        password        1.000 (27/27)    [0.875, 1.000]
+mock-redact        phone           0.625 (55/88)    [0.521, 0.719]
+mock-redact        ssn             0.369 (52/141)   [0.294, 0.451]
+presidio           account_number  0.000 (0/33)     [0.000, 0.104]
+presidio           address         0.129 (19/147)   [0.084, 0.193]
+presidio           api_key         0.833 (20/24)    [0.641, 0.933]
+presidio           credit_card     0.206 (14/68)    [0.127, 0.316]
+presidio           email           0.000 (0/120)    [0.000, 0.031]
+presidio           mrn             0.374 (76/203)   [0.311, 0.443]
+presidio           name            0.121 (24/198)   [0.083, 0.174]
+presidio           password        0.926 (25/27)    [0.766, 0.979]
+presidio           phone           0.125 (11/88)    [0.071, 0.210]
+presidio           ssn             0.291 (41/141)   [0.222, 0.370]
+nemo-guardrails    account_number  0.667 (22/33)    [0.496, 0.802]
+nemo-guardrails    address         0.218 (32/147)   [0.159, 0.291]
+nemo-guardrails    api_key         1.000 (24/24)    [0.862, 1.000]
+nemo-guardrails    credit_card     0.338 (23/68)    [0.237, 0.457]
+nemo-guardrails    email           0.000 (0/120)    [0.000, 0.031]
+nemo-guardrails    mrn             0.941 (191/203)  [0.900, 0.966]
+nemo-guardrails    name            0.121 (24/198)   [0.083, 0.174]
+nemo-guardrails    password        0.963 (26/27)    [0.817, 0.993]
+nemo-guardrails    phone           0.227 (20/88)    [0.152, 0.325]
+nemo-guardrails    ssn             0.397 (56/141)   [0.320, 0.480]
+piiguard           account_number  0.576 (19/33)    [0.408, 0.728]
+piiguard           address         1.000 (147/147)  [0.975, 1.000]
+piiguard           api_key         1.000 (24/24)    [0.862, 1.000]
+piiguard           credit_card     0.265 (18/68)    [0.174, 0.380]
+piiguard           email           0.000 (0/120)    [0.000, 0.031]
+piiguard           mrn             1.000 (203/203)  [0.981, 1.000]
+piiguard           name            1.000 (198/198)  [0.981, 1.000]
+piiguard           password        1.000 (27/27)    [0.875, 1.000]
+piiguard           phone           0.625 (55/88)    [0.521, 0.719]
+piiguard           ssn             0.397 (56/141)   [0.320, 0.480]
+piiguard-presidio  account_number  0.576 (19/33)    [0.408, 0.728]
+piiguard-presidio  address         0.218 (32/147)   [0.159, 0.291]
+piiguard-presidio  api_key         1.000 (24/24)    [0.862, 1.000]
+piiguard-presidio  credit_card     0.265 (18/68)    [0.174, 0.380]
+piiguard-presidio  email           0.000 (0/120)    [0.000, 0.031]
+piiguard-presidio  mrn             0.916 (186/203)  [0.870, 0.947]
+piiguard-presidio  name            0.121 (24/198)   [0.083, 0.174]
+piiguard-presidio  password        0.963 (26/27)    [0.817, 0.993]
+piiguard-presidio  phone           0.352 (31/88)    [0.261, 0.456]
+piiguard-presidio  ssn             0.397 (56/141)   [0.320, 0.480]

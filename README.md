@@ -4,11 +4,11 @@ PII-GuardBench is an open benchmark for PII guardrails, with a planned public le
 
 The goal is to compare guardrails such as NVIDIA NeMo Guardrails, Microsoft Presidio, LLM Guard, piiguard, and others behind one adapter interface, on a shared set of prompts that contain planted, obviously synthetic sensitive values.
 
-**Current status: scaffold plus scoring machinery; no prompts yet.** The adapter interface, evaluator, and CLI are in place. The planned ~1,000-prompt set has not been generated, and this repository does not report official benchmark results.
+**Current status: scoring machinery and a real-data evaluation mode; the shipped ~1,000-prompt set is not generated yet.** Real adapters (Presidio, NeMo Guardrails' PII rail, piiguard) run offline, and a seeded 500-record sample of a public synthetic dataset (Gretel, Apache-2.0) is included for an exploratory run. No official benchmark results are reported; see [`results/`](results/README.md) for the exploratory run and its caveats.
 
 ## Scoring
 
-A leak is recorded when any planted span `value` still appears as an exact substring in the guardrail's residual text. If the guardrail **blocks** the prompt, that prompt is not counted as a leak, even if the raw text still contains a planted value. Leak rate is computed over prompts that have at least one planted span, and is reported with a Wilson score 95% confidence interval (`z = 1.96`). Zero-count cases (for example, no control prompts) are reported as `n/a` rather than dividing by zero.
+A leak is recorded when any planted span `value` still appears in the guardrail's residual text as an exact, case-sensitive string that is not part of a longer word (so the name `Ann` does not match inside `Annual`). If the guardrail **blocks** the prompt, that prompt is not counted as a leak, even if the raw text still contains a planted value. Leak rate is computed over prompts that have at least one planted span, and is reported with a Wilson score 95% confidence interval (`z = 1.96`). Zero-count cases (for example, no control prompts) are reported as `n/a` rather than dividing by zero.
 
 The evaluator also reports:
 
@@ -34,8 +34,12 @@ Every guardrail is wrapped behind one interface: `normalize(prompt) -> request`,
 
 Built-in adapters:
 
-- `mock`, `mock-leaky`, and `mock-redact` — in-memory mocks for tests and demos (no network)
-- `piiguard`, `presidio`, and `nemo-guardrails` — stubs that show the wrapping pattern. `call` raises `NotImplementedError` when the dependency is missing or the live service is not wired up
+- `mock`, `mock-leaky`, and `mock-redact`: in-memory references for tests and demos (no network)
+- `presidio`: real Microsoft Presidio, default `AnalyzerEngine()` + `AnonymizerEngine()` (needs `pip install -e ".[presidio]"` and `python -m spacy download en_core_web_lg`)
+- `nemo-guardrails`: NeMo Guardrails' own Presidio-backed `mask_sensitive_data` PII rail, run offline with no LLM and no API key, using the entity list from NeMo's shipped example config (`pip install -e ".[nemo]"`). NeMo's GLiNER PII rails need a NIM server and are not wired up
+- `piiguard` and `piiguard-presidio`: piiguard's committed learned rules, alone or with its local Presidio detector; no LLM. Needs the `piiguard` package and `PIIGUARD_GUARD_DIR` pointing at a checkout's `guard/` folder
+
+An adapter whose dependency is missing is skipped with a warning instead of failing the run. Each adapter's exact configuration and package versions are written to the `--out` JSON next to the hardware description.
 
 ## Evaluator and CLI
 
@@ -54,6 +58,18 @@ python -m pii_guardbench.cli \
   --out /tmp/pii-guardbench-results.json
 ```
 
+### Real-data mode (exploratory)
+
+```bash
+python -m pip install -e ".[dev,data,presidio,nemo]" piiguard   # piiguard from a checkout of github.com/Akhilvallala1/piiguard
+python scripts/fetch_gretel_en_v1.py        # optional: rebuild the sample from the Hugging Face parquet (seeded)
+PIIGUARD_GUARD_DIR=/path/to/piiguard/guard \
+python -m pii_guardbench.cli --dataset gretel-en-v1 \
+  --adapters presidio,nemo-guardrails,piiguard,piiguard-presidio,mock-leaky --out results/gretel-en-v1.json
+```
+
+`--dataset gretel-en-v1` runs the committed sample in `data/external/gretel-en-v1/` (schema and offset checks only; the generated-set format rules do not apply to real data). The data is **synthetic**, its labels are generator labels, it has **no no-PII controls** (so FPR prints `n/a`), and unmapped label types are dropped. Read [`data/external/gretel-en-v1/README.md`](data/external/gretel-en-v1/README.md) and [`results/README.md`](results/README.md) before quoting any number. The sample is derived from `gretelai/gretel-pii-masking-en-v1` (Apache-2.0); see its [`NOTICE`](data/external/gretel-en-v1/NOTICE).
+
 `pii-guardbench` is also installed as a console script, and `scripts/run_benchmark.py` is a thin wrapper around the same CLI.
 
 `mock-leaky` passes the prompt through unchanged. `mock-redact` redacts test-style card, SSN, and API-key patterns and also over-redacts long digit runs, so a no-PII control that mentions an invoice number can show a false positive. These runs demonstrate the scoring machinery only; they are not product rankings.
@@ -64,7 +80,11 @@ python -m pii_guardbench.cli \
 schema/prompt.schema.json     JSON Schema (Draft 2020-12) for one prompt record
 schema/example.jsonl          One scaffold example (not part of a scored set)
 generators/                   Placeholder generator CLI and format validators
-pii_guardbench/adapters/      Adapter interface, mocks, stubs, and registry
+pii_guardbench/adapters/      Adapter interface, mocks, real adapters, and registry
+pii_guardbench/datasets/      Converters from public labeled datasets (Gretel)
+data/external/gretel-en-v1/   Seeded 500-record derived sample, NOTICE, conversion stats
+results/                      Exploratory run output and caveats (not official results)
+scripts/fetch_gretel_en_v1.py Download, convert, and sample the Gretel test split
 pii_guardbench/evaluator.py   Leak rate, Wilson CIs, FPR, latency, table output
 pii_guardbench/cli.py         `python -m pii_guardbench.cli`
 data/raw/                     Notes used only to shape categories and style
@@ -78,14 +98,15 @@ A prompt record includes `id`, `text`, `sensitive_spans` (category, character of
 
 ## Status and roadmap
 
-Current status: **scaffold plus adapters, evaluator, and CLI; no prompts yet.**
+Current status: **adapters, evaluator, CLI, and an exploratory real-data run; the shipped prompt set is not generated yet.**
 
 1. Schema, validators, and repository layout
 2. Adapter interface, mock adapters, evaluator with Wilson intervals, and CLI
-3. Generator that emits about 1,000 validated prompts
-4. Live wrappers for piiguard, Presidio, NeMo Guardrails, and others
-5. Public practice set, hidden official set, and public leaderboard
-6. Paper submission (see venues below)
+3. Real adapters (Presidio, NeMo PII rail, piiguard) and an exploratory real-data run on a public synthetic dataset
+4. Generator that emits about 1,000 validated prompts, including no-PII controls
+5. More adapters (for example LLM Guard) and a GLiNER-based NeMo configuration
+6. Public practice set, hidden official set, and public leaderboard
+7. Paper submission (see venues below)
 
 ## Target venues
 

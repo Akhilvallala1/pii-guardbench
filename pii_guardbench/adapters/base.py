@@ -8,6 +8,13 @@ from dataclasses import dataclass, field
 from typing import Any
 
 
+class AdapterUnavailableError(NotImplementedError):
+    """Raised when an adapter's dependency or service is not available.
+
+    Subclasses NotImplementedError so existing callers that catch it keep working.
+    """
+
+
 @dataclass
 class AdapterFlags:
     """Outcome flags from a single guardrail call."""
@@ -41,6 +48,14 @@ class GuardrailAdapter(ABC):
     @abstractmethod
     def parse(self, raw: Any) -> AdapterResult:
         """Map a raw response onto redacted text and flags. Latency is set by run()."""
+
+    def describe(self) -> dict[str, Any]:
+        """Configuration and version details recorded next to results."""
+        return {"adapter": self.name}
+
+    def warmup(self) -> None:
+        """Load models/engines before timing starts. Raises if unavailable."""
+        self.call(self.normalize("Warm-up text with no sensitive values."))
 
     def run(self, prompt: str) -> AdapterResult:
         """Normalize, call, and parse, recording wall-clock latency in milliseconds."""

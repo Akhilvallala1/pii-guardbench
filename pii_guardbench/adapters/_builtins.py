@@ -29,7 +29,12 @@ def _mock_redact() -> MockAdapter:
 register_adapter("mock", _mock)
 register_adapter("mock-leaky", _mock_leaky)
 register_adapter("mock-redact", _mock_redact)
+def _piiguard_presidio() -> PiiguardAdapter:
+    return PiiguardAdapter(with_presidio=True)
+
+
 register_adapter("piiguard", PiiguardAdapter)
+register_adapter("piiguard-presidio", _piiguard_presidio)
 register_adapter("presidio", PresidioAdapter)
 register_adapter("nemo-guardrails", NemoGuardrailsAdapter)
 register_adapter("nemo", NemoGuardrailsAdapter)

@@ -82,3 +82,38 @@ def test_cli_rejects_unknown_adapter() -> None:
     completed = _run(["--prompts", str(EXAMPLE), "--adapters", "not-a-guard"])
     assert completed.returncode == 1
     assert "Unknown adapter" in completed.stderr
+
+
+def test_cli_dataset_mode_runs_on_committed_gretel_sample(tmp_path: Path) -> None:
+    out = tmp_path / "results.json"
+    completed = _run(["--dataset", "gretel-en-v1", "--adapters", "mock-leaky,mock-redact", "--out", str(out)])
+    assert completed.returncode == 0, completed.stderr
+    payload = json.loads(out.read_text(encoding="utf-8"))
+    assert payload["n_controls"] == 0
+    by_name = {row["adapter"]: row for row in payload["results"]}
+    assert by_name["mock-leaky"]["leak"]["rate"] == 1.0
+    assert by_name["mock-leaky"]["false_positive"]["rate"] is None
+    assert "environment" in payload and "python" in payload["environment"]
+
+
+def test_cli_requires_exactly_one_prompt_source() -> None:
+    assert _run(["--adapters", "mock"]).returncode == 2
+    both = _run(["--prompts", str(EXAMPLE), "--dataset", "gretel-en-v1"])
+    assert both.returncode == 2
+
+
+def test_cli_skips_unavailable_adapter_with_warning(tmp_path: Path) -> None:
+    # piiguard without PIIGUARD_GUARD_DIR is unavailable; the mock must still run.
+    import os
+
+    env = {k: v for k, v in os.environ.items() if k != "PIIGUARD_GUARD_DIR"}
+    completed = subprocess.run(
+        [sys.executable, "-m", "pii_guardbench.cli", "--prompts", str(EXAMPLE),
+         "--adapters", "mock,piiguard", "--out", str(tmp_path / "r.json")],
+        cwd=ROOT, check=False, capture_output=True, text=True, timeout=60, env=env,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "skipped adapter piiguard" in completed.stderr
+    payload = json.loads((tmp_path / "r.json").read_text(encoding="utf-8"))
+    assert "piiguard" in payload["skipped_adapters"]
+    assert [r["adapter"] for r in payload["results"]] == ["mock"]

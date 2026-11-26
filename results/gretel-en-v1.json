@@ -1,0 +1,666 @@
+{
+  "prompts_path": "data/external/gretel-en-v1/sample.jsonl",
+  "n_prompts": 500,
+  "n_pii": 500,
+  "n_controls": 0,
+  "results": [
+    {
+      "adapter": "mock-leaky",
+      "leak": {
+        "k": 500,
+        "n": 500,
+        "rate": 1.0,
+        "low": 0.9923753814690964,
+        "high": 0.9999999999999999
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "latency_ms": {
+        "mean": 1.5,
+        "p50": 1.5,
+        "p95": 1.5,
+        "n": 500
+      },
+      "by_category": {
+        "account_number": {
+          "k": 33,
+          "n": 33,
+          "rate": 1.0,
+          "low": 0.8957265699643882,
+          "high": 1.0
+        },
+        "address": {
+          "k": 147,
+          "n": 147,
+          "rate": 1.0,
+          "low": 0.9745322245322244,
+          "high": 0.9999999999999999
+        },
+        "api_key": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "low": 0.8620194241710247,
+          "high": 1.0
+        },
+        "credit_card": {
+          "k": 68,
+          "n": 68,
+          "rate": 1.0,
+          "low": 0.9465268034119508,
+          "high": 1.0
+        },
+        "email": {
+          "k": 120,
+          "n": 120,
+          "rate": 1.0,
+          "low": 0.9689797289440706,
+          "high": 1.0
+        },
+        "mrn": {
+          "k": 203,
+          "n": 203,
+          "rate": 1.0,
+          "low": 0.9814273337665149,
+          "high": 0.9999999999999998
+        },
+        "name": {
+          "k": 198,
+          "n": 198,
+          "rate": 1.0,
+          "low": 0.9809672535295005,
+          "high": 1.0
+        },
+        "password": {
+          "k": 27,
+          "n": 27,
+          "rate": 1.0,
+          "low": 0.8754409628553641,
+          "high": 1.0
+        },
+        "phone": {
+          "k": 88,
+          "n": 88,
+          "rate": 1.0,
+          "low": 0.9581714604275188,
+          "high": 1.0
+        },
+        "ssn": {
+          "k": 141,
+          "n": 141,
+          "rate": 1.0,
+          "low": 0.9734772330601154,
+          "high": 1.0
+        }
+      },
+      "span_leak": {
+        "k": 1324,
+        "n": 1324,
+        "rate": 1.0
+      }
+    },
+    {
+      "adapter": "mock-redact",
+      "leak": {
+        "k": 466,
+        "n": 500,
+        "rate": 0.932,
+        "low": 0.9064785429161282,
+        "high": 0.9509337866731715
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "latency_ms": {
+        "mean": 8.0,
+        "p50": 8.0,
+        "p95": 8.0,
+        "n": 500
+      },
+      "by_category": {
+        "account_number": {
+          "k": 19,
+          "n": 33,
+          "rate": 0.5757575757575758,
+          "low": 0.40806973691460025,
+          "high": 0.7276464100497011
+        },
+        "address": {
+          "k": 142,
+          "n": 147,
+          "rate": 0.9659863945578231,
+          "low": 0.9228517246378743,
+          "high": 0.985385790742498
+        },
+        "api_key": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "low": 0.8620194241710247,
+          "high": 1.0
+        },
+        "credit_card": {
+          "k": 3,
+          "n": 68,
+          "rate": 0.04411764705882353,
+          "low": 0.015116345653532107,
+          "high": 0.12187392182380692
+        },
+        "email": {
+          "k": 120,
+          "n": 120,
+          "rate": 1.0,
+          "low": 0.9689797289440706,
+          "high": 1.0
+        },
+        "mrn": {
+          "k": 154,
+          "n": 203,
+          "rate": 0.7586206896551724,
+          "low": 0.6953023600367221,
+          "high": 0.8123324677735442
+        },
+        "name": {
+          "k": 198,
+          "n": 198,
+          "rate": 1.0,
+          "low": 0.9809672535295005,
+          "high": 1.0
+        },
+        "password": {
+          "k": 27,
+          "n": 27,
+          "rate": 1.0,
+          "low": 0.8754409628553641,
+          "high": 1.0
+        },
+        "phone": {
+          "k": 55,
+          "n": 88,
+          "rate": 0.625,
+          "low": 0.5206205279693488,
+          "high": 0.7189223371375308
+        },
+        "ssn": {
+          "k": 52,
+          "n": 141,
+          "rate": 0.36879432624113473,
+          "low": 0.2936217739275508,
+          "high": 0.45092675356731254
+        }
+      },
+      "span_leak": {
+        "k": 995,
+        "n": 1324,
+        "rate": 0.7515105740181269
+      }
+    },
+    {
+      "adapter": "presidio",
+      "leak": {
+        "k": 209,
+        "n": 500,
+        "rate": 0.418,
+        "low": 0.37555228526740775,
+        "high": 0.4616981521716604
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "latency_ms": {
+        "mean": 8.987712856014696,
+        "p50": 8.19073050024599,
+        "p95": 15.437773249686868,
+        "n": 500
+      },
+      "by_category": {
+        "account_number": {
+          "k": 0,
+          "n": 33,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.10427343003561192
+        },
+        "address": {
+          "k": 19,
+          "n": 147,
+          "rate": 0.1292517006802721,
+          "low": 0.08432985363284276,
+          "high": 0.19305781661197038
+        },
+        "api_key": {
+          "k": 20,
+          "n": 24,
+          "rate": 0.8333333333333334,
+          "low": 0.6414652961213058,
+          "high": 0.9332143199927109
+        },
+        "credit_card": {
+          "k": 14,
+          "n": 68,
+          "rate": 0.20588235294117646,
+          "low": 0.1267944614096761,
+          "high": 0.31642506599505876
+        },
+        "email": {
+          "k": 0,
+          "n": 120,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.031020271055929513
+        },
+        "mrn": {
+          "k": 76,
+          "n": 203,
+          "rate": 0.37438423645320196,
+          "low": 0.31072069941765,
+          "high": 0.44271381278879196
+        },
+        "name": {
+          "k": 24,
+          "n": 198,
+          "rate": 0.12121212121212122,
+          "low": 0.08282173249624801,
+          "high": 0.17402125725413048
+        },
+        "password": {
+          "k": 25,
+          "n": 27,
+          "rate": 0.9259259259259259,
+          "low": 0.7663002270926937,
+          "high": 0.9794457783026165
+        },
+        "phone": {
+          "k": 11,
+          "n": 88,
+          "rate": 0.125,
+          "low": 0.07125200897954588,
+          "high": 0.21011939569981514
+        },
+        "ssn": {
+          "k": 41,
+          "n": 141,
+          "rate": 0.2907801418439716,
+          "low": 0.22216384589818058,
+          "high": 0.37049461686389873
+        }
+      },
+      "span_leak": {
+        "k": 244,
+        "n": 1324,
+        "rate": 0.18429003021148035
+      }
+    },
+    {
+      "adapter": "nemo-guardrails",
+      "leak": {
+        "k": 336,
+        "n": 500,
+        "rate": 0.672,
+        "low": 0.6296726201980068,
+        "high": 0.7117045110273624
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "latency_ms": {
+        "mean": 8.687942582026153,
+        "p50": 7.821030500053894,
+        "p95": 15.380751249995228,
+        "n": 500
+      },
+      "by_category": {
+        "account_number": {
+          "k": 22,
+          "n": 33,
+          "rate": 0.6666666666666666,
+          "low": 0.4960758179994997,
+          "high": 0.8024997053219629
+        },
+        "address": {
+          "k": 32,
+          "n": 147,
+          "rate": 0.21768707482993196,
+          "low": 0.15862862420913557,
+          "high": 0.2911252898304928
+        },
+        "api_key": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "low": 0.8620194241710247,
+          "high": 1.0
+        },
+        "credit_card": {
+          "k": 23,
+          "n": 68,
+          "rate": 0.3382352941176471,
+          "low": 0.23714091243789054,
+          "high": 0.45662982763471366
+        },
+        "email": {
+          "k": 0,
+          "n": 120,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.031020271055929513
+        },
+        "mrn": {
+          "k": 191,
+          "n": 203,
+          "rate": 0.9408866995073891,
+          "low": 0.8995313742295562,
+          "high": 0.9658651417517551
+        },
+        "name": {
+          "k": 24,
+          "n": 198,
+          "rate": 0.12121212121212122,
+          "low": 0.08282173249624801,
+          "high": 0.17402125725413048
+        },
+        "password": {
+          "k": 26,
+          "n": 27,
+          "rate": 0.9629629629629629,
+          "low": 0.8171614606584348,
+          "high": 0.9934320234669025
+        },
+        "phone": {
+          "k": 20,
+          "n": 88,
+          "rate": 0.22727272727272727,
+          "low": 0.1522163058823423,
+          "high": 0.3251447157026475
+        },
+        "ssn": {
+          "k": 56,
+          "n": 141,
+          "rate": 0.3971631205673759,
+          "low": 0.3201558187006704,
+          "high": 0.4796254596061144
+        }
+      },
+      "span_leak": {
+        "k": 472,
+        "n": 1324,
+        "rate": 0.3564954682779456
+      }
+    },
+    {
+      "adapter": "piiguard",
+      "leak": {
+        "k": 466,
+        "n": 500,
+        "rate": 0.932,
+        "low": 0.9064785429161282,
+        "high": 0.9509337866731715
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "latency_ms": {
+        "mean": 0.29162809592526173,
+        "p50": 0.24856799973349553,
+        "p95": 0.5930082007580495,
+        "n": 500
+      },
+      "by_category": {
+        "account_number": {
+          "k": 19,
+          "n": 33,
+          "rate": 0.5757575757575758,
+          "low": 0.40806973691460025,
+          "high": 0.7276464100497011
+        },
+        "address": {
+          "k": 147,
+          "n": 147,
+          "rate": 1.0,
+          "low": 0.9745322245322244,
+          "high": 0.9999999999999999
+        },
+        "api_key": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "low": 0.8620194241710247,
+          "high": 1.0
+        },
+        "credit_card": {
+          "k": 18,
+          "n": 68,
+          "rate": 0.2647058823529412,
+          "low": 0.17449602975254203,
+          "high": 0.3800795921712458
+        },
+        "email": {
+          "k": 0,
+          "n": 120,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.031020271055929513
+        },
+        "mrn": {
+          "k": 203,
+          "n": 203,
+          "rate": 1.0,
+          "low": 0.9814273337665149,
+          "high": 0.9999999999999998
+        },
+        "name": {
+          "k": 198,
+          "n": 198,
+          "rate": 1.0,
+          "low": 0.9809672535295005,
+          "high": 1.0
+        },
+        "password": {
+          "k": 27,
+          "n": 27,
+          "rate": 1.0,
+          "low": 0.8754409628553641,
+          "high": 1.0
+        },
+        "phone": {
+          "k": 55,
+          "n": 88,
+          "rate": 0.625,
+          "low": 0.5206205279693488,
+          "high": 0.7189223371375308
+        },
+        "ssn": {
+          "k": 56,
+          "n": 141,
+          "rate": 0.3971631205673759,
+          "low": 0.3201558187006704,
+          "high": 0.4796254596061144
+        }
+      },
+      "span_leak": {
+        "k": 957,
+        "n": 1324,
+        "rate": 0.722809667673716
+      }
+    },
+    {
+      "adapter": "piiguard-presidio",
+      "leak": {
+        "k": 342,
+        "n": 500,
+        "rate": 0.684,
+        "low": 0.641977078070737,
+        "high": 0.7232170623098906
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "latency_ms": {
+        "mean": 8.750076143987826,
+        "p50": 7.953117000397469,
+        "p95": 14.872928349177522,
+        "n": 500
+      },
+      "by_category": {
+        "account_number": {
+          "k": 19,
+          "n": 33,
+          "rate": 0.5757575757575758,
+          "low": 0.40806973691460025,
+          "high": 0.7276464100497011
+        },
+        "address": {
+          "k": 32,
+          "n": 147,
+          "rate": 0.21768707482993196,
+          "low": 0.15862862420913557,
+          "high": 0.2911252898304928
+        },
+        "api_key": {
+          "k": 24,
+          "n": 24,
+          "rate": 1.0,
+          "low": 0.8620194241710247,
+          "high": 1.0
+        },
+        "credit_card": {
+          "k": 18,
+          "n": 68,
+          "rate": 0.2647058823529412,
+          "low": 0.17449602975254203,
+          "high": 0.3800795921712458
+        },
+        "email": {
+          "k": 0,
+          "n": 120,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.031020271055929513
+        },
+        "mrn": {
+          "k": 186,
+          "n": 203,
+          "rate": 0.916256157635468,
+          "low": 0.8699912391268799,
+          "high": 0.9470591027772631
+        },
+        "name": {
+          "k": 24,
+          "n": 198,
+          "rate": 0.12121212121212122,
+          "low": 0.08282173249624801,
+          "high": 0.17402125725413048
+        },
+        "password": {
+          "k": 26,
+          "n": 27,
+          "rate": 0.9629629629629629,
+          "low": 0.8171614606584348,
+          "high": 0.9934320234669025
+        },
+        "phone": {
+          "k": 31,
+          "n": 88,
+          "rate": 0.3522727272727273,
+          "low": 0.2605618066297556,
+          "high": 0.45634208006211396
+        },
+        "ssn": {
+          "k": 56,
+          "n": 141,
+          "rate": 0.3971631205673759,
+          "low": 0.3201558187006704,
+          "high": 0.4796254596061144
+        }
+      },
+      "span_leak": {
+        "k": 475,
+        "n": 1324,
+        "rate": 0.35876132930513593
+      }
+    }
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.12.113+-x86_64-with-glibc2.41",
+    "cpu_model": "Intel(R) Xeon(R) Processor",
+    "cpu_count": 8,
+    "memory_gb": 15.6,
+    "gpu": "none used (CPU only)",
+    "packages": {
+      "presidio-analyzer": "2.2.366",
+      "presidio-anonymizer": "2.2.366",
+      "spacy": "3.8.18",
+      "en-core-web-lg": "3.8.0",
+      "piiguard": "0.1.0",
+      "nemoguardrails": "0.25.0",
+      "jsonschema": "4.26.0",
+      "pyarrow": "26.0.1"
+    }
+  },
+  "adapter_config": {
+    "mock-leaky": {
+      "adapter": "mock-leaky"
+    },
+    "mock-redact": {
+      "adapter": "mock-redact"
+    },
+    "presidio": {
+      "adapter": "presidio",
+      "presidio_analyzer": "2.2.366",
+      "presidio_anonymizer": "2.2.366",
+      "spacy": "3.8.18",
+      "spacy_model": "en_core_web_lg 3.8.0",
+      "config": "AnalyzerEngine() defaults, language=en, no entity filter, score_threshold=0; AnonymizerEngine() default replace-with-<ENTITY>"
+    },
+    "nemo-guardrails": {
+      "adapter": "nemo-guardrails",
+      "nemoguardrails": "0.25.0",
+      "presidio_analyzer": "2.2.366",
+      "spacy_model": "en_core_web_lg 3.8.0",
+      "config": "mask_sensitive_data action (Presidio-backed, local, no LLM) with the shipped example entities PERSON, EMAIL_ADDRESS, PHONE_NUMBER, CREDIT_CARD, US_SSN, LOCATION; action default score threshold 0.4; GLiNER NIM rails not used (need a NIM server/API key)"
+    },
+    "piiguard": {
+      "adapter": "piiguard",
+      "piiguard_package": "0.1.0",
+      "guard_dir": "/workspace/external-cache/piiguard-clone/guard",
+      "rules_yaml_first_line": "version: 23",
+      "rules_yaml_sha256": "4369f4e8988280d4ef6b48721ae80352e33f82a74898d14e9fd164d6e486a4c0",
+      "config": "Guard.from_dir(guard/), learned rules only; no classifier, no LLM"
+    },
+    "piiguard-presidio": {
+      "adapter": "piiguard-presidio",
+      "piiguard_package": "0.1.0",
+      "guard_dir": "/workspace/external-cache/piiguard-clone/guard",
+      "rules_yaml_first_line": "version: 23",
+      "rules_yaml_sha256": "4369f4e8988280d4ef6b48721ae80352e33f82a74898d14e9fd164d6e486a4c0",
+      "config": "Guard.from_dir(guard/), learned rules + piiguard PresidioDetector (its defaults: score_threshold=0.5, 15 default entities); no LLM classifier"
+    }
+  },
+  "skipped_adapters": {}
+}

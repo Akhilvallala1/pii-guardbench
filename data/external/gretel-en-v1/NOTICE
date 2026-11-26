@@ -1,0 +1,24 @@
+Gretel synthetic PII masking dataset (English), derived sample
+================================================================
+
+Source dataset : gretelai/gretel-pii-masking-en-v1
+Location       : https://huggingface.co/datasets/gretelai/gretel-pii-masking-en-v1
+Revision       : e06eb1499ca8d54470f085021cd8e54f9efac7fd (test split)
+Copyright      : Gretel AI
+License        : Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+Attribution    : Gretel AI, "GLiNER Models for PII Detection through Fine-Tuning on
+                 Gretel-Generated Synthetic Documents", 2024
+                 (dataset id gretel-pii-docs-en-v1, as cited on the dataset card).
+
+Changes made (Apache-2.0 section 4(b)): this file's sibling sample.jsonl is a
+modified, derived subset of the Gretel test split. The original `entities`
+lists were converted into character-offset spans in the PII-GuardBench schema,
+entity types were mapped onto this benchmark's categories (unmapped types were
+dropped), and 500 records were sampled with a fixed seed. The text of each kept
+record is unchanged. See README.md and conversion_stats.json in this folder.
+
+The full dataset is not redistributed here. The documents are synthetic
+(generated with Gretel Navigator, mistral-nemo-2407), not real user text.
+
+This notice is provided to satisfy Apache-2.0 attribution requirements. A copy
+of the Apache-2.0 license text is in the repository root LICENSE file.
