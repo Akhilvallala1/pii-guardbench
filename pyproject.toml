@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pii-guardbench"
+version = "0.1.0"
+description = "Open PII guardrail benchmark with a public leaderboard"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = [
+    "jsonschema>=4.18.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "faker>=22.0.0",
+]
+
+[project.scripts]
+pii-guardbench = "pii_guardbench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pii_guardbench*", "generators*"]
+

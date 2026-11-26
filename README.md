@@ -4,11 +4,19 @@ PII-GuardBench is an open benchmark for PII guardrails, with a planned public le
 
 The goal is to compare guardrails such as NVIDIA NeMo Guardrails, Microsoft Presidio, LLM Guard, piiguard, and others behind one adapter interface, on a shared set of prompts that contain planted, obviously synthetic sensitive values.
 
-**Current status: scaffold only.** This repository does not yet include the planned dataset, adapters, evaluator, or any benchmark results. No prompts have been generated.
+**Current status: scaffold plus scoring machinery; no prompts yet.** The adapter interface, evaluator, and CLI are in place. The planned ~1,000-prompt set has not been generated, and this repository does not report official benchmark results.
 
 ## Scoring
 
-A leak is recorded when a planted value appears in a system's residual output (for example, after redaction or blocking) as an exact string match on the recorded `value` for that span. The primary metric is leak rate, reported with 95% confidence intervals (Wilson score and/or bootstrap). The evaluator will also report a false-positive rate on no-PII control prompts, so a system cannot look strong simply by blocking everything.
+A leak is recorded when any planted span `value` still appears as an exact substring in the guardrail's residual text. If the guardrail **blocks** the prompt, that prompt is not counted as a leak, even if the raw text still contains a planted value. Leak rate is computed over prompts that have at least one planted span, and is reported with a Wilson score 95% confidence interval (`z = 1.96`). Zero-count cases (for example, no control prompts) are reported as `n/a` rather than dividing by zero.
+
+The evaluator also reports:
+
+- False-positive rate on no-PII control prompts (the guard blocked the prompt or changed its text)
+- Per-category leak rates with their own Wilson intervals
+- Latency mean, p50, and p95 in milliseconds
+
+A system cannot look strong simply by blocking everything: that drives leak rate down and false-positive rate up.
 
 ## Hybrid dataset approach
 
@@ -22,42 +30,61 @@ PII-GuardBench uses a hybrid *process*, but the shipped set will be freshly gene
 
 ## Adapter layer
 
-Each guardrail will be wrapped behind one interface so the evaluator can send the same prompt to NVIDIA NeMo Guardrails, Microsoft Presidio, LLM Guard, piiguard, and additional systems, then score the residual output.
+Every guardrail is wrapped behind one interface: `normalize(prompt) -> request`, `call(request) -> raw`, `parse(raw) -> AdapterResult`, plus `run(prompt)` which times the three steps. `AdapterResult` holds `redacted_text`, flags (`blocked` and `detected_categories`), and `latency_ms`.
 
-## Evaluator
+Built-in adapters:
 
-Planned outputs:
+- `mock`, `mock-leaky`, and `mock-redact` — in-memory mocks for tests and demos (no network)
+- `piiguard`, `presidio`, and `nemo-guardrails` — stubs that show the wrapping pattern. `call` raises `NotImplementedError` when the dependency is missing or the live service is not wired up
 
-- Exact-match leak rate per system, domain, category, and difficulty
-- 95% confidence intervals (Wilson and/or bootstrap)
-- False-positive rate on control prompts
-- Optional per-span breakdowns
+## Evaluator and CLI
 
-Nothing in this repository reports those numbers yet.
+The evaluator scores one or more adapters on a JSONL file of schema-validated prompts. The CLI prints a leaderboard table and can write the same numbers as JSON.
+
+```bash
+python -m pip install -e ".[dev]"
+
+# Smoke the default mock on the single scaffold example
+python -m pii_guardbench.cli --prompts schema/example.jsonl --adapters mock
+
+# Two mocks with different leak behavior, on a tiny test fixture (not a real corpus)
+python -m pii_guardbench.cli \
+  --prompts tests/fixtures/tiny_prompts.jsonl \
+  --adapters mock-leaky,mock-redact \
+  --out /tmp/pii-guardbench-results.json
+```
+
+`pii-guardbench` is also installed as a console script, and `scripts/run_benchmark.py` is a thin wrapper around the same CLI.
+
+`mock-leaky` passes the prompt through unchanged. `mock-redact` redacts test-style card, SSN, and API-key patterns and also over-redacts long digit runs, so a no-PII control that mentions an invoice number can show a false positive. These runs demonstrate the scoring machinery only; they are not product rankings.
 
 ## Repository layout
 
 ```text
-schema/prompt.schema.json   JSON Schema (Draft 2020-12) for one prompt record
-schema/example.jsonl        One scaffold example (not part of a scored set)
-generators/                 Placeholder CLI and working format validators
-data/raw/                   Notes used only to shape categories and style
-data/generated/             Future generator output, before validation
-data/validated/             Future prompts that passed schema and format checks
-tests/                      Schema and validator tests
+schema/prompt.schema.json     JSON Schema (Draft 2020-12) for one prompt record
+schema/example.jsonl          One scaffold example (not part of a scored set)
+generators/                   Placeholder generator CLI and format validators
+pii_guardbench/adapters/      Adapter interface, mocks, stubs, and registry
+pii_guardbench/evaluator.py   Leak rate, Wilson CIs, FPR, latency, table output
+pii_guardbench/cli.py         `python -m pii_guardbench.cli`
+data/raw/                     Notes used only to shape categories and style
+data/generated/               Future generator output, before validation
+data/validated/               Future prompts that passed schema and format checks
+tests/                        Schema, evaluator, adapter, and CLI tests
+tests/fixtures/               Tiny hand-written prompts for tests and CLI demos
 ```
 
 A prompt record includes `id`, `text`, `sensitive_spans` (category, character offsets, and exact `value`), `difficulty`, `source`, `domain`, and optional `metadata`.
 
 ## Status and roadmap
 
-Current status: **scaffold, no prompts yet.**
+Current status: **scaffold plus adapters, evaluator, and CLI; no prompts yet.**
 
-1. Schema, validators, and repository layout (this commit)
-2. Generator that emits about 1,000 validated prompts
-3. Adapter interface and first guardrail wrappers
-4. Evaluator with confidence intervals
-5. Public practice set, hidden official set, and leaderboard
+1. Schema, validators, and repository layout
+2. Adapter interface, mock adapters, evaluator with Wilson intervals, and CLI
+3. Generator that emits about 1,000 validated prompts
+4. Live wrappers for piiguard, Presidio, NeMo Guardrails, and others
+5. Public practice set, hidden official set, and public leaderboard
 6. Paper submission (see venues below)
 
 ## Target venues
@@ -69,16 +96,16 @@ These dates are submission targets, not acceptances.
 
 ## Disclosure
 
-The author also builds piiguard, one of the systems this benchmark is intended to score. To reduce the risk that the official ranking is gamed, including by the author, the official evaluation split will be held out and not published with the practice set. Leaderboard claims should be read with that conflict of interest in mind. This repository does not report any benchmark results.
+The author also builds piiguard, one of the systems this benchmark is intended to score. To reduce the risk that the official ranking is gamed, including by the author, the official evaluation split will be held out and not published with the practice set. Leaderboard claims should be read with that conflict of interest in mind. This repository does not report any official benchmark results.
 
 ## Development
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install -e ".[dev]"
 python -m pytest
 ```
 
-The `faker` dependency is reserved for the future generator. Running `python -m generators.generate_prompts --n 1000` currently exits with `NotImplementedError`, by design.
+`requirements.txt` remains available for a bare pytest install. The `faker` dependency is reserved for the future generator. Running `python -m generators.generate_prompts --n 1000` currently exits with `NotImplementedError`, by design.
 
 ## License
 
