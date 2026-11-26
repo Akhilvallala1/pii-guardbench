@@ -22,7 +22,7 @@
     "text": {
       "type": "string",
       "minLength": 1,
-      "description": "Full prompt text. Span offsets are character offsets into this string."
+      "description": "Full prompt text. Loaders normalize to Unicode NFC first; span offsets are Python code-point offsets into the NFC text."
     },
     "sensitive_spans": {
       "type": "array",
@@ -68,7 +68,25 @@
           "value": {
             "type": "string",
             "minLength": 1,
-            "description": "Exact planted string used for exact-match leak scoring."
+            "description": "Exact planted surface string, as written in text. Used for exact-match scoring."
+          },
+          "canonical_value": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Underlying value behind an obfuscated surface form (adversarial layer). Format checks run on this value; normalized scoring matches either form."
+          },
+          "obfuscation": {
+            "type": "string",
+            "enum": [
+              "spaced_digits",
+              "dashed_digits",
+              "spelled_digits",
+              "leetspeak",
+              "base64",
+              "zero_width",
+              "split_sentences"
+            ],
+            "description": "Obfuscation applied to canonical_value to produce value."
           }
         }
       }

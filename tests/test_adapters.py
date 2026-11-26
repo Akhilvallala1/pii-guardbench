@@ -18,7 +18,7 @@ from pii_guardbench.adapters.nemo import NemoGuardrailsAdapter
 from pii_guardbench.adapters.piiguard import PiiguardAdapter
 from pii_guardbench.adapters.presidio import PresidioAdapter
 
-CARD_PROMPT = "charge card 4111 1111 1111 1111 please"
+CARD_PROMPT = "charge card 5289 6655 3719 3154 please"
 CONTROL = "Please confirm invoice 123456 is paid."
 
 
@@ -38,19 +38,28 @@ def test_registry_contains_mocks_and_real_adapters() -> None:
     assert leaky.name == "mock-leaky"
 
 
-def test_mock_passthrough_leaks_and_reports_configured_latency() -> None:
-    adapter = MockAdapter(name="mock-leaky", behavior="passthrough", latency_ms=1.5)
+def test_mock_passthrough_leaks_and_latency_is_measured_not_hard_coded() -> None:
+    adapter = MockAdapter(name="mock-leaky", behavior="passthrough", latency_ms=5.0)
     result = adapter.run(CARD_PROMPT)
     assert result.redacted_text == CARD_PROMPT
     assert result.flags.blocked is False
-    assert result.latency_ms == 1.5
+    # Measured wall time includes the simulated 5 ms delay, so it is >= 5 and
+    # (almost surely) not exactly 5.0.
+    assert result.latency_ms >= 5.0
+    fast = MockAdapter(name="fast", behavior="passthrough").run(CARD_PROMPT)
+    assert 0.0 <= fast.latency_ms < 5.0
+
+
+def test_mock_rejects_negative_latency() -> None:
+    with pytest.raises(ValueError):
+        MockAdapter(latency_ms=-1)
 
 
 def test_mock_redact_removes_card_and_over_redacts_control() -> None:
     adapter = MockAdapter(name="mock-redact", behavior="redact", over_redact=True)
     card = adapter.run(CARD_PROMPT)
     control = adapter.run(CONTROL)
-    assert "4111 1111 1111 1111" not in card.redacted_text
+    assert "5289 6655 3719 3154" not in card.redacted_text
     assert "[REDACTED]" in card.redacted_text
     assert card.flags.blocked is False
     assert control.redacted_text != CONTROL
@@ -98,8 +107,8 @@ def test_piiguard_rules_only_with_inline_rules(tmp_path) -> None:
         encoding="utf-8",
     )
     adapter = PiiguardAdapter(guard_dir=tmp_path)
-    result = adapter.run("ssn 078-05-1120 ok")
-    assert "078-05-1120" not in result.redacted_text
+    result = adapter.run("ssn 790-18-3465 ok")
+    assert "790-18-3465" not in result.redacted_text
     assert "ssn" in result.flags.detected_categories
     assert adapter.describe()["piiguard_package"]
 
@@ -109,9 +118,9 @@ def test_piiguard_rules_only_with_inline_rules(tmp_path) -> None:
     reason="presidio/spaCy model not installed",
 )
 def test_presidio_default_engine_redacts_card_and_email() -> None:
-    result = PresidioAdapter().run("mail jane@example.org card 4111 1111 1111 1111")
+    result = PresidioAdapter().run("mail jane@example.org card 5289 6655 3719 3154")
     assert "jane@example.org" not in result.redacted_text
-    assert "4111 1111 1111 1111" not in result.redacted_text
+    assert "5289 6655 3719 3154" not in result.redacted_text
 
 
 @pytest.mark.skipif(

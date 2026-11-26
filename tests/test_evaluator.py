@@ -14,9 +14,9 @@ from pii_guardbench.evaluator import (
     wilson_interval,
 )
 
-CARD = "4111 1111 1111 1111"
-SSN = "078-05-1120"
-KEY = "sk_test_example123"
+CARD = "5289 6655 3719 3154"
+SSN = "790-18-3465"
+KEY = "sk_test_FAKE_4753rw_3mpw3v_pgb"
 
 PROMPTS = [
     {
@@ -50,12 +50,14 @@ def _result(text: str, *, blocked: bool = False, latency_ms: float = 1.0) -> Ada
     )
 
 
-def test_blocked_output_is_not_a_leak_even_if_text_still_contains_pii() -> None:
+def test_blocked_flag_does_not_excuse_residual_text() -> None:
     prompt = PROMPTS[0]
     leaked_text = _result(prompt["text"], blocked=False)
-    blocked = _result(prompt["text"], blocked=True)
+    blocked_echo = _result(prompt["text"], blocked=True)
+    blocked_empty = _result("", blocked=True)
     assert prompt_leaked(prompt, leaked_text) is True
-    assert prompt_leaked(prompt, blocked) is False
+    assert prompt_leaked(prompt, blocked_echo) is True
+    assert prompt_leaked(prompt, blocked_empty) is False
 
 
 def test_score_leaky_redacting_and_blocking_adapters() -> None:
@@ -69,7 +71,7 @@ def test_score_leaky_redacting_and_blocking_adapters() -> None:
         _result("key [REDACTED]", latency_ms=8.0),
         _result("Please confirm invoice [REDACTED] is paid.", latency_ms=8.0),
     ]
-    # Blocked despite residual PII in the raw text; must not count as a leak.
+    # Blocked but the PII is still in the returned text: residual exposure.
     blocking = [
         _result(PROMPTS[0]["text"], blocked=True, latency_ms=4.0),
         _result(PROMPTS[1]["text"], blocked=True, latency_ms=4.0),
@@ -89,6 +91,8 @@ def test_score_leaky_redacting_and_blocking_adapters() -> None:
     assert leaky_score.by_category["credit_card"].rate == 1.0
     assert leaky_score.by_category["ssn"].rate == 1.0
     assert leaky_score.by_category["api_key"].rate == 1.0
+    assert leaky_score.blocked.rate == 0.0
+    assert leaky_score.residual_given_block.n == 0
     assert leaky_score.latency.mean == pytest.approx(1.5)
     assert leaky_score.latency.p50 == pytest.approx(1.5)
     assert leaky_score.latency.p95 == pytest.approx(1.5)
@@ -103,9 +107,12 @@ def test_score_leaky_redacting_and_blocking_adapters() -> None:
     assert redact_score.by_category["ssn"].rate == 0.0
     assert redact_score.by_category["api_key"].rate == 0.0
 
-    assert block_score.leak.rate == 0.0
+    assert block_score.leak.rate == 1.0
+    assert block_score.blocked.rate == 1.0
+    assert block_score.residual_given_block.k == 2
+    assert block_score.residual_given_block.n == 2
     assert block_score.false_positive.rate == 1.0
-    assert block_score.by_category["credit_card"].rate == 0.0
+    assert block_score.by_category["credit_card"].rate == 1.0
 
     expected_leak_ci = wilson_interval(2, 2)
     assert leaky_score.leak.low == pytest.approx(expected_leak_ci.low)
@@ -173,7 +180,7 @@ def test_value_present_respects_token_boundaries() -> None:
     assert value_present("Ann", "Ann approved")
     assert not value_present("Ann", "Annual review")
     assert value_present("Ann", "Annual review, but Ann signed")
-    assert value_present("078-05-1120", "ssn 078-05-1120.")
-    assert value_present("sk_test_example123", "key=sk_test_example123;")
+    assert value_present("790-18-3465", "ssn 790-18-3465.")
+    assert value_present("sk_test_FAKE_4753rw_3mpw3v_pgb", "key=sk_test_FAKE_4753rw_3mpw3v_pgb;")
     assert not value_present("", "anything")
     assert not value_present("4111", "x41111")

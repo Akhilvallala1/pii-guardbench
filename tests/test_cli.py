@@ -74,8 +74,9 @@ def test_cli_two_mocks_on_tiny_fixture(tmp_path: Path) -> None:
     assert leaky["false_positive"]["rate"] == 0.0
     assert redacting["leak"]["rate"] == 0.0
     assert redacting["false_positive"]["rate"] == 1.0
-    assert leaky["latency_ms"]["mean"] == pytest.approx(1.5)
-    assert redacting["latency_ms"]["mean"] == pytest.approx(8.0)
+    # Latency is measured, not hard-coded.
+    assert leaky["latency_ms"]["mean"] >= 0.0
+    assert redacting["latency_ms"]["mean"] >= 0.0
 
 
 def test_cli_rejects_unknown_adapter() -> None:
@@ -117,3 +118,43 @@ def test_cli_skips_unavailable_adapter_with_warning(tmp_path: Path) -> None:
     payload = json.loads((tmp_path / "r.json").read_text(encoding="utf-8"))
     assert "piiguard" in payload["skipped_adapters"]
     assert [r["adapter"] for r in payload["results"]] == ["mock"]
+
+
+DEMO = ROOT / "tests" / "fixtures" / "demo_prompts_seed7.jsonl"
+
+
+def test_cli_rejects_duplicate_adapter_ids() -> None:
+    for spec in ("mock,mock", "nemo,nemo-guardrails", "mock-leaky,MOCK-LEAKY"):
+        completed = _run(["--prompts", str(EXAMPLE), "--adapters", spec])
+        assert completed.returncode == 1, spec
+        assert "Duplicate adapter id" in completed.stderr
+
+
+def test_cli_out_dir_writes_per_prompt_dump_and_stats_sections(tmp_path: Path) -> None:
+    out_dir = tmp_path / "run"
+    completed = _run([
+        "--prompts", str(DEMO), "--adapters", "mock-leaky,mock-redact,mock-block",
+        "--out-dir", str(out_dir), "--bootstrap-iters", "200", "--seed", "3",
+        "--mock-latency-ms", "1",
+    ])
+    assert completed.returncode == 0, completed.stderr
+    out = completed.stdout
+    for section in ("Exact leak", "Norm leak", "Cluster-boot 95%", "Partial (last-4)", "Resid|block",
+                    "Layer breakdown", "Paired McNemar", "p Holm", "Bootstrap rank intervals"):
+        assert section in out, section
+    rows = [json.loads(line) for line in (out_dir / "per_prompt.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert len(rows) == 3 * 30
+    assert {r["adapter"] for r in rows} == {"mock-leaky", "mock-redact", "mock-block"}
+    assert {"prompt_id", "exact_leak", "normalized_leak", "partial_exposure", "blocked",
+            "false_positive", "latency_ms", "layer", "cluster"} <= set(rows[0])
+    summary = json.loads((out_dir / "summary.json").read_text(encoding="utf-8"))
+    assert summary["bootstrap"]["iterations"] == 200 and summary["bootstrap"]["seed"] == 3
+    assert len(summary["pairwise_mcnemar_holm"]) == 3
+    # Simulated 1 ms delay is measured, so mean latency is at least 1 ms.
+    assert all(r["latency_ms"]["mean"] >= 1.0 for r in summary["results"])
+    assert (out_dir / "leaderboard.txt").read_text(encoding="utf-8") == out
+
+
+def test_cli_rejects_bad_bootstrap_iterations() -> None:
+    completed = _run(["--prompts", str(EXAMPLE), "--adapters", "mock", "--bootstrap-iters", "0"])
+    assert completed.returncode == 1

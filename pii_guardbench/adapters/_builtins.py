@@ -14,7 +14,7 @@ def _mock() -> MockAdapter:
 
 
 def _mock_leaky() -> MockAdapter:
-    return MockAdapter(name="mock-leaky", behavior="passthrough", latency_ms=1.5)
+    return MockAdapter(name="mock-leaky", behavior="passthrough")
 
 
 def _mock_redact() -> MockAdapter:
@@ -22,19 +22,23 @@ def _mock_redact() -> MockAdapter:
         name="mock-redact",
         behavior="redact",
         over_redact=True,
-        latency_ms=8.0,
     )
+
+
+def _mock_block() -> MockAdapter:
+    return MockAdapter(name="mock-block", behavior="block")
+
+
+def _piiguard_presidio() -> PiiguardAdapter:
+    return PiiguardAdapter(with_presidio=True)
 
 
 register_adapter("mock", _mock)
 register_adapter("mock-leaky", _mock_leaky)
 register_adapter("mock-redact", _mock_redact)
-def _piiguard_presidio() -> PiiguardAdapter:
-    return PiiguardAdapter(with_presidio=True)
-
-
+register_adapter("mock-block", _mock_block)
 register_adapter("piiguard", PiiguardAdapter)
 register_adapter("piiguard-presidio", _piiguard_presidio)
 register_adapter("presidio", PresidioAdapter)
 register_adapter("nemo-guardrails", NemoGuardrailsAdapter)
-register_adapter("nemo", NemoGuardrailsAdapter)
+register_adapter("nemo", NemoGuardrailsAdapter, alias_of="nemo-guardrails")

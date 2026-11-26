@@ -123,6 +123,7 @@ def test_span_offset_check() -> None:
     assert not span_offsets_valid(text, -1, end, "4111 1111 1111 1111")
 
 
-def test_generate_prompts_is_not_implemented() -> None:
-    with pytest.raises(NotImplementedError):
-        generate_prompts(1000)
+def test_generate_prompts_is_implemented_and_validates() -> None:
+    records = generate_prompts(50, seed=3)
+    assert len(records) == 50
+    assert all(validate_record(r) == [] for r in records)

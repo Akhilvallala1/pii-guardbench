@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import time
 from typing import Any, Iterable, Sequence
 
 from pii_guardbench.adapters.base import AdapterFlags, AdapterResult, GuardrailAdapter
@@ -35,8 +36,9 @@ class MockAdapter(GuardrailAdapter):
         When True and behavior is ``redact``, also redact 6+ digit runs.
         Useful for demonstrating a non-zero false-positive rate on controls.
     latency_ms:
-        If set, ``run()`` reports this value instead of measured wall time,
-        so demos and tests have stable latency numbers.
+        Simulated service delay in milliseconds (default 0). ``call()`` sleeps
+        this long, and ``run()`` reports the *measured* wall time, so latency
+        is never hard-coded into results.
     """
 
     def __init__(
@@ -69,12 +71,16 @@ class MockAdapter(GuardrailAdapter):
         self.replacement = replacement
         self.over_redact = over_redact
         self._detected_categories = list(detected_categories or [])
-        self.fixed_latency_ms = latency_ms
+        if latency_ms is not None and latency_ms < 0:
+            raise ValueError("latency_ms must be >= 0")
+        self.latency_ms = float(latency_ms or 0.0)
 
     def normalize(self, prompt: str) -> dict[str, str]:
         return {"text": prompt}
 
     def call(self, request: dict[str, str]) -> dict[str, Any]:
+        if self.latency_ms > 0:
+            time.sleep(self.latency_ms / 1000.0)
         text = request["text"]
         if self.behavior == "block":
             return {
@@ -104,12 +110,6 @@ class MockAdapter(GuardrailAdapter):
                 detected_categories=list(raw.get("detected_categories") or []),
             ),
         )
-
-    def run(self, prompt: str) -> AdapterResult:
-        result = super().run(prompt)
-        if self.fixed_latency_ms is not None:
-            result.latency_ms = float(self.fixed_latency_ms)
-        return result
 
     def _redact(self, text: str) -> tuple[str, list[str]]:
         detected: list[str] = []

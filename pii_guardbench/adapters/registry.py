@@ -9,16 +9,35 @@ from pii_guardbench.adapters.base import GuardrailAdapter
 AdapterFactory = Callable[[], GuardrailAdapter]
 
 _REGISTRY: dict[str, AdapterFactory] = {}
+_ALIASES: dict[str, str] = {}
 
 
-def register_adapter(name: str, factory: AdapterFactory, *, overwrite: bool = False) -> None:
-    """Register an adapter factory under a lowercase CLI name."""
+def register_adapter(
+    name: str,
+    factory: AdapterFactory,
+    *,
+    overwrite: bool = False,
+    alias_of: str | None = None,
+) -> None:
+    """Register an adapter factory under a lowercase CLI name.
+
+    ``alias_of`` marks ``name`` as another spelling of an existing adapter id,
+    so asking for both in one run is reported as a duplicate.
+    """
     key = name.strip().lower()
     if not key:
         raise ValueError("Adapter name must be non-empty.")
     if key in _REGISTRY and not overwrite:
         raise ValueError(f"Adapter {name!r} is already registered.")
     _REGISTRY[key] = factory
+    if alias_of:
+        _ALIASES[key] = alias_of.strip().lower()
+
+
+def adapter_id(name: str) -> str:
+    """Unique id for a CLI name: the lowercase registry key, aliases resolved."""
+    key = name.strip().lower()
+    return _ALIASES.get(key, key)
 
 
 def get_adapter(name: str) -> GuardrailAdapter:
