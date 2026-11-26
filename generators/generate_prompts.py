@@ -46,6 +46,8 @@ from typing import Any, Iterable, Mapping, Sequence
 
 from generators import obfuscations as obf
 
+GENERATOR_VERSION = "pgb-gen-v2"  # v2: adds base64_wrapped and leetspeak_alt hard templates
+
 API_KEY_PREFIXES: tuple[str, ...] = ("sk_test_", "ghp_", "xoxb-")
 
 _MRN_RE = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{4,14})[A-Za-z0-9]$")
@@ -305,6 +307,8 @@ HARD_TEMPLATES: tuple[tuple[str, str, str, str, str], ...] = (
     ("hard-08", "credentials", "api_key", "zero_width", "Use key {obf} for the staging environment."),
     ("hard-09", "credentials", "password", "leetspeak", "New admin password is {obf}, store it in the vault."),
     ("hard-10", "credentials", "credit_card", "zero_width", "Card for the vendor account: {obf}."),
+    ("hard-11", "credentials", "api_key", "base64_wrapped", "Paste the key from this wrapped blob into the config:\n{obf}\nthen restart the worker."),
+    ("hard-12", "credentials", "password", "leetspeak_alt", "Temporary login password: {obf} (rotate it next week)."),
 )
 
 _PLACEHOLDER_RE = re.compile(r"\{(\w+)\}")
@@ -422,7 +426,7 @@ def _clean_record(rng: random.Random, vf: _ValueFactory, idx: int, tpl: tuple[st
     return {
         "id": f"pgb-{idx:05d}", "text": text, "sensitive_spans": spans,
         "difficulty": rng.choice(("easy", "medium")), "source": "generated", "domain": domain,
-        "metadata": {"layer": "clean", "template_id": tid, "generator": "pgb-gen-v1"},
+        "metadata": {"layer": "clean", "template_id": tid, "generator": GENERATOR_VERSION},
     }
 
 
@@ -444,7 +448,7 @@ def _control_record(rng: random.Random, vf: _ValueFactory, idx: int, tpl: tuple[
         "id": f"pgb-{idx:05d}", "text": text, "sensitive_spans": spans,
         "difficulty": "hard" if tid in ("ctl-01", "ctl-02", "ctl-05") else "easy",
         "source": "control", "domain": "none",
-        "metadata": {"layer": "control", "template_id": tid, "generator": "pgb-gen-v1", "lookalike": True},
+        "metadata": {"layer": "control", "template_id": tid, "generator": GENERATOR_VERSION, "lookalike": True},
     }
 
 
@@ -464,7 +468,7 @@ def _hard_record(rng: random.Random, vf: _ValueFactory, idx: int, tpl: tuple[str
     return {
         "id": f"pgb-{idx:05d}", "text": text, "sensitive_spans": spans,
         "difficulty": "adversarial", "source": "generated", "domain": domain,
-        "metadata": {"layer": "hard", "template_id": tid, "obfuscation": method, "generator": "pgb-gen-v1"},
+        "metadata": {"layer": "hard", "template_id": tid, "obfuscation": method, "generator": GENERATOR_VERSION},
     }
 
 

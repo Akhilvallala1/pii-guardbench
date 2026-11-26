@@ -37,7 +37,7 @@ def test_layers_domains_and_obfuscations_are_covered(big: list[dict]) -> None:
     assert {r["domain"] for r in big if r["metadata"]["layer"] == "clean"} == {"finance", "health", "credentials"}
     obfs = {r["metadata"]["obfuscation"] for r in big if r["metadata"]["layer"] == "hard"}
     assert obfs == {"spaced_digits", "dashed_digits", "spelled_digits", "split_sentences",
-                    "leetspeak", "base64", "zero_width"}
+                    "leetspeak", "base64", "zero_width", "leetspeak_alt", "base64_wrapped"}
     cats = {s["category"] for r in big for s in r["sensitive_spans"]}
     assert {"credit_card", "ssn", "mrn", "diagnosis", "api_key", "token", "password"} <= cats
 

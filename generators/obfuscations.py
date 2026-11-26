@@ -32,6 +32,21 @@ def leetspeak(value: str) -> str:
     return value.translate(_LEET)
 
 
+_LEET_ALT = str.maketrans({"a": "@", "i": "!", "s": "$", "t": "+", "e": "3", "o": "0",
+                           "A": "@", "I": "!", "S": "$", "T": "+", "E": "3", "O": "0"})
+
+
+def leetspeak_alt(value: str) -> str:
+    """Second leet alphabet (symbols instead of digits for a/i/s/t)."""
+    return value.translate(_LEET_ALT)
+
+
+def base64_wrapped(value: str, width: int = 16) -> str:
+    """Base64 hard-wrapped with a newline every ``width`` characters (MIME-style)."""
+    raw = base64_encode(value)
+    return "\n".join(raw[i : i + width] for i in range(0, len(raw), width))
+
+
 def base64_encode(value: str) -> str:
     return base64.b64encode(value.encode("utf-8")).decode("ascii")
 
@@ -53,5 +68,7 @@ ENCODERS = {
     "leetspeak": leetspeak,
     "base64": base64_encode,
     "zero_width": zero_width,
+    "leetspeak_alt": leetspeak_alt,
+    "base64_wrapped": base64_wrapped,
 }
 OBFUSCATIONS = tuple(ENCODERS) + ("split_sentences",)

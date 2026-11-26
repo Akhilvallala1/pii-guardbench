@@ -30,7 +30,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Any, Iterable, Mapping, Optional, Sequence
 
 from pii_guardbench.adapters.base import AdapterResult
-from pii_guardbench.matching import PARTIAL_CATEGORIES, exact_present, match_span
+from pii_guardbench.matching import PARTIAL_CATEGORIES, SpanMatch, exact_present, match_span
 from pii_guardbench.stats import (
     BootstrapCI,
     bootstrap_rank_intervals,
@@ -136,12 +136,12 @@ def prompt_leaked(prompt: Mapping[str, Any], result: AdapterResult) -> bool:
     The ``blocked`` flag does not excuse residual text (see module docstring).
     """
     text = result.redacted_text or ""
-    return any(match_span(span, text).normalized for span in prompt.get("sensitive_spans") or [])
+    return any(m.normalized for m in _span_units(prompt.get("sensitive_spans") or [], text))
 
 
 def prompt_leaked_exact(prompt: Mapping[str, Any], result: AdapterResult) -> bool:
     text = result.redacted_text or ""
-    return any(match_span(span, text).exact for span in prompt.get("sensitive_spans") or [])
+    return any(m.exact for m in _span_units(prompt.get("sensitive_spans") or [], text))
 
 
 def category_leaked(
@@ -213,12 +213,51 @@ class PromptOutcome:
         return asdict(self)
 
 
+def _span_units(spans: Sequence[Mapping[str, Any]], text: str) -> list[SpanMatch]:
+    """One match per planted value.
+
+    Fragments of a value split across sentences (``obfuscation ==
+    "split_sentences"``, same ``canonical_value``) form one unit: it is a full
+    (normalized/exact) leak only if every fragment survives or the whole
+    canonical value appears; if only some fragments survive it is a partial
+    exposure, not a full leak.
+    """
+    units: list[SpanMatch] = []
+    groups: dict[str, list[SpanMatch]] = {}
+    order: list[Any] = []
+    for span in spans:
+        m = match_span(span, text)
+        if span.get("obfuscation") == "split_sentences" and span.get("canonical_value"):
+            key = span["canonical_value"]
+            if key not in groups:
+                groups[key] = []
+                order.append(("g", key))
+            groups[key].append(m)
+        else:
+            order.append(("s", m))
+    for kind, item in order:
+        if kind == "s":
+            units.append(item)
+            continue
+        frags = groups[item]
+        full_norm = all(f.normalized for f in frags)
+        units.append(
+            SpanMatch(
+                category=frags[0].category,
+                exact=all(f.exact for f in frags),
+                normalized=full_norm,
+                partial=(not full_norm) and any(f.normalized or f.partial for f in frags),
+            )
+        )
+    return units
+
+
 def score_prompt(adapter: str, prompt: Mapping[str, Any], result: AdapterResult) -> PromptOutcome:
     text = result.redacted_text or ""
     spans = prompt.get("sensitive_spans") or []
-    matches = [match_span(span, text) for span in spans]
+    matches = _span_units(spans, text)
     is_pii = bool(spans)
-    partial_spans = [m for m in matches if m.category in PARTIAL_CATEGORIES]
+    partial_spans = [m for m in matches if m.category in PARTIAL_CATEGORIES or m.partial]
     return PromptOutcome(
         prompt_id=str(prompt.get("id")),
         adapter=adapter,
@@ -272,9 +311,15 @@ class AdapterScore:
     blocked: Optional[ProportionCI] = None
     residual_given_block: Optional[ProportionCI] = None
     by_layer: dict[str, dict[str, ProportionCI]] = field(default_factory=dict)
-    # Supplementary, per planted span rather than per prompt. Spans cluster
-    # inside prompts, so no interval is attached.
+    by_obfuscation: dict[str, ProportionCI] = field(default_factory=dict)
+    # Per planted value (split fragments count once). Spans cluster inside
+    # prompts and templates, so the interval is a cluster bootstrap.
     span_leak: dict[str, Any] = field(default_factory=dict)
+    span_leak_ci: Optional[ProportionCI] = None
+    span_leak_bootstrap: Optional[BootstrapCI] = None
+    contract: Optional[list[str]] = None
+    in_scope: dict[str, Any] = field(default_factory=dict)
+    shared_scope: dict[str, Any] = field(default_factory=dict)
     outcomes: list[PromptOutcome] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
@@ -298,7 +343,17 @@ class AdapterScore:
                 for layer, metrics in self.by_layer.items()
             },
             "span_leak": self.span_leak,
+            "by_obfuscation": {k: v.to_dict() for k, v in self.by_obfuscation.items()},
+            "span_leak_wilson_unadjusted": opt(self.span_leak_ci),
+            "span_leak_cluster_bootstrap": opt(self.span_leak_bootstrap),
+            "entity_contract": self.contract,
+            "in_scope": _scope_dict(self.in_scope),
+            "shared_scope": _scope_dict(self.shared_scope),
         }
+
+
+def _scope_dict(scope: Mapping[str, Any]) -> dict[str, Any]:
+    return {k: (v.to_dict() if hasattr(v, "to_dict") else v) for k, v in scope.items()}
 
 
 @dataclass
@@ -311,6 +366,7 @@ class BenchmarkReport:
     pairwise: list[dict[str, Any]] = field(default_factory=list)
     ranks: dict[str, dict[str, Any]] = field(default_factory=dict)
     bootstrap: dict[str, Any] = field(default_factory=dict)
+    shared_categories: Optional[list[str]] = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -321,7 +377,9 @@ class BenchmarkReport:
             "bootstrap": self.bootstrap,
             "results": [score.to_dict() for score in self.scores],
             "pairwise_mcnemar_holm": self.pairwise,
+            "holm_family": "all pairs of non-mock adapters; mock pairs reported unadjusted",
             "rank_intervals": self.ranks,
+            "shared_scope_categories": self.shared_categories,
         }
 
     def iter_outcomes(self) -> Iterable[PromptOutcome]:
@@ -353,6 +411,8 @@ def score_adapter(
     *,
     bootstrap_iterations: int = DEFAULT_BOOTSTRAP_ITERATIONS,
     seed: int = DEFAULT_SEED,
+    contract: Optional[Iterable[str]] = None,
+    shared_categories: Optional[Iterable[str]] = None,
 ) -> AdapterScore:
     """Aggregate every metric for one adapter on the shared prompt list."""
     if len(prompts) != len(results):
@@ -383,8 +443,17 @@ def score_adapter(
             "normalized_leak": _ci([bool(o.normalized_leak) for o in sub]),
         }
 
+    by_obf: dict[str, list[bool]] = {}
+    for prompt, o in zip(prompts, outcomes):
+        obf = (prompt.get("metadata") or {}).get("obfuscation")
+        if obf and o.is_pii:
+            by_obf.setdefault(str(obf), []).append(bool(o.normalized_leak))
+
     blocked_pii = [o for o in pii if o.blocked]
     leak_flags = [bool(o.normalized_leak) for o in pii]
+    span_flags = [bool(m["normalized"]) for o in pii for m in o.span_matches]
+    span_clusters = [o.cluster for o in pii for _ in o.span_matches]
+    contract_list = sorted(contract) if contract is not None else None
     return AdapterScore(
         adapter=name,
         leak=_ci(leak_flags),
@@ -399,13 +468,41 @@ def score_adapter(
         latency=_latency_stats(results),
         by_category={c: _ci(f) for c, f in sorted(categories.items())},
         by_layer=layers,
+        by_obfuscation={k: _ci(v) for k, v in sorted(by_obf.items())},
         span_leak={
             "k": span_leaked,
             "n": span_total,
             "rate": (span_leaked / span_total) if span_total else None,
         },
+        span_leak_ci=_ci(span_flags),
+        span_leak_bootstrap=cluster_bootstrap_ci(
+            span_flags, span_clusters, iterations=bootstrap_iterations, seed=seed
+        ),
+        contract=contract_list,
+        in_scope=_scope_metrics(pii, contract_list),
+        shared_scope=_scope_metrics(pii, sorted(shared_categories) if shared_categories is not None else None),
         outcomes=outcomes,
     )
+
+
+def _scope_metrics(pii: Sequence[PromptOutcome], categories: Optional[Sequence[str]]) -> dict[str, Any]:
+    """Prompt- and span-level normalized leak restricted to ``categories``."""
+    if categories is None:
+        return {}
+    cats = set(categories)
+    prompt_flags: list[bool] = []
+    span_flags: list[bool] = []
+    for o in pii:
+        inside = [m for m in o.span_matches if m["category"] in cats]
+        if not inside:
+            continue
+        prompt_flags.append(any(m["normalized"] for m in inside))
+        span_flags.extend(bool(m["normalized"]) for m in inside)
+    return {
+        "categories": sorted(cats),
+        "prompt_leak": _ci(prompt_flags),
+        "span_leak": _ci(span_flags),
+    }
 
 
 def evaluate(
@@ -415,15 +512,31 @@ def evaluate(
     prompts_path: Optional[str] = None,
     bootstrap_iterations: int = DEFAULT_BOOTSTRAP_ITERATIONS,
     seed: int = DEFAULT_SEED,
+    contracts: Optional[Mapping[str, Optional[Iterable[str]]]] = None,
 ) -> BenchmarkReport:
     """Score every adapter in ``runs`` against the same prompt list.
+
+    ``contracts`` maps adapter id -> benchmark categories it is configured to
+    cover (``None`` = no declared contract). The shared scope is the
+    intersection of all declared contracts of non-mock adapters.
 
     Adds paired exact McNemar tests (normalized leak, PII prompts) for every
     adapter pair with Holm correction, paired cluster-bootstrap CIs on the
     difference, and bootstrap rank intervals.
     """
+    contracts = dict(contracts or {})
+    declared = [set(c) for n, c in contracts.items() if c is not None and not is_reference_adapter(n)]
+    shared = sorted(set.intersection(*declared)) if declared else None
     scores = [
-        score_adapter(name, prompts, results, bootstrap_iterations=bootstrap_iterations, seed=seed)
+        score_adapter(
+            name,
+            prompts,
+            results,
+            bootstrap_iterations=bootstrap_iterations,
+            seed=seed,
+            contract=contracts.get(name),
+            shared_categories=shared,
+        )
         for name, results in runs.items()
     ]
     flags = {
@@ -443,8 +556,14 @@ def evaluate(
             pairwise.append(
                 {"adapter_a": a, "adapter_b": b, **test, "diff_bootstrap": diff.to_dict()}
             )
-    for row, adj in zip(pairwise, holm_adjust([r["p_value"] for r in pairwise])):
+    family = [r for r in pairwise if not (is_reference_adapter(r["adapter_a"]) or is_reference_adapter(r["adapter_b"]))]
+    for row, adj in zip(family, holm_adjust([r["p_value"] for r in family])):
         row["p_holm"] = adj
+        row["holm_family"] = "systems"
+    for row in pairwise:
+        if "p_holm" not in row:
+            row["p_holm"] = None
+            row["holm_family"] = "reference (mock; not adjusted)"
 
     ranks = (
         bootstrap_rank_intervals(flags, pii_clusters, iterations=bootstrap_iterations, seed=seed)
@@ -459,6 +578,7 @@ def evaluate(
         scores=scores,
         pairwise=pairwise,
         ranks=ranks,
+        shared_categories=shared,
         bootstrap={
             "iterations": bootstrap_iterations,
             "seed": seed,
@@ -466,6 +586,11 @@ def evaluate(
             "cluster_key": "metadata.cluster > metadata.template_id > id",
         },
     )
+
+
+def is_reference_adapter(name: str) -> bool:
+    """Mock/reference adapters are excluded from the Holm family and shared scope."""
+    return name.startswith("mock")
 
 
 def _fmt_opt(ci: Optional[ProportionCI]) -> str:
@@ -495,7 +620,9 @@ def format_leaderboard(report: BenchmarkReport) -> str:
         "Norm leak",
         "Wilson 95%",
         "Cluster-boot 95%",
-        "Partial (last-4)",
+        "Span leak",
+        "Span boot 95%",
+        "Partial",
         "Blocked",
         "Resid|block",
         "FPR",
@@ -509,6 +636,8 @@ def format_leaderboard(report: BenchmarkReport) -> str:
             s.leak.format_rate(),
             s.leak.format_ci(),
             s.leak_bootstrap.format_ci() if s.leak_bootstrap else "n/a",
+            _fmt_opt(s.span_leak_ci),
+            s.span_leak_bootstrap.format_ci() if s.span_leak_bootstrap else "n/a",
             _fmt_opt(s.partial),
             _fmt_opt(s.blocked),
             _fmt_opt(s.residual_given_block),
@@ -540,6 +669,47 @@ def format_leaderboard(report: BenchmarkReport) -> str:
         _align_table(("Adapter", "Layer", "Exact leak", "Norm leak", "Wilson 95%"), layer_rows)
     )
 
+    obf_rows = [
+        (s.adapter, obf, ci.format_rate(), ci.format_ci())
+        for s in report.scores
+        for obf, ci in s.by_obfuscation.items()
+    ]
+    if obf_rows:
+        lines.append("")
+        lines.append("Hard-layer breakdown by obfuscation (normalized leak)")
+        lines.extend(_align_table(("Adapter", "Obfuscation", "Norm leak", "Wilson 95%"), obf_rows))
+
+    lines.append("")
+    lines.append("In-scope entity contract (normalized leak on categories each system is configured for)")
+    scope_rows: list[tuple[str, ...]] = []
+    for s in report.scores:
+        if s.contract is None:
+            scope_rows.append((s.adapter, "(none declared: reference)", "n/a", "n/a", "n/a", "n/a"))
+            continue
+        ins, sh = s.in_scope, s.shared_scope
+        scope_rows.append(
+            (
+                s.adapter,
+                ",".join(s.contract) or "(empty)",
+                ins["prompt_leak"].format_rate() if ins else "n/a",
+                ins["span_leak"].format_rate() if ins else "n/a",
+                sh["prompt_leak"].format_rate() if sh else "n/a",
+                sh["span_leak"].format_rate() if sh else "n/a",
+            )
+        )
+    lines.extend(
+        _align_table(
+            ("Adapter", "Configured categories", "In-scope prompt leak", "In-scope span leak",
+             "Shared-scope prompt leak", "Shared-scope span leak"),
+            scope_rows,
+        )
+    )
+    lines.append(
+        "  shared scope = "
+        + (",".join(report.shared_categories) if report.shared_categories else "n/a")
+        + " (intersection of declared contracts of non-mock adapters)"
+    )
+
     lines.append("")
     lines.append("Category breakdown (normalized leak)")
     cat_headers = ("Adapter", "Category", "Leak rate", "95% CI")
@@ -553,7 +723,7 @@ def format_leaderboard(report: BenchmarkReport) -> str:
     lines.extend(_align_table(cat_headers, cat_rows))
 
     lines.append("")
-    lines.append("Paired McNemar exact tests on normalized leak (Holm-adjusted)")
+    lines.append("Paired McNemar exact tests on normalized leak (Holm over non-mock pairs; 'ref' = mock pair, unadjusted)")
     if report.pairwise:
         pw_rows = [
             (
@@ -561,7 +731,7 @@ def format_leaderboard(report: BenchmarkReport) -> str:
                 str(r["b"]),
                 str(r["c"]),
                 f"{r['p_value']:.4g}",
-                f"{r['p_holm']:.4g}",
+                "ref" if r["p_holm"] is None else f"{r['p_holm']:.4g}",
                 _fmt_diff(r["diff_bootstrap"]),
             )
             for r in report.pairwise

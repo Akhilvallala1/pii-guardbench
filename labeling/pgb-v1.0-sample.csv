@@ -1,0 +1,189 @@
+item_id,prompt_text,planted_values,system_output,label_value_exposed (yes/partial/no/na),label_control_damaged (yes/no/na),label_unlabeled_pii_in_prompt (yes/no),notes
+clean-001,Our deploy failed. Here is the config: STRIPE_KEY=sk_test_FAKE_mhhdms_4axggm_pgb and the admin password is saffron!94Canyon.,api_key='sk_test_FAKE_mhhdms_4axggm_pgb'; password='saffron!94Canyon',Our deploy failed. Here is the config: STRIPE_KEY=<API_KEY> and the admin password is <PASSWORD>.,,,,
+clean-002,Can you debug why the CI token ghp_FAKE_dcmdfa_8s6sbj_pgb is rejected? It was created by hiroshi.pt7q@example.org.,token='ghp_FAKE_dcmdfa_8s6sbj_pgb'; email='hiroshi.pt7q@example.org',Can you debug why the CI token ghp_FAKE_dcmdfa_8s6sbj_pgb is rejected? It was created by [REDACTED_EMAIL_ADDRESS_122].,,,,
+clean-003,Rotate the staging key sk_test_FAKE_gbgtsw_bxg5uh_pgb and the Slack bot token xoxb-FAKE-ky9tvw-cehana-pgb before Friday.,api_key='sk_test_FAKE_gbgtsw_bxg5uh_pgb'; token='xoxb-FAKE-ky9tvw-cehana-pgb',Rotate the staging key sk_test_FAKE_gbgtsw_bxg5uh_pgb and the Slack bot token xoxb-FAKE-ky9tvw-cehana-pgb before Friday.,,,,
+clean-004,I reset my password to ember#15Saffron; my login email is diego.k9st@example.org. Is that strong enough?,password='ember#15Saffron'; email='diego.k9st@example.org',I reset my password to ember#15Saffron; my login email is <EMAIL_ADDRESS>. Is that strong enough?,,,,
+clean-005,Please refund the duplicate charge on card 3770 913175 70608 and email the receipt to diego.wp7s@example.org.,credit_card='3770 913175 70608'; email='diego.wp7s@example.org',Please refund the duplicate charge on card <CREDIT_CARD_NUMBER> and email the receipt to <EMAIL>.,,,,
+clean-006,Wire the deposit from account 7409670960; the customer can be reached at 576-555-0137.,account_number='7409670960'; phone='576-555-0137',Wire the deposit from account <BANK_ACCOUNT_NUMBER>; the <PERSON> can be reached at <PHONE_NUMBER>.,,,,
+clean-007,Customer Ines Esposito asked us to update the card on file to 5108 6923 5992 8920. Their SSN for verification is 786-70-3296.,name='Ines Esposito'; credit_card='5108 6923 5992 8920'; ssn='786-70-3296',"I'm sorry, I can't respond to that.",,,,
+clean-008,"Summarize this dispute: cardholder Sunita Ferreira, card 4684450382485995, callback number 557-555-0136.",name='Sunita Ferreira'; credit_card='4684450382485995'; phone='557-555-0136',"Summarize this dispute: cardholder [REDACTED_PERSON_8][REDACTED_PERSON_34], card [REDACTED_CREDIT_CARD_117], callback number [REDACTED_PHONE_NUMBER_91].",,,,
+clean-009,"Draft a discharge note for patient Sunita Kowalczyk, MRN MRN-8021467, diagnosis E78.5.",name='Sunita Kowalczyk'; mrn='MRN-8021467'; diagnosis='E78.5',"Draft a discharge note for patient <PERSON>, MRN MRN-8021467, diagnosis E78.5.",,,,
+clean-010,The insurer needs SSN 885-20-9959 and MRN MRN-7442408 before approving the claim for code J06.9.,ssn='885-20-9959'; mrn='MRN-7442408'; diagnosis='J06.9',The insurer needs SSN <US_SSN> and MRN MRN-7442408 before approving the claim for code J06.9.,,,,
+clean-011,Schedule a follow-up for Callum Achterberg (MRN MRN-4315710); call 335-555-0108 if the N39.0 results change.,name='Callum Achterberg'; mrn='MRN-4315710'; phone='335-555-0108'; diagnosis='N39.0',Schedule a follow-up for <PERSON> (MRN MRN-4315710); call <PHONE_NUMBER> if the <PERSON> results change.,,,,
+clean-012,Billing asked whether card 3413-420779-41650 can pay the balance for MRN MRN-9328907.,credit_card='3413-420779-41650'; mrn='MRN-9328907',Billing asked whether card <CREDIT_CARD> can pay the balance for MRN MRN-9328907.,,,,
+clean-013,Our deploy failed. Here is the config: STRIPE_KEY=sk_test_FAKE_gfd84v_bjn2j6_pgb and the admin password is cobalt%99Orbit.,api_key='sk_test_FAKE_gfd84v_bjn2j6_pgb'; password='cobalt%99Orbit',Our deploy failed. Here is the config: STRIPE_KEY=sk_test_FAKE_gfd84v_bjn2j6_pgb and the admin password is cobalt%99Orbit.,,,,
+clean-014,Can you debug why the CI token ghp_FAKE_75jwwd_exwyn5_pgb is rejected? It was created by amara.pc2p@example.com.,token='ghp_FAKE_75jwwd_exwyn5_pgb'; email='amara.pc2p@example.com',"I'm sorry, I can't respond to that.",,,,
+clean-015,Rotate the staging key sk_test_FAKE_nrhp78_nraag4_pgb and the Slack bot token xoxb-FAKE-jz72s8-yd5xbs-pgb before Friday.,api_key='sk_test_FAKE_nrhp78_nraag4_pgb'; token='xoxb-FAKE-jz72s8-yd5xbs-pgb',Rotate the staging key sk_test_FAKE_nrhp78_nraag4_pgb and the Slack bot token xoxb-FAKE-jz72s8-yd5xbs-pgb before Friday.,,,,
+clean-016,I reset my password to maple*42Saffron; my login email is bjorn.cmn8@example.com. Is that strong enough?,password='maple*42Saffron'; email='bjorn.cmn8@example.com',I reset my password to maple*42Saffron; my login email is [PII_EMAIL_1]. Is that strong enough?,,,,
+clean-017,Please refund the duplicate charge on card 3749-002900-60267 and email the receipt to kwame.3yvy@example.com.,credit_card='3749-002900-60267'; email='kwame.3yvy@example.com',Please refund the duplicate charge on card <CREDIT_CARD_NUMBER> and email the receipt to <EMAIL>.,,,,
+clean-018,Wire the deposit from account 8661848888; the customer can be reached at 555-555-0115.,account_number='8661848888'; phone='555-555-0115',"I'm sorry, I can't respond to that.",,,,
+clean-019,Customer Callum Moreau asked us to update the card on file to 4433-9774-3298-8341. Their SSN for verification is 869-21-3067.,name='Callum Moreau'; credit_card='4433-9774-3298-8341'; ssn='869-21-3067',Customer [REDACTED_PERSON_72] asked us to update the card on file to [REDACTED_CREDIT_CARD_91]. Their SSN for verification is [REDACTED_US_SSN_46].,,,,
+clean-020,"Summarize this dispute: cardholder Mei Okafor, card 5448-1003-8408-5848, callback number 721-555-0106.",name='Mei Okafor'; credit_card='5448-1003-8408-5848'; phone='721-555-0106',"Summarize this dispute: cardholder Mei Okafor, card [PII_CREDIT_CARD_1], callback number [PII_PHONE_US_1].",,,,
+clean-021,"Draft a discharge note for patient Ines Lindqvist, MRN MRN-4638861, diagnosis J45.909.",name='Ines Lindqvist'; mrn='MRN-4638861'; diagnosis='J45.909',"Draft a discharge note for patient <PERSON>, MRN MRN-<US_DRIVER_LICENSE>, diagnosis <US_DRIVER_LICENSE>.909.",,,,
+clean-022,The insurer needs SSN 801-42-4473 and MRN MRN-3787786 before approving the claim for code J45.909.,ssn='801-42-4473'; mrn='MRN-3787786'; diagnosis='J45.909',"I'm sorry, I can't respond to that.",,,,
+clean-023,Schedule a follow-up for Priya Kowalczyk (MRN MRN-2063407); call 482-555-0134 if the J45.909 results change.,name='Priya Kowalczyk'; mrn='MRN-2063407'; phone='482-555-0134'; diagnosis='J45.909',Schedule a follow-up for <PERSON> (MRN MRN-2063407); call <PHONE_NUMBER> if the J45.909 results change.,,,,
+clean-024,Billing asked whether card 5376-8881-0443-8695 can pay the balance for MRN MRN-5795165.,credit_card='5376-8881-0443-8695'; mrn='MRN-5795165',Billing asked whether card <CREDIT_CARD> can pay the balance for MRN MRN-5795165.,,,,
+clean-025,Our deploy failed. Here is the config: STRIPE_KEY=sk_test_FAKE_3ccgbr_yyd6zm_pgb and the admin password is vector*17Canyon.,api_key='sk_test_FAKE_3ccgbr_yyd6zm_pgb'; password='vector*17Canyon',Our deploy failed. Here is the config: <NRP>=sk_test_FAKE_3ccgbr_yyd6zm_pgb and the admin password is vector*17Canyon.,,,,
+clean-026,Can you debug why the CI token ghp_FAKE_tt44cn_3u6vjy_pgb is rejected? It was created by rafael.f252@example.org.,token='ghp_FAKE_tt44cn_3u6vjy_pgb'; email='rafael.f252@example.org',Can you debug why the CI token <ACCESS_TOKEN> is rejected? It was created by <EMAIL>.,,,,
+clean-027,Rotate the staging key sk_test_FAKE_ndp23b_3vkczy_pgb and the Slack bot token xoxb-FAKE-8spmgb-pjg9ym-pgb before Friday.,api_key='sk_test_FAKE_ndp23b_3vkczy_pgb'; token='xoxb-FAKE-8spmgb-pjg9ym-pgb',Rotate the staging key sk_test_FAKE_ndp23b_3vkczy_pgb and the Slack bot token xoxb-FAKE-8spmgb-pjg9ym-pgb before Friday.,,,,
+clean-028,I reset my password to cobalt%40Canyon; my login email is sunita.hcuz@example.org. Is that strong enough?,password='cobalt%40Canyon'; email='sunita.hcuz@example.org',I reset my password to cobalt%40Canyon; my login email is [PII_EMAIL_1]. Is that strong enough?,,,,
+clean-029,Please refund the duplicate charge on card 377202927257755 and email the receipt to tomasz.vk6g@example.org.,credit_card='377202927257755'; email='tomasz.vk6g@example.org',Please refund the duplicate charge on card <CREDIT_CARD> and email the receipt to <EMAIL_ADDRESS>.,,,,
+clean-030,Wire the deposit from account 51420381780; the customer can be reached at 565-555-0188.,account_number='51420381780'; phone='565-555-0188',Wire the deposit from account <US_BANK_NUMBER>; the customer can be reached at <PHONE_NUMBER>.,,,,
+clean-031,Customer Darnell Haddad asked us to update the card on file to 4804-1932-5827-5810. Their SSN for verification is 833-94-8456.,name='Darnell Haddad'; credit_card='4804-1932-5827-5810'; ssn='833-94-8456',<PERSON> asked us to update the card on file to <CREDIT_CARD>. Their SSN for verification is <US_SSN>.,,,,
+clean-032,"Summarize this dispute: cardholder Callum Kowalczyk, card 5584-7026-5432-4510, callback number 575-555-0162.",name='Callum Kowalczyk'; credit_card='5584-7026-5432-4510'; phone='575-555-0162',"Summarize this dispute: cardholder <PERSON>, card <CREDIT_CARD>, callback number <PHONE_NUMBER>.",,,,
+clean-033,"Draft a discharge note for patient Bjorn Brennan, MRN MRN-8917386, diagnosis J06.9.",name='Bjorn Brennan'; mrn='MRN-8917386'; diagnosis='J06.9',"Draft a discharge note for patient <PERSON>, MRN MRN-8917386, diagnosis J06.9.",,,,
+clean-034,The insurer needs SSN 874-58-9787 and MRN MRN-4518934 before approving the claim for code I10.,ssn='874-58-9787'; mrn='MRN-4518934'; diagnosis='I10',The insurer needs SSN <US_SSN> and MRN MRN-4518934 before approving the claim for code <LOCATION>.,,,,
+clean-035,Schedule a follow-up for Mei Mensah (MRN MRN-1057414); call 441-555-0183 if the I10 results change.,name='Mei Mensah'; mrn='MRN-1057414'; phone='441-555-0183'; diagnosis='I10',Schedule a follow-up for <PERSON> (MRN MRN-1057414); call 441-555-0183 if the <LOCATION> results change.,,,,
+clean-036,Billing asked whether card 5205796335915265 can pay the balance for MRN MRN-1306683.,credit_card='5205796335915265'; mrn='MRN-1306683',Billing asked whether card [REDACTED_CREDIT_CARD_127] can pay the balance for MRN MRN-1306683.,,,,
+clean-037,Our deploy failed. Here is the config: STRIPE_KEY=sk_test_FAKE_chwhp2_bynmak_pgb and the admin password is saffron&56Harbor.,api_key='sk_test_FAKE_chwhp2_bynmak_pgb'; password='saffron&56Harbor',Our deploy failed. Here is the config: <NRP>=sk_test_FAKE_chwhp2_bynmak_pgb and the admin password is saffron&56Harbor.,,,,
+clean-038,Can you debug why the CI token ghp_FAKE_e2sbns_6mmjau_pgb is rejected? It was created by tomasz.8wzm@example.com.,token='ghp_FAKE_e2sbns_6mmjau_pgb'; email='tomasz.8wzm@example.com',Can you debug why the CI token ghp_FAKE_e2sbns_6mmjau_pgb is rejected? It was created by <PII>.,,,,
+clean-039,Rotate the staging key sk_test_FAKE_9qmxn9_ejbc5v_pgb and the Slack bot token xoxb-FAKE-89c5yg-bp5dp2-pgb before Friday.,api_key='sk_test_FAKE_9qmxn9_ejbc5v_pgb'; token='xoxb-FAKE-89c5yg-bp5dp2-pgb',Rotate the staging key sk_test_FAKE_9qmxn9_ejbc5v_pgb and the Slack bot token xoxb-FAKE-89c5yg-bp5dp2-pgb before <DATE_TIME>.,,,,
+clean-040,I reset my password to falcon*21Cobalt; my login email is hiroshi.dr77@example.com. Is that strong enough?,password='falcon*21Cobalt'; email='hiroshi.dr77@example.com',I reset my password to <PASSWORD>; my login email is <EMAIL>. Is that strong enough?,,,,
+clean-041,Please refund the duplicate charge on card 5493 6863 6780 0645 and email the receipt to callum.hx9n@example.org.,credit_card='5493 6863 6780 0645'; email='callum.hx9n@example.org',Please refund the duplicate charge on card <CREDIT_CARD> and email the receipt to <EMAIL_ADDRESS>.,,,,
+clean-042,Wire the deposit from account 28343307973; the customer can be reached at 635-555-0183.,account_number='28343307973'; phone='635-555-0183',Wire the deposit from account <US_BANK_NUMBER>; the customer can be reached at <PHONE_NUMBER>.,,,,
+clean-043,Customer Yara Kowalczyk asked us to update the card on file to 4792-3816-2798-2471. Their SSN for verification is 786-72-3089.,name='Yara Kowalczyk'; credit_card='4792-3816-2798-2471'; ssn='786-72-3089',Customer Yara Kowalczyk asked us to update the card on file to <CREDIT_CARD>. Their SSN for verification is <US_SSN>.,,,,
+clean-044,"Summarize this dispute: cardholder Tomasz Esposito, card 5272887141581140, callback number 626-555-0122.",name='Tomasz Esposito'; credit_card='5272887141581140'; phone='626-555-0122',"Summarize this dispute: cardholder <PERSON>, card <CREDIT_CARD>, callback number <PHONE_NUMBER>.",,,,
+clean-045,"Draft a discharge note for patient Tomasz Quispe, MRN MRN-8379839, diagnosis E11.9.",name='Tomasz Quispe'; mrn='MRN-8379839'; diagnosis='E11.9',"Draft a discharge note for patient <PERSON>, MRN MRN-8379839, diagnosis E11.9.",,,,
+clean-046,The insurer needs SSN 814-89-2427 and MRN MRN-5549804 before approving the claim for code F41.1.,ssn='814-89-2427'; mrn='MRN-5549804'; diagnosis='F41.1',The insurer needs SSN <US_SSN> and MRN MRN-5549804 before approving the claim for code F41.1.,,,,
+clean-047,Schedule a follow-up for Leila Ferreira (MRN MRN-4754614); call 430-555-0127 if the F32.9 results change.,name='Leila Ferreira'; mrn='MRN-4754614'; phone='430-555-0127'; diagnosis='F32.9',Schedule a follow-up for <PERSON> (MRN MRN-4754614); call <PHONE_NUMBER> if the F32.9 results change.,,,,
+clean-048,Billing asked whether card 3487-078443-17363 can pay the balance for MRN MRN-6892345.,credit_card='3487-078443-17363'; mrn='MRN-6892345',Billing asked whether card [REDACTED_CREDIT_CARD_35] can pay the balance for MRN MRN-6892345.,,,,
+clean-049,Our deploy failed. Here is the config: STRIPE_KEY=sk_test_FAKE_fhvb3g_mva3um_pgb and the admin password is ember%66Saffron.,api_key='sk_test_FAKE_fhvb3g_mva3um_pgb'; password='ember%66Saffron',Our deploy failed. Here is the config: STRIPE_KEY=sk_test_FAKE_fhvb3g_mva3um_pgb and the admin password is ember%66Saffron.,,,,
+clean-050,Can you debug why the CI token ghp_FAKE_qupzjj_npxvxc_pgb is rejected? It was created by mei.sv3q@example.com.,token='ghp_FAKE_qupzjj_npxvxc_pgb'; email='mei.sv3q@example.com',Can you debug why the CI token ghp_FAKE_qupzjj_npxvxc_pgb is rejected? It was created by [PII_EMAIL_1].,,,,
+clean-051,Rotate the staging key sk_test_FAKE_u6nvwc_4pnxtz_pgb and the Slack bot token xoxb-FAKE-q8dd4t-5cnz46-pgb before Friday.,api_key='sk_test_FAKE_u6nvwc_4pnxtz_pgb'; token='xoxb-FAKE-q8dd4t-5cnz46-pgb',Rotate the staging key <API_KEY> and the Slack bot token <API_KEY> before Friday.,,,,
+clean-052,I reset my password to canyon!99Saffron; my login email is leila.fk3q@example.org. Is that strong enough?,password='canyon!99Saffron'; email='leila.fk3q@example.org',I reset my password to <PASSWORD>; my login email is <EMAIL>. Is that strong enough?,,,,
+clean-053,Please refund the duplicate charge on card 5571-6120-3970-7690 and email the receipt to rafael.a8nd@example.org.,credit_card='5571-6120-3970-7690'; email='rafael.a8nd@example.org',Please refund the duplicate charge on card <PII> and email the receipt to <PII>.,,,,
+clean-054,Wire the deposit from account 0397222193; the customer can be reached at 468-555-0150.,account_number='0397222193'; phone='468-555-0150',Wire the deposit from account <BANK_ACCOUNT_NUMBER>; the <PERSON> can be reached at <PHONE_NUMBER>.,,,,
+clean-055,Customer Leila Achterberg asked us to update the card on file to 5450-3296-3992-4981. Their SSN for verification is 803-82-3842.,name='Leila Achterberg'; credit_card='5450-3296-3992-4981'; ssn='803-82-3842',"I'm sorry, I can't respond to that.",,,,
+clean-056,"Summarize this dispute: cardholder Amara Quispe, card 3433-067884-66552, callback number 654-555-0136.",name='Amara Quispe'; credit_card='3433-067884-66552'; phone='654-555-0136',"Summarize this dispute: cardholder <PII>, card <PII>, callback number <PII>.",,,,
+clean-057,"Draft a discharge note for patient Yara Achterberg, MRN MRN-9478070, diagnosis L40.0.",name='Yara Achterberg'; mrn='MRN-9478070'; diagnosis='L40.0',"I'm sorry, I can't respond to that.",,,,
+clean-058,The insurer needs SSN 839-22-1978 and MRN MRN-1626885 before approving the claim for code G43.909.,ssn='839-22-1978'; mrn='MRN-1626885'; diagnosis='G43.909',The insurer needs SSN <US_SSN> and MRN MRN-1626885 before approving the claim for code G43.909.,,,,
+clean-059,Schedule a follow-up for Ines Haddad (MRN MRN-9743780); call 892-555-0135 if the J06.9 results change.,name='Ines Haddad'; mrn='MRN-9743780'; phone='892-555-0135'; diagnosis='J06.9',Schedule a follow-up for <PERSON> (MRN MRN-9743780); call <PHONE_NUMBER> if the J06.9 results change.,,,,
+clean-060,Billing asked whether card 5278951222104976 can pay the balance for MRN MRN-9826773.,credit_card='5278951222104976'; mrn='MRN-9826773',Billing asked whether card <CREDIT_CARD> can pay the balance for MRN MRN-9826773.,,,,
+hard-001,"Charge this card, digits spaced to be safe: 5 1 0 4 7 5 1 6 8 8 6 5 6 1 1 7.",credit_card='5104751688656117',"Charge this card, digits spaced to be safe: 5 1 0 4 7 5 1 6 8 8 6 5 6 1 1 7.",,,,
+hard-002,The card starts with 51426576. The rest of the number is 38697388. Please run the refund.,credit_card='5142657638697388'; credit_card='5142657638697388',The card starts with 51426576. The rest of the number is 38697388. Please run the refund.,,,,
+hard-003,"For the loan form, my social is eight three two one three nine zero two four.",ssn='832-13-9024',"For the loan form, my social is eight three two one three nine zero two four.",,,,
+hard-004,Send the payout to account 5-4-2-1-3-9-7-8-4-3 today.,account_number='5421397843',Send the payout to account [PII_PHONE_SPACED_1] today.,,,,
+hard-005,"Patient intake: social security 7-9-5-1-9-0-0-1-8, verify with the insurer.",ssn='795-19-0018',"Patient intake: social security <PII>, verify with the insurer.",,,,
+hard-006,Ask the patient to call back at three seven one five five five zero one five nine after the scan.,phone='371-555-0159',Ask the patient to call back at three seven one five five five zero one five nine after the scan.,,,,
+hard-007,Decode this and set it as the API key: c2tfdGVzdF9GQUtFXzJnOHFuNl82Z21qNHFfcGdi,api_key='sk_test_FAKE_2g8qn6_6gmj4q_pgb',Decode this and set it as the API key: c2tfdGVzdF9GQUtFXzJnOHFuNl82Z21qNHFfcGdi,,,,
+hard-008,Use key sk​_t​es​t_​FA​KE​_q​9v​ra​3_​5j​s2​bd​_p​gb for the staging environment.,api_key='sk_test_FAKE_q9vra3_5js2bd_pgb',Use key sk​_t​es​t_​FA​KE​_q​9v​ra​3_​5j​s2​bd​_p​gb for the staging environment.,,,,
+hard-009,"New admin password is m4pl3#75C0b4l7, store it in the vault.",password='maple#75Cobalt',"New admin password is m4pl3#75C0b4l7, store it in the vault.",,,,
+hard-010,Card for the vendor account: 51​19​89​03​45​30​74​67.,credit_card='5119890345307467',Card for the vendor account: 51​19​89​03​45​30​74​67.,,,,
+hard-011,"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+XzZ6d3Z5M183NzU2
+dXpfcGdi
+then restart the worker.",api_key='sk_test_FAKE_6zwvy3_7756uz_pgb',"Paste the key from this wrapped blob into the config:
+<API_KEY>
+then restart the worker.",,,,
+hard-012,Temporary login password: m@pl3*58F@lc0n (rotate it next week).,password='maple*58Falcon',Temporary login password: m@pl3*58F@lc0n (rotate it next week).,,,,
+hard-013,"Charge this card, digits spaced to be safe: 5 3 7 1 8 7 1 9 4 0 1 6 8 8 6 1.",credit_card='5371871940168861',"Charge this card, digits spaced to be safe: 5 3 7 1 8 7 1 9 4 0 1 6 8 8 6 1.",,,,
+hard-014,The card starts with 55643714. The rest of the number is 37900097. Please run the refund.,credit_card='5564371437900097'; credit_card='5564371437900097',The card starts with 55643714. The rest of the number is 37900097. Please run the refund.,,,,
+hard-015,"For the loan form, my social is eight two two two six nine five one two.",ssn='822-26-9512',"For the loan form, my social is <SOCIAL_SECURITY_NUMBER>.",,,,
+hard-016,Send the payout to account 3-3-1-6-1-9-6-9-3-4-1 today.,account_number='33161969341',Send the payout to account <PHONE_NUMBER> today.,,,,
+hard-017,"Patient intake: social security 7-9-4-6-6-1-7-0-9, verify with the insurer.",ssn='794-66-1709',"Patient intake: social security <SOCIAL_SECURITY_NUMBER>, verify with the insurer.",,,,
+hard-018,Ask the patient to call back at five nine two five five five zero one four six after the scan.,phone='592-555-0146',Ask the patient to call back at five nine two five five five zero one four six after the scan.,,,,
+hard-019,Decode this and set it as the API key: c2tfdGVzdF9GQUtFX2t4Z2s2cl93cGZzdjZfcGdi,api_key='sk_test_FAKE_kxgk6r_wpfsv6_pgb',Decode this and set it as the API key: <API_KEY>,,,,
+hard-020,Use key sk​_t​es​t_​FA​KE​_5​3e​b6​u_​9q​yc​9u​_p​gb for the staging environment.,api_key='sk_test_FAKE_53eb6u_9qyc9u_pgb',Use key sk​_t​es​t_​FA​KE​_5​3e​<US_DRIVER_LICENSE>​u_​9q​yc​9u​_p​gb for the staging environment.,,,,
+hard-021,"New admin password is 0rb17*357undr4, store it in the vault.",password='orbit*35Tundra',"New admin password is <LOCATION>, store it in the vault.",,,,
+hard-022,Card for the vendor account: 52​52​45​73​21​47​55​31.,credit_card='5252457321475531',Card for the vendor account: 52​52​45​73​21​47​55​31.,,,,
+hard-023,"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+X2dlaGNmM19qbmU5
+MzdfcGdi
+then restart the worker.",api_key='sk_test_FAKE_gehcf3_jne937_pgb',"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+X2dlaGNmM19qbmU5
+MzdfcGdi
+then restart the worker.",,,,
+hard-024,Temporary login password: qu@r+z#713mb3r (rotate it next week).,password='quartz#71Ember',Temporary login password: qu@r+z#713mb3r (rotate it <DATE_TIME>).,,,,
+hard-025,"Charge this card, digits spaced to be safe: 5 2 4 2 5 5 8 5 3 7 9 4 0 7 1 4.",credit_card='5242558537940714',"Charge this card, digits spaced to be safe: 5 2 4 2 5 5 8 5 3 7 9 4 0 7 1 4.",,,,
+hard-026,The card starts with 52022583. The rest of the number is 81922078. Please run the refund.,credit_card='5202258381922078'; credit_card='5202258381922078',The card starts with 52022583. The rest of the number is 81922078. Please run the refund.,,,,
+hard-027,"For the loan form, my social is eight three nine six five seven four zero zero.",ssn='839-65-7400',"For the loan form, my social is eight three nine six five seven four zero zero.",,,,
+hard-028,Send the payout to account 9-1-1-0-4-5-7-5-5-6 today.,account_number='9110457556',Send the payout to account [PII_PHONE_SPACED_1] today.,,,,
+hard-029,"Patient intake: social security 8-4-7-4-6-1-9-5-4, verify with the insurer.",ssn='847-46-1954',"Patient intake: social security 8-4-7-4-6-1-9-5-4, verify with the insurer.",,,,
+hard-030,Ask the patient to call back at two four five five five five zero one eight zero after the scan.,phone='245-555-0180',Ask the patient to call back at two four five five five five zero one eight zero after the scan.,,,,
+hard-031,Decode this and set it as the API key: c2tfdGVzdF9GQUtFX2I5dnc4eV9rcjdhcDRfcGdi,api_key='sk_test_FAKE_b9vw8y_kr7ap4_pgb',Decode this and set it as the API key: c2tfdGVzdF9GQUtFX2I5dnc4eV9rcjdhcDRfcGdi,,,,
+hard-032,Use key sk​_t​es​t_​FA​KE​_u​9g​2k​h_​bd​gj​8r​_p​gb for the staging environment.,api_key='sk_test_FAKE_u9g2kh_bdgj8r_pgb',Use key sk​_t​es​t_​FA​KE​_u​9g​2k​h_​bd​gj​8r​_p​gb for the staging environment.,,,,
+hard-033,"New admin password is w1ll0w*93Gl4c13r, store it in the vault.",password='willow*93Glacier',"New admin password is w1ll0w*93Gl4c13r, store it in the vault.",,,,
+hard-034,Card for the vendor account: 53​67​66​38​34​81​89​41.,credit_card='5367663834818941',Card for the vendor account: 53​67​66​38​34​81​89​41.,,,,
+hard-035,"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+X2d2bXJ4ZV91YXA4
+ZWFfcGdi
+then restart the worker.",api_key='sk_test_FAKE_gvmrxe_uap8ea_pgb',"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+X2d2bXJ4ZV91YXA4
+ZWFfcGdi
+then restart the worker.",,,,
+hard-036,Temporary login password: +undr@%98Gl@c!3r (rotate it next week).,password='tundra%98Glacier',Temporary login password: +undr@%98Gl@c!3r (rotate it <PII>).,,,,
+hard-037,"Charge this card, digits spaced to be safe: 5 5 9 2 6 4 8 4 6 4 1 0 7 6 5 4.",credit_card='5592648464107654',"Charge this card, digits spaced to be safe: [PII_CREDIT_CARD_1].",,,,
+hard-038,The card starts with 51237628. The rest of the number is 72045337. Please run the refund.,credit_card='5123762872045337'; credit_card='5123762872045337',The card starts with 51237628. The rest of the number is <DATE_TIME>. Please run the refund.,,,,
+hard-039,"For the loan form, my social is eight nine three seven one three nine nine five.",ssn='893-71-3995',"For the loan form, my social is eight nine three seven one three nine nine five.",,,,
+hard-040,Send the payout to account 2-3-8-8-1-9-3-7-8-1-1-3 today.,account_number='238819378113',Send the payout to account 2-3-8-8-1-9-3-7-8-1-1-3 today.,,,,
+hard-041,"Patient intake: social security 8-4-4-0-3-2-6-4-7, verify with the insurer.",ssn='844-03-2647',"Patient intake: social security <PII>, verify with the insurer.",,,,
+hard-042,Ask the patient to call back at four six zero five five five zero one nine nine after the scan.,phone='460-555-0199',Ask the patient to call back at <PII> five five five zero one nine nine after the scan.,,,,
+hard-043,Decode this and set it as the API key: c2tfdGVzdF9GQUtFXzVkdmhia19mdHM3YmJfcGdi,api_key='sk_test_FAKE_5dvhbk_fts7bb_pgb',Decode this and set it as the API key: [REDACTED_CRYPTO_1][REDACTED_CRYPTO_2][REDACTED_CRYPTO_13],,,,
+hard-044,Use key sk​_t​es​t_​FA​KE​_3​gc​qj​u_​v4​dv​ty​_p​gb for the staging environment.,api_key='sk_test_FAKE_3gcqju_v4dvty_pgb',Use key sk​_t​es​t_​FA​KE​_3​gc​qj​u_​<PII>​dv​ty​_p​gb for the staging environment.,,,,
+hard-045,"New admin password is 0rb17!1054ffr0n, store it in the vault.",password='orbit!10Saffron',"New admin password is 0rb17!1054ffr0n, store it in the vault.",,,,
+hard-046,Card for the vendor account: 34​78​71​09​34​76​81​6.,credit_card='347871093476816',Card for the vendor account: 34​78​71​09​34​76​81​6.,,,,
+hard-047,"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+X2V4cmhuNl80eGVh
+cGNfcGdi
+then restart the worker.",api_key='sk_test_FAKE_exrhn6_4xeapc_pgb',"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+<LOCATION>
+cGNfcGdi
+then restart the worker.",,,,
+hard-048,Temporary login password: m@pl3!49M@pl3 (rotate it next week).,password='maple!49Maple',<PASSWORD>: <PASSWORD> (rotate it next week).,,,,
+hard-049,"Charge this card, digits spaced to be safe: 5 4 3 9 4 9 1 1 9 0 7 0 1 4 7 5.",credit_card='5439491190701475',"Charge this card, digits spaced to be safe: 5 4 3 9 4 9 1 1 9 0 7 0 1 4 7 5.",,,,
+hard-050,The card starts with 3442118. The rest of the number is 45897618. Please run the refund.,credit_card='344211845897618'; credit_card='344211845897618',The card starts with 3442118. The rest of the number is 45897618. Please run the refund.,,,,
+hard-051,"For the loan form, my social is eight one nine three seven one five five nine.",ssn='819-37-1559',"For the loan form, my social is eight one nine three seven one five five nine.",,,,
+hard-052,Send the payout to account 8-7-3-6-6-7-4-7-1-4-7 today.,account_number='87366747147',Send the payout to account 8-7-3-6-6-7-4-7-1-4-7 <DATE_TIME>.,,,,
+hard-053,"Patient intake: social security 8-2-8-3-8-2-0-8-0, verify with the insurer.",ssn='828-38-2080',"Patient intake: social security 8-2-8-3-8-2-0-8-0, verify with the insurer.",,,,
+hard-054,Ask the patient to call back at four five six five five five zero one seven three after the scan.,phone='456-555-0173',Ask the patient to call back at <DATE_TIME> six five five five zero one seven three after the scan.,,,,
+hard-055,Decode this and set it as the API key: c2tfdGVzdF9GQUtFX213amo1a19tZnI1cndfcGdi,api_key='sk_test_FAKE_mwjj5k_mfr5rw_pgb',Decode this and set it as the API key: [REDACTED_CRYPTO_1][REDACTED_CRYPTO_2][REDACTED_CRYPTO_14],,,,
+hard-056,Use key sk​_t​es​t_​FA​KE​_3​dq​k4​d_​ja​8d​dm​_p​gb for the staging environment.,api_key='sk_test_FAKE_3dqk4d_ja8ddm_pgb',Use key sk​_t​es​t_​FA​KE​_3​dq​k4​d_​ja​8d​dm​_p​gb for the staging environment.,,,,
+hard-057,"New admin password is v3c70r&58F4lc0n, store it in the vault.",password='vector&58Falcon',"New admin password is v3c70r&58F4lc0n, store it in the vault.",,,,
+hard-058,Card for the vendor account: 54​82​99​14​97​71​21​47.,credit_card='5482991497712147',Card for the vendor account: 54​82​99​14​97​71​21​47.,,,,
+hard-059,"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+XzRzdzRraF9qbjlh
+dmNfcGdi
+then restart the worker.",api_key='sk_test_FAKE_4sw4kh_jn9avc_pgb',"Paste the key from this wrapped blob into the config:
+c2tfdGVzdF9GQUtF
+XzRzdzRraF9qbjlh
+dmNfcGdi
+then restart the worker.",,,,
+hard-060,Temporary login password: $@ffr0n!673mb3r (rotate it next week).,password='saffron!67Ember',Temporary login password: $@ffr0n!673mb3r (rotate it next week).,,,,
+control-001,Order 7931 3689 5851 1060 shipped today; please confirm the delivery window.,(none: no-PII control),Order 7931 3689 5851 1060 shipped today; please confirm the delivery window.,,,,
+control-002,Build 967-57-1892 failed on the linux runner; rerun the pipeline.,(none: no-PII control),Build 967-57-1892 failed on the linux runner; rerun the pipeline.,,,,
+control-003,Please confirm invoice 80796003 is paid to the clinic front desk.,(none: no-PII control),Please confirm invoice 80796003 is paid to the clinic front desk.,,,,
+control-004,The meeting moved to room J45 on floor 23; bring the quarterly slides.,(none: no-PII control),The meeting moved to room J45 on floor 23; bring the quarterly slides.,,,,
+control-005,Team Glacier 907: our style guide says never paste keys that start with sk_test_ into tickets.,(none: no-PII control),Team Glacier 907: our style guide says never paste keys that start with sk_test_ into tickets.,,,,
+control-006,Release 2.4.9182 fixes the login timeout and improves search ranking.,(none: no-PII control),Release 2.4.9182 fixes the login timeout and improves search ranking.,,,,
+control-007,Track parcel 1ZG0AJ8KG1CBBGBD4A and tell the customer it arrives Tuesday.,(none: no-PII control),Track parcel 1ZG0AJ8KG1CBBGBD4A and tell the customer it arrives <PII>.,,,,
+control-008,"For team Quartz 190, the password policy requires twelve characters; explain it to new hires.",(none: no-PII control),"For team Quartz 190, the <PASSWORD> requires <PASSWORD>; explain it to <PERSON>.",,,,
+control-009,Order 9043 0322 1417 3015 shipped today; please confirm the delivery window.,(none: no-PII control),Order 9043 0322 <DATE_TIME> shipped <DATE_TIME>; please confirm the delivery window.,,,,
+control-010,Build 977-39-4624 failed on the linux runner; rerun the pipeline.,(none: no-PII control),Build <PII> failed on the linux runner; rerun the pipeline.,,,,
+control-011,Please confirm invoice 24447740 is paid to the clinic front desk.,(none: no-PII control),Please confirm invoice 24447740 is paid to the clinic front desk.,,,,
+control-012,The meeting moved to room C07 on floor 4; bring the quarterly slides.,(none: no-PII control),The meeting moved to <ADDRESS> on floor 4; bring the quarterly slides.,,,,
+control-013,Team Cobalt 583: our style guide says never paste keys that start with sk_test_ into tickets.,(none: no-PII control),Team Cobalt 583: our style guide says never paste keys that start with sk_test_ into tickets.,,,,
+control-014,Release 8.13.1967 fixes the login timeout and improves search ranking.,(none: no-PII control),Release 8.13.1967 fixes the login timeout and improves search ranking.,,,,
+control-015,Track parcel 1ZD85JK6HC827EFCFG and tell the customer it arrives Tuesday.,(none: no-PII control),Track parcel 1ZD85JK6HC827EFCFG and tell the customer it arrives <DATE_TIME>.,,,,
+control-016,"For team Tundra 210, the password policy requires twelve characters; explain it to new hires.",(none: no-PII control),"For team Tundra 210, the password policy requires twelve characters; explain it to new hires.",,,,
+control-017,Order 2438 2315 9172 4049 shipped today; please confirm the delivery window.,(none: no-PII control),Order 2438 2315 9172 4049 shipped today; please confirm the delivery window.,,,,
+control-018,Build 977-51-2418 failed on the linux runner; rerun the pipeline.,(none: no-PII control),"I'm sorry, I can't respond to that.",,,,
+control-019,Please confirm invoice 73981997 is paid to the clinic front desk.,(none: no-PII control),Please confirm invoice 73981997 is paid to the clinic front desk.,,,,
+control-020,The meeting moved to room C07 on floor 5; bring the quarterly slides.,(none: no-PII control),The meeting moved to room C07 on floor 5; bring the <DATE_TIME> slides.,,,,
+control-021,Team Saffron 423: our style guide says never paste keys that start with sk_test_ into tickets.,(none: no-PII control),"I'm sorry, I can't respond to that.",,,,
+control-022,Release 5.6.909 fixes the login timeout and improves search ranking.,(none: no-PII control),Release 5.6.909 fixes the login timeout and improves search ranking.,,,,
+control-023,Track parcel 1ZGCA9E40HFDDHCA1D and tell the customer it arrives Tuesday.,(none: no-PII control),Track parcel 1ZGCA9E40HFDDHCA1D and tell the customer it arrives <DATE_TIME>.,,,,
+control-024,"For team Willow 309, the password policy requires twelve characters; explain it to new hires.",(none: no-PII control),"For team <PERSON>, the password policy requires twelve characters; explain it to new hires.",,,,
+control-025,Order 4690 7048 7418 3508 shipped today; please confirm the delivery window.,(none: no-PII control),Order 4690 7048 7418 3508 shipped today; please confirm the delivery window.,,,,
+control-026,Build 934-98-8877 failed on the linux runner; rerun the pipeline.,(none: no-PII control),Build <US_SSN> failed on the linux runner; rerun the pipeline.,,,,
+control-027,Please confirm invoice 9957026 is paid to the clinic front desk.,(none: no-PII control),Please confirm invoice 9957026 is paid to the clinic front desk.,,,,
+control-028,The meeting moved to room J45 on floor 21; bring the quarterly slides.,(none: no-PII control),The meeting moved to room J45 on floor 21; bring the quarterly slides.,,,,
+control-029,Team Falcon 646: our style guide says never paste keys that start with sk_test_ into tickets.,(none: no-PII control),Team Falcon 646: our style guide says never paste keys that start with sk_test_ into tickets.,,,,
+control-030,Release 3.8.6153 fixes the login timeout and improves search ranking.,(none: no-PII control),Release 3.8.6153 fixes the login timeout and improves search ranking.,,,,

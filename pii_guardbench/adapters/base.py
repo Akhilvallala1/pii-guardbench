@@ -8,6 +8,12 @@ from dataclasses import dataclass, field
 from typing import Any
 
 
+# NeMo Guardrails' default refusal text, used as the returned text whenever a
+# block-style configuration blocks a prompt (the user sees a refusal, not the
+# original text).
+BLOCK_MESSAGE = "I'm sorry, I can't respond to that."
+
+
 class AdapterUnavailableError(NotImplementedError):
     """Raised when an adapter's dependency or service is not available.
 
@@ -52,6 +58,16 @@ class GuardrailAdapter(ABC):
     def describe(self) -> dict[str, Any]:
         """Configuration and version details recorded next to results."""
         return {"adapter": self.name}
+
+    def entity_contract(self) -> frozenset[str] | None:
+        """Benchmark categories this configuration claims to cover.
+
+        ``None`` means "no declared contract" (mocks/references); such adapters
+        are scored on all categories only. Real adapters return the categories
+        their configured entity types map to, so leak can also be reported on
+        in-scope spans only.
+        """
+        return None
 
     def warmup(self) -> None:
         """Load models/engines before timing starts. Raises if unavailable."""

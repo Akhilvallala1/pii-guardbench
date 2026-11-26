@@ -99,3 +99,37 @@ def test_partial_metric_aggregates() -> None:
     score = score_adapter("masker", [prompt], [result], bootstrap_iterations=10)
     assert score.leak.k == 0
     assert score.partial.k == 1 and score.partial.n == 1
+
+
+def test_wrapped_base64_is_decoded_on_output_side() -> None:
+    from generators.obfuscations import base64_wrapped
+
+    key = "sk_test_FAKE_kf6qyv_erpxsy_pgb"
+    surface = base64_wrapped(key)
+    assert "\n" in surface
+    span = {"category": "api_key", "value": surface, "canonical_value": key, "obfuscation": "base64_wrapped"}
+    assert match_span(span, f"config:\n{surface}\nrestart").normalized
+    # Rewrapped at a different width (not the generator's) is still caught.
+    import base64 as b64
+
+    raw = b64.b64encode(key.encode()).decode()
+    rewrapped = "\n".join(raw[i:i + 8] for i in range(0, len(raw), 8))
+    assert match_span(span, f"blob {rewrapped} end").normalized
+    assert not match_span(span, "config: [REDACTED] restart").normalized
+
+
+def test_alternate_leet_alphabets_are_caught() -> None:
+    from generators.obfuscations import leetspeak, leetspeak_alt
+
+    pw = "secretPass!42"
+    span = {"category": "password", "value": leetspeak_alt(pw), "canonical_value": pw, "obfuscation": "leetspeak_alt"}
+    assert match_span(span, f"pw {leetspeak_alt(pw)} ok").normalized
+    assert match_span(span, f"pw {leetspeak(pw)} ok").normalized  # the other alphabet
+    assert match_span(span, "pw 53cr3tP@55!42 ok").normalized  # a mixed form neither encoder emits
+    assert not match_span(span, "pw [PASSWORD] ok").normalized
+
+
+def test_leet_skeleton_not_applied_to_short_or_digit_categories() -> None:
+    # A phone must not match via leet folding of unrelated words.
+    span = {"category": "phone", "value": "212-555-0147"}
+    assert not match_span(span, "call BOSS ASAP").normalized

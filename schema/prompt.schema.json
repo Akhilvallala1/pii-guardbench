@@ -84,7 +84,9 @@
               "leetspeak",
               "base64",
               "zero_width",
-              "split_sentences"
+              "split_sentences",
+              "leetspeak_alt",
+              "base64_wrapped"
             ],
             "description": "Obfuscation applied to canonical_value to produce value."
           }

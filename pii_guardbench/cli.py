@@ -87,12 +87,30 @@ def build_parser() -> argparse.ArgumentParser:
         help=f"Bootstrap seed (default {DEFAULT_SEED}).",
     )
     parser.add_argument(
+        "--layer",
+        choices=("all", "clean", "control", "hard"),
+        default="all",
+        help=(
+            "Score only one layer of a generated set (metadata.layer; records without it "
+            "count as clean, or control when they have no spans). Default: all."
+        ),
+    )
+    parser.add_argument(
         "--mock-latency-ms",
         type=float,
         default=None,
         help="Simulated delay for mock adapters; reported latency is still measured.",
     )
     return parser
+
+
+def record_layer(prompt: dict) -> str:
+    layer = (prompt.get("metadata") or {}).get("layer")
+    if layer in ("clean", "control", "hard"):
+        return layer
+    if prompt.get("difficulty") == "adversarial":
+        return "hard"
+    return "clean" if prompt.get("sensitive_spans") else "control"
 
 
 def parse_adapter_names(spec: str) -> list[str]:
@@ -123,9 +141,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         else:
             prompts_path = args.prompts
             prompts = load_prompts(prompts_path)
+        if args.layer != "all":
+            prompts = [p for p in prompts if record_layer(p) == args.layer]
+            if not prompts:
+                raise ValueError(f"No prompts in layer {args.layer!r}.")
         if args.bootstrap_iters < 1:
             raise ValueError("--bootstrap-iters must be >= 1")
         runs = {}
+        contracts: dict[str, object] = {}
         for name in names:
             uid = adapter_id(name)
             adapter = get_adapter(name)
@@ -141,6 +164,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 continue
             runs[uid] = [adapter.run(prompt["text"]) for prompt in prompts]
             descriptions[uid] = adapter.describe()
+            contracts[uid] = adapter.entity_contract()
         if not runs:
             raise ValueError("No adapter could run; see warnings above.")
     except (ValueError, KeyError, NotImplementedError, OSError) as exc:
@@ -158,6 +182,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         prompts_path=str(display_path),
         bootstrap_iterations=args.bootstrap_iters,
         seed=args.seed,
+        contracts=contracts,
     )
     leaderboard = format_leaderboard(report)
     sys.stdout.write(leaderboard)
@@ -166,6 +191,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         payload["environment"] = collect_environment()
         payload["adapter_config"] = descriptions
         payload["skipped_adapters"] = skipped
+        payload["layer"] = args.layer
         text = json.dumps(payload, indent=2) + "\n"
         if args.out is not None:
             args.out.parent.mkdir(parents=True, exist_ok=True)

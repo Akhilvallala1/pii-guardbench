@@ -24,6 +24,11 @@ data = ["pyarrow>=14"]
 presidio = ["presidio-analyzer>=2.2", "presidio-anonymizer>=2.2", "spacy>=3.7"]
 # Real NeMo Guardrails PII rail (Presidio-backed, offline). Also needs en_core_web_lg.
 nemo = ["nemoguardrails>=0.20", "presidio-analyzer>=2.2", "presidio-anonymizer>=2.2", "spacy>=3.7"]
+# GLiNER PII (CPU torch is fine: pip install torch --index-url https://download.pytorch.org/whl/cpu).
+gliner = ["gliner>=0.2.20", "torch>=2.0"]
+# LLM Guard cannot share this environment (needs Python < 3.13, pins presidio 2.2.358):
+# create a separate Python 3.12 venv with llm-guard==0.3.16 plus spaCy en_core_web_sm and
+# zh_core_web_sm, then set PGB_LLM_GUARD_PYTHON to its interpreter.
 
 [project.scripts]
 pii-guardbench = "pii_guardbench.cli:main"

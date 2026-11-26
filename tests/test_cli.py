@@ -139,7 +139,7 @@ def test_cli_out_dir_writes_per_prompt_dump_and_stats_sections(tmp_path: Path) -
     ])
     assert completed.returncode == 0, completed.stderr
     out = completed.stdout
-    for section in ("Exact leak", "Norm leak", "Cluster-boot 95%", "Partial (last-4)", "Resid|block",
+    for section in ("Exact leak", "Norm leak", "Cluster-boot 95%", "Partial", "Span leak", "In-scope entity contract", "Resid|block",
                     "Layer breakdown", "Paired McNemar", "p Holm", "Bootstrap rank intervals"):
         assert section in out, section
     rows = [json.loads(line) for line in (out_dir / "per_prompt.jsonl").read_text(encoding="utf-8").splitlines()]
@@ -158,3 +158,15 @@ def test_cli_out_dir_writes_per_prompt_dump_and_stats_sections(tmp_path: Path) -
 def test_cli_rejects_bad_bootstrap_iterations() -> None:
     completed = _run(["--prompts", str(EXAMPLE), "--adapters", "mock", "--bootstrap-iters", "0"])
     assert completed.returncode == 1
+
+
+def test_cli_layer_filter_scores_one_layer(tmp_path: Path) -> None:
+    out = tmp_path / "hard.json"
+    completed = _run(["--prompts", str(DEMO), "--adapters", "mock-leaky", "--layer", "hard",
+                      "--bootstrap-iters", "50", "--out", str(out)])
+    assert completed.returncode == 0, completed.stderr
+    payload = json.loads(out.read_text(encoding="utf-8"))
+    demo = [json.loads(line) for line in DEMO.read_text(encoding="utf-8").splitlines()]
+    n_hard = sum(1 for r in demo if r["metadata"]["layer"] == "hard")
+    assert payload["layer"] == "hard"
+    assert payload["results"][0]["leak"]["n"] + payload["results"][0]["false_positive"]["n"] == n_hard

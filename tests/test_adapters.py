@@ -74,6 +74,10 @@ def test_mock_block_marks_prompt_blocked() -> None:
 
 
 def test_presidio_reports_unavailable_without_dependency(monkeypatch) -> None:
+    from pii_guardbench.adapters import presidio
+
+    # The per-process shared AnalyzerEngine would otherwise hide the missing import.
+    monkeypatch.setattr(presidio, "_SHARED", {})
     monkeypatch.setitem(sys.modules, "presidio_analyzer", None)
     with pytest.raises(AdapterUnavailableError, match="presidio-analyzer"):
         PresidioAdapter().warmup()
@@ -135,3 +139,112 @@ def test_nemo_pii_rail_masks_email_offline() -> None:
 def test_unknown_adapter_name_lists_known_options() -> None:
     with pytest.raises(KeyError, match="Unknown adapter"):
         get_adapter("definitely-not-a-real-adapter")
+
+
+def test_registry_has_matched_config_ablations_and_honest_names() -> None:
+    names = set(list_adapters())
+    assert {"presidio-nemo6-t0", "presidio-nemo6-t0.4", "presidio-all-t0.4", "nemo-guardrails-all",
+            "nemo-guardrails-detect", "piiguard-pgpresidio", "piiguard-union-presidio",
+            "gliner-pii", "llm-guard-anonymize", "llm-guard-block"} <= names
+    # Old name still resolves, to the honestly named adapter.
+    assert get_adapter("piiguard-presidio").name == "piiguard-pgpresidio"
+
+
+def test_entity_contracts_are_declared_per_config() -> None:
+    from pii_guardbench.adapters.presidio import NEMO_EXAMPLE_ENTITIES, contract_for_entities
+
+    assert get_adapter("mock-leaky").entity_contract() is None
+    nemo6 = contract_for_entities(NEMO_EXAMPLE_ENTITIES)
+    assert nemo6 == {"name", "email", "phone", "credit_card", "ssn", "address"} - ({"address"} - nemo6)
+    assert get_adapter("presidio-nemo6-t0").entity_contract() == nemo6
+    assert get_adapter("nemo-guardrails").entity_contract() == nemo6
+    assert get_adapter("piiguard").entity_contract() == {"ssn", "email", "phone", "credit_card"}
+    assert get_adapter("gliner-pii").entity_contract() >= {"name", "email", "api_key", "password", "mrn"}
+
+
+def test_union_replace_spans_merges_overlaps() -> None:
+    from pii_guardbench.adapters.piiguard import _replace_spans
+
+    text = "a 123-45-6789 b jane@example.org c"
+    spans = [(2, 13), (5, 9), (16, 32)]
+    assert _replace_spans(text, spans, "<PII>") == "a <PII> b <PII> c"
+    assert _replace_spans(text, [], "<PII>") == text
+
+
+def test_nemo_detect_mode_blocks_with_refusal() -> None:
+    from pii_guardbench.adapters.base import BLOCK_MESSAGE
+
+    # Parse the raw shape call() returns in detect mode (no NeMo needed).
+    adapter = NemoGuardrailsAdapter(mode="detect")
+    result = adapter.parse({"text": BLOCK_MESSAGE, "original": "mail jane@example.org", "blocked": True})
+    assert result.flags.blocked and result.redacted_text == BLOCK_MESSAGE
+    clean = adapter.parse({"text": "hello", "original": "hello", "blocked": False})
+    assert not clean.flags.blocked and clean.redacted_text == "hello"
+    assert adapter.name == "nemo-guardrails-detect" or adapter.mode == "detect"
+
+
+def test_llm_guard_parse_blocks_only_in_block_variant() -> None:
+    from pii_guardbench.adapters.base import BLOCK_MESSAGE
+    from pii_guardbench.adapters.llm_guard import LlmGuardAdapter
+
+    raw = {"text": "call [REDACTED_PHONE_NUMBER_1]", "is_valid": False, "risk_score": 1.0}
+    anon = LlmGuardAdapter().parse(raw)
+    assert not anon.flags.blocked and anon.redacted_text == raw["text"]
+    block = LlmGuardAdapter(block_on_invalid=True).parse(raw)
+    assert block.flags.blocked and block.redacted_text == BLOCK_MESSAGE
+    ok = LlmGuardAdapter(block_on_invalid=True).parse({"text": "hi", "is_valid": True, "risk_score": 0.0})
+    assert not ok.flags.blocked
+
+
+def test_llm_guard_unavailable_without_interpreter(monkeypatch) -> None:
+    from pii_guardbench.adapters.llm_guard import LlmGuardAdapter
+
+    monkeypatch.delenv("PGB_LLM_GUARD_PYTHON", raising=False)
+    with pytest.raises(AdapterUnavailableError, match="PGB_LLM_GUARD_PYTHON"):
+        LlmGuardAdapter().warmup()
+
+
+def test_gliner_unavailable_without_dependency(monkeypatch) -> None:
+    from pii_guardbench.adapters import gliner_pii
+    from pii_guardbench.adapters.gliner_pii import GlinerPiiAdapter
+
+    monkeypatch.setattr(gliner_pii, "_SHARED", {})
+    monkeypatch.setitem(sys.modules, "gliner", None)
+    with pytest.raises(AdapterUnavailableError):
+        GlinerPiiAdapter().warmup()
+
+
+def _hf_cached(repo: str) -> bool:
+    try:
+        from huggingface_hub import try_to_load_from_cache
+
+        return isinstance(try_to_load_from_cache(repo, "gliner_config.json"), str)
+    except Exception:
+        return False
+
+
+@pytest.mark.skipif(
+    not (_installed("gliner") and _hf_cached("urchade/gliner_multi_pii-v1")),
+    reason="gliner or its cached model not available (no download in tests)",
+)
+def test_gliner_live_redacts_email_offline(monkeypatch) -> None:
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")
+    from pii_guardbench.adapters.gliner_pii import GlinerPiiAdapter
+
+    result = GlinerPiiAdapter().run("Please email jane.doe@example.org about the invoice.")
+    assert "jane.doe@example.org" not in result.redacted_text
+    assert not result.flags.blocked
+
+
+@pytest.mark.skipif(
+    not __import__("os").environ.get("PGB_LLM_GUARD_PYTHON"),
+    reason="PGB_LLM_GUARD_PYTHON not set (LLM Guard runs in its own venv)",
+)
+def test_llm_guard_live_block_variant_blocks_pii() -> None:
+    from pii_guardbench.adapters.base import BLOCK_MESSAGE
+    from pii_guardbench.adapters.llm_guard import LlmGuardAdapter
+
+    anon = LlmGuardAdapter().run("Call me at 212-555-0147, my name is John Smith.")
+    assert "212-555-0147" not in anon.redacted_text and not anon.flags.blocked
+    block = LlmGuardAdapter(block_on_invalid=True).run("Call me at 212-555-0147, my name is John Smith.")
+    assert block.flags.blocked and block.redacted_text == BLOCK_MESSAGE

@@ -1,0 +1,178 @@
+PII-GuardBench results (scorer v2)
+  prompts : data/official/pgb-v1.0/prompts.jsonl
+  counts  : 200 total, 0 PII, 200 control
+  bootstrap: 2000 iterations, seed 0, 0 clusters (metadata.cluster > metadata.template_id > id)
+
+Adapter                  Exact leak  Norm leak  Wilson 95%  Cluster-boot 95%  Span leak  Span boot 95%  Partial    Blocked    Resid|block  FPR              FPR Wilson 95%  Latency ms (mean/p50/p95)
+-----------------------  ----------  ---------  ----------  ----------------  ---------  -------------  ---------  ---------  -----------  ---------------  --------------  -------------------------
+presidio                 n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.720 (144/200)  [0.654, 0.778]  4.32 / 4.19 / 5.01
+presidio-all-t0.4        n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.625 (125/200)  [0.556, 0.689]  4.07 / 4.04 / 4.59
+presidio-nemo6-t0        n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.160 (32/200)   [0.116, 0.217]  3.70 / 3.68 / 4.21
+presidio-nemo6-t0.4      n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.160 (32/200)   [0.116, 0.217]  3.78 / 3.77 / 4.36
+nemo-guardrails          n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.135 (27/200)   [0.094, 0.189]  4.29 / 4.25 / 4.90
+nemo-guardrails-all      n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.605 (121/200)  [0.536, 0.670]  4.53 / 4.51 / 5.19
+nemo-guardrails-detect   n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.135 (27/200)   [0.094, 0.189]  4.06 / 4.02 / 4.60
+piiguard                 n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.125 (25/200)   [0.086, 0.178]  0.19 / 0.18 / 0.31
+piiguard-pgpresidio      n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.135 (27/200)   [0.094, 0.189]  4.37 / 4.26 / 5.05
+piiguard-union-presidio  n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.720 (144/200)  [0.654, 0.778]  4.31 / 4.25 / 4.87
+gliner-pii               n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.490 (98/200)   [0.422, 0.559]  53.04 / 50.85 / 65.27
+llm-guard-anonymize      n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.235 (47/200)   [0.182, 0.298]  39.15 / 38.23 / 47.19
+llm-guard-block          n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.235 (47/200)   [0.182, 0.298]  40.96 / 38.18 / 54.05
+mock-leaky               n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.000 (0/200)    [0.000, 0.019]  0.00 / 0.00 / 0.00
+mock-redact              n/a (0/0)   n/a (0/0)  n/a         n/a               n/a (0/0)  n/a            n/a (0/0)  n/a (0/0)  n/a (0/0)    0.375 (75/200)   [0.311, 0.444]  0.01 / 0.01 / 0.01
+
+Layer breakdown (clean vs adversarial obfuscation)
+Adapter  Layer  Exact leak  Norm leak  Wilson 95%
+-------  -----  ----------  ---------  ----------
+n/a      n/a    n/a         n/a        n/a
+
+In-scope entity contract (normalized leak on categories each system is configured for)
+Adapter                  Configured categories                                                                         In-scope prompt leak  In-scope span leak  Shared-scope prompt leak  Shared-scope span leak
+-----------------------  --------------------------------------------------------------------------------------------  --------------------  ------------------  ------------------------  ----------------------
+presidio                 account_number,address,credit_card,email,name,phone,ssn                                       n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+presidio-all-t0.4        account_number,address,credit_card,email,name,phone,ssn                                       n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+presidio-nemo6-t0        address,credit_card,email,name,phone,ssn                                                      n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+presidio-nemo6-t0.4      address,credit_card,email,name,phone,ssn                                                      n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+nemo-guardrails          address,credit_card,email,name,phone,ssn                                                      n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+nemo-guardrails-all      account_number,address,credit_card,email,name,phone,ssn                                       n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+nemo-guardrails-detect   address,credit_card,email,name,phone,ssn                                                      n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+piiguard                 credit_card,email,phone,ssn                                                                   n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+piiguard-pgpresidio      account_number,address,credit_card,email,name,phone,ssn                                       n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+piiguard-union-presidio  account_number,address,credit_card,email,name,phone,ssn                                       n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+gliner-pii               account_number,address,api_key,credit_card,diagnosis,email,mrn,name,password,phone,ssn,token  n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+llm-guard-anonymize      account_number,credit_card,email,name,phone,ssn                                               n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+llm-guard-block          account_number,credit_card,email,name,phone,ssn                                               n/a (0/0)             n/a (0/0)           n/a (0/0)                 n/a (0/0)
+mock-leaky               (none declared: reference)                                                                    n/a                   n/a                 n/a                       n/a
+mock-redact              (none declared: reference)                                                                    n/a                   n/a                 n/a                       n/a
+  shared scope = credit_card,email,phone,ssn (intersection of declared contracts of non-mock adapters)
+
+Category breakdown (normalized leak)
+Adapter                  Category  Leak rate  95% CI
+-----------------------  --------  ---------  ------
+presidio                 n/a       n/a (0/0)  n/a
+presidio-all-t0.4        n/a       n/a (0/0)  n/a
+presidio-nemo6-t0        n/a       n/a (0/0)  n/a
+presidio-nemo6-t0.4      n/a       n/a (0/0)  n/a
+nemo-guardrails          n/a       n/a (0/0)  n/a
+nemo-guardrails-all      n/a       n/a (0/0)  n/a
+nemo-guardrails-detect   n/a       n/a (0/0)  n/a
+piiguard                 n/a       n/a (0/0)  n/a
+piiguard-pgpresidio      n/a       n/a (0/0)  n/a
+piiguard-union-presidio  n/a       n/a (0/0)  n/a
+gliner-pii               n/a       n/a (0/0)  n/a
+llm-guard-anonymize      n/a       n/a (0/0)  n/a
+llm-guard-block          n/a       n/a (0/0)  n/a
+mock-leaky               n/a       n/a (0/0)  n/a
+mock-redact              n/a       n/a (0/0)  n/a
+
+Paired McNemar exact tests on normalized leak (Holm over non-mock pairs; 'ref' = mock pair, unadjusted)
+Pair (A vs B)                                      only A leaks  only B leaks  p exact  p Holm  rate(A)-rate(B) [cluster-boot 95%]
+-------------------------------------------------  ------------  ------------  -------  ------  ----------------------------------
+presidio vs presidio-all-t0.4                      0             0             1        1       n/a
+presidio vs presidio-nemo6-t0                      0             0             1        1       n/a
+presidio vs presidio-nemo6-t0.4                    0             0             1        1       n/a
+presidio vs nemo-guardrails                        0             0             1        1       n/a
+presidio vs nemo-guardrails-all                    0             0             1        1       n/a
+presidio vs nemo-guardrails-detect                 0             0             1        1       n/a
+presidio vs piiguard                               0             0             1        1       n/a
+presidio vs piiguard-pgpresidio                    0             0             1        1       n/a
+presidio vs piiguard-union-presidio                0             0             1        1       n/a
+presidio vs gliner-pii                             0             0             1        1       n/a
+presidio vs llm-guard-anonymize                    0             0             1        1       n/a
+presidio vs llm-guard-block                        0             0             1        1       n/a
+presidio vs mock-leaky                             0             0             1        ref     n/a
+presidio vs mock-redact                            0             0             1        ref     n/a
+presidio-all-t0.4 vs presidio-nemo6-t0             0             0             1        1       n/a
+presidio-all-t0.4 vs presidio-nemo6-t0.4           0             0             1        1       n/a
+presidio-all-t0.4 vs nemo-guardrails               0             0             1        1       n/a
+presidio-all-t0.4 vs nemo-guardrails-all           0             0             1        1       n/a
+presidio-all-t0.4 vs nemo-guardrails-detect        0             0             1        1       n/a
+presidio-all-t0.4 vs piiguard                      0             0             1        1       n/a
+presidio-all-t0.4 vs piiguard-pgpresidio           0             0             1        1       n/a
+presidio-all-t0.4 vs piiguard-union-presidio       0             0             1        1       n/a
+presidio-all-t0.4 vs gliner-pii                    0             0             1        1       n/a
+presidio-all-t0.4 vs llm-guard-anonymize           0             0             1        1       n/a
+presidio-all-t0.4 vs llm-guard-block               0             0             1        1       n/a
+presidio-all-t0.4 vs mock-leaky                    0             0             1        ref     n/a
+presidio-all-t0.4 vs mock-redact                   0             0             1        ref     n/a
+presidio-nemo6-t0 vs presidio-nemo6-t0.4           0             0             1        1       n/a
+presidio-nemo6-t0 vs nemo-guardrails               0             0             1        1       n/a
+presidio-nemo6-t0 vs nemo-guardrails-all           0             0             1        1       n/a
+presidio-nemo6-t0 vs nemo-guardrails-detect        0             0             1        1       n/a
+presidio-nemo6-t0 vs piiguard                      0             0             1        1       n/a
+presidio-nemo6-t0 vs piiguard-pgpresidio           0             0             1        1       n/a
+presidio-nemo6-t0 vs piiguard-union-presidio       0             0             1        1       n/a
+presidio-nemo6-t0 vs gliner-pii                    0             0             1        1       n/a
+presidio-nemo6-t0 vs llm-guard-anonymize           0             0             1        1       n/a
+presidio-nemo6-t0 vs llm-guard-block               0             0             1        1       n/a
+presidio-nemo6-t0 vs mock-leaky                    0             0             1        ref     n/a
+presidio-nemo6-t0 vs mock-redact                   0             0             1        ref     n/a
+presidio-nemo6-t0.4 vs nemo-guardrails             0             0             1        1       n/a
+presidio-nemo6-t0.4 vs nemo-guardrails-all         0             0             1        1       n/a
+presidio-nemo6-t0.4 vs nemo-guardrails-detect      0             0             1        1       n/a
+presidio-nemo6-t0.4 vs piiguard                    0             0             1        1       n/a
+presidio-nemo6-t0.4 vs piiguard-pgpresidio         0             0             1        1       n/a
+presidio-nemo6-t0.4 vs piiguard-union-presidio     0             0             1        1       n/a
+presidio-nemo6-t0.4 vs gliner-pii                  0             0             1        1       n/a
+presidio-nemo6-t0.4 vs llm-guard-anonymize         0             0             1        1       n/a
+presidio-nemo6-t0.4 vs llm-guard-block             0             0             1        1       n/a
+presidio-nemo6-t0.4 vs mock-leaky                  0             0             1        ref     n/a
+presidio-nemo6-t0.4 vs mock-redact                 0             0             1        ref     n/a
+nemo-guardrails vs nemo-guardrails-all             0             0             1        1       n/a
+nemo-guardrails vs nemo-guardrails-detect          0             0             1        1       n/a
+nemo-guardrails vs piiguard                        0             0             1        1       n/a
+nemo-guardrails vs piiguard-pgpresidio             0             0             1        1       n/a
+nemo-guardrails vs piiguard-union-presidio         0             0             1        1       n/a
+nemo-guardrails vs gliner-pii                      0             0             1        1       n/a
+nemo-guardrails vs llm-guard-anonymize             0             0             1        1       n/a
+nemo-guardrails vs llm-guard-block                 0             0             1        1       n/a
+nemo-guardrails vs mock-leaky                      0             0             1        ref     n/a
+nemo-guardrails vs mock-redact                     0             0             1        ref     n/a
+nemo-guardrails-all vs nemo-guardrails-detect      0             0             1        1       n/a
+nemo-guardrails-all vs piiguard                    0             0             1        1       n/a
+nemo-guardrails-all vs piiguard-pgpresidio         0             0             1        1       n/a
+nemo-guardrails-all vs piiguard-union-presidio     0             0             1        1       n/a
+nemo-guardrails-all vs gliner-pii                  0             0             1        1       n/a
+nemo-guardrails-all vs llm-guard-anonymize         0             0             1        1       n/a
+nemo-guardrails-all vs llm-guard-block             0             0             1        1       n/a
+nemo-guardrails-all vs mock-leaky                  0             0             1        ref     n/a
+nemo-guardrails-all vs mock-redact                 0             0             1        ref     n/a
+nemo-guardrails-detect vs piiguard                 0             0             1        1       n/a
+nemo-guardrails-detect vs piiguard-pgpresidio      0             0             1        1       n/a
+nemo-guardrails-detect vs piiguard-union-presidio  0             0             1        1       n/a
+nemo-guardrails-detect vs gliner-pii               0             0             1        1       n/a
+nemo-guardrails-detect vs llm-guard-anonymize      0             0             1        1       n/a
+nemo-guardrails-detect vs llm-guard-block          0             0             1        1       n/a
+nemo-guardrails-detect vs mock-leaky               0             0             1        ref     n/a
+nemo-guardrails-detect vs mock-redact              0             0             1        ref     n/a
+piiguard vs piiguard-pgpresidio                    0             0             1        1       n/a
+piiguard vs piiguard-union-presidio                0             0             1        1       n/a
+piiguard vs gliner-pii                             0             0             1        1       n/a
+piiguard vs llm-guard-anonymize                    0             0             1        1       n/a
+piiguard vs llm-guard-block                        0             0             1        1       n/a
+piiguard vs mock-leaky                             0             0             1        ref     n/a
+piiguard vs mock-redact                            0             0             1        ref     n/a
+piiguard-pgpresidio vs piiguard-union-presidio     0             0             1        1       n/a
+piiguard-pgpresidio vs gliner-pii                  0             0             1        1       n/a
+piiguard-pgpresidio vs llm-guard-anonymize         0             0             1        1       n/a
+piiguard-pgpresidio vs llm-guard-block             0             0             1        1       n/a
+piiguard-pgpresidio vs mock-leaky                  0             0             1        ref     n/a
+piiguard-pgpresidio vs mock-redact                 0             0             1        ref     n/a
+piiguard-union-presidio vs gliner-pii              0             0             1        1       n/a
+piiguard-union-presidio vs llm-guard-anonymize     0             0             1        1       n/a
+piiguard-union-presidio vs llm-guard-block         0             0             1        1       n/a
+piiguard-union-presidio vs mock-leaky              0             0             1        ref     n/a
+piiguard-union-presidio vs mock-redact             0             0             1        ref     n/a
+gliner-pii vs llm-guard-anonymize                  0             0             1        1       n/a
+gliner-pii vs llm-guard-block                      0             0             1        1       n/a
+gliner-pii vs mock-leaky                           0             0             1        ref     n/a
+gliner-pii vs mock-redact                          0             0             1        ref     n/a
+llm-guard-anonymize vs llm-guard-block             0             0             1        1       n/a
+llm-guard-anonymize vs mock-leaky                  0             0             1        ref     n/a
+llm-guard-anonymize vs mock-redact                 0             0             1        ref     n/a
+llm-guard-block vs mock-leaky                      0             0             1        ref     n/a
+llm-guard-block vs mock-redact                     0             0             1        ref     n/a
+mock-leaky vs mock-redact                          0             0             1        ref     n/a
+
+Bootstrap rank intervals (1 = least leakage, normalized leak)
+  (no PII prompts)
