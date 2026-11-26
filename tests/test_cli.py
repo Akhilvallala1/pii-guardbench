@@ -139,14 +139,14 @@ def test_cli_out_dir_writes_per_prompt_dump_and_stats_sections(tmp_path: Path) -
     ])
     assert completed.returncode == 0, completed.stderr
     out = completed.stdout
-    for section in ("Exact leak", "Norm leak", "Cluster-boot 95%", "Partial", "Span leak", "In-scope entity contract", "Resid|block",
+    for section in ("Exact leak", "Norm leak", "Cluster 95%", "Wilson (iid, secondary)", "Ctl blocked", "cluster CI excl. 0", "Partial", "Span leak", "In-scope entity contract", "Resid|block",
                     "Layer breakdown", "Paired McNemar", "p Holm", "Bootstrap rank intervals"):
         assert section in out, section
     rows = [json.loads(line) for line in (out_dir / "per_prompt.jsonl").read_text(encoding="utf-8").splitlines()]
     assert len(rows) == 3 * 30
     assert {r["adapter"] for r in rows} == {"mock-leaky", "mock-redact", "mock-block"}
     assert {"prompt_id", "exact_leak", "normalized_leak", "partial_exposure", "blocked",
-            "false_positive", "latency_ms", "layer", "cluster"} <= set(rows[0])
+            "false_positive", "latency_ms", "layer", "cluster", "detected_types", "contract_false_positive", "template_id"} <= set(rows[0])
     summary = json.loads((out_dir / "summary.json").read_text(encoding="utf-8"))
     assert summary["bootstrap"]["iterations"] == 200 and summary["bootstrap"]["seed"] == 3
     assert len(summary["pairwise_mcnemar_holm"]) == 3

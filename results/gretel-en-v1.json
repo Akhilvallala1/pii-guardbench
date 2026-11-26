@@ -7,6 +7,8 @@
     "iterations": 2000,
     "seed": 0,
     "n_clusters": 500,
+    "n_pii_clusters": 500,
+    "n_control_clusters": 0,
     "cluster_key": "metadata.cluster > metadata.template_id > id"
   },
   "results": [
@@ -69,10 +71,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 50,
+          "n": 85,
+          "rate": 0.5882352941176471,
+          "low": 0.48200820902440994,
+          "high": 0.6868316137613121
+        },
+        "finance": {
+          "k": 19,
+          "n": 56,
+          "rate": 0.3392857142857143,
+          "low": 0.2291979931933465,
+          "high": 0.47000791039211914
+        },
+        "health": {
+          "k": 8,
+          "n": 25,
+          "rate": 0.32,
+          "low": 0.1720498751689114,
+          "high": 0.515900862654233
+        }
+      },
       "latency_ms": {
-        "mean": 8.54593342001317,
-        "p50": 7.74960250055301,
-        "p95": 14.63128035002228,
+        "mean": 8.977288240013877,
+        "p50": 8.075611498497892,
+        "p95": 16.16816430032486,
         "n": 500
       },
       "by_category": {
@@ -302,10 +361,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 65,
+          "n": 85,
+          "rate": 0.7647058823529411,
+          "low": 0.6643136684446008,
+          "high": 0.8422057999125651
+        },
+        "finance": {
+          "k": 31,
+          "n": 56,
+          "rate": 0.5535714285714286,
+          "low": 0.42412986131783886,
+          "high": 0.676134837487006
+        },
+        "health": {
+          "k": 23,
+          "n": 25,
+          "rate": 0.92,
+          "low": 0.7503348787704218,
+          "high": 0.977780066308908
+        }
+      },
       "latency_ms": {
-        "mean": 7.846445368017157,
-        "p50": 7.210487499833107,
-        "p95": 13.357256400831828,
+        "mean": 8.223998476030829,
+        "p50": 7.614160000230186,
+        "p95": 13.697461301489964,
         "n": 500
       },
       "by_category": {
@@ -535,10 +651,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 68,
+          "n": 85,
+          "rate": 0.8,
+          "low": 0.7028443198871105,
+          "high": 0.8712110775843444
+        },
+        "finance": {
+          "k": 34,
+          "n": 56,
+          "rate": 0.6071428571428571,
+          "low": 0.476331653784818,
+          "high": 0.7241977438248716
+        },
+        "health": {
+          "k": 23,
+          "n": 25,
+          "rate": 0.92,
+          "low": 0.7503348787704218,
+          "high": 0.977780066308908
+        }
+      },
       "latency_ms": {
-        "mean": 7.254251063954143,
-        "p50": 6.621537499995611,
-        "p95": 12.465018199873155,
+        "mean": 7.707719825906679,
+        "p50": 7.113256498996634,
+        "p95": 13.44457719897036,
         "n": 500
       },
       "by_category": {
@@ -766,10 +939,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 68,
+          "n": 85,
+          "rate": 0.8,
+          "low": 0.7028443198871105,
+          "high": 0.8712110775843444
+        },
+        "finance": {
+          "k": 35,
+          "n": 56,
+          "rate": 0.625,
+          "low": 0.494051260344893,
+          "high": 0.7398997035330781
+        },
+        "health": {
+          "k": 23,
+          "n": 25,
+          "rate": 0.92,
+          "low": 0.7503348787704218,
+          "high": 0.977780066308908
+        }
+      },
       "latency_ms": {
-        "mean": 7.305006243983371,
-        "p50": 6.692541500342486,
-        "p95": 12.318830251115283,
+        "mean": 7.687517566002498,
+        "p50": 7.067567999911262,
+        "p95": 13.254395701005697,
         "n": 500
       },
       "by_category": {
@@ -997,10 +1227,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 69,
+          "n": 85,
+          "rate": 0.8117647058823529,
+          "low": 0.7158877949459186,
+          "high": 0.8806795788969659
+        },
+        "finance": {
+          "k": 35,
+          "n": 56,
+          "rate": 0.625,
+          "low": 0.494051260344893,
+          "high": 0.7398997035330781
+        },
+        "health": {
+          "k": 23,
+          "n": 25,
+          "rate": 0.92,
+          "low": 0.7503348787704218,
+          "high": 0.977780066308908
+        }
+      },
       "latency_ms": {
-        "mean": 9.157559334023972,
-        "p50": 7.914515499578556,
-        "p95": 14.576973100429301,
+        "mean": 9.37846132593404,
+        "p50": 7.9588619992136955,
+        "p95": 16.153949950239614,
         "n": 500
       },
       "by_category": {
@@ -1228,10 +1515,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 66,
+          "n": 85,
+          "rate": 0.7764705882352941,
+          "low": 0.6770628717994043,
+          "high": 0.8519685729291915
+        },
+        "finance": {
+          "k": 31,
+          "n": 56,
+          "rate": 0.5535714285714286,
+          "low": 0.42412986131783886,
+          "high": 0.676134837487006
+        },
+        "health": {
+          "k": 23,
+          "n": 25,
+          "rate": 0.92,
+          "low": 0.7503348787704218,
+          "high": 0.977780066308908
+        }
+      },
       "latency_ms": {
-        "mean": 8.632786334015691,
-        "p50": 7.929715000500437,
-        "p95": 14.478969400352064,
+        "mean": 9.336898786044912,
+        "p50": 8.431025999016128,
+        "p95": 15.748554899437291,
         "n": 500
       },
       "by_category": {
@@ -1461,10 +1805,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 20,
+          "n": 85,
+          "rate": 0.23529411764705882,
+          "low": 0.1577942000874349,
+          "high": 0.3356863315553992
+        },
+        "finance": {
+          "k": 4,
+          "n": 56,
+          "rate": 0.07142857142857142,
+          "low": 0.028125581246379622,
+          "high": 0.16975682831486205
+        },
+        "health": {
+          "k": 0,
+          "n": 25,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.13319649395317873
+        }
+      },
       "latency_ms": {
-        "mean": 7.888066396008071,
-        "p50": 7.198934500593168,
-        "p95": 13.920979949853061,
+        "mean": 7.92011802601337,
+        "p50": 7.30171150098613,
+        "p95": 13.510086150381538,
         "n": 500
       },
       "by_category": {
@@ -1692,10 +2093,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 81,
+          "n": 85,
+          "rate": 0.9529411764705882,
+          "low": 0.8851610525649923,
+          "high": 0.9815500377350471
+        },
+        "finance": {
+          "k": 50,
+          "n": 56,
+          "rate": 0.8928571428571429,
+          "low": 0.7853131324833861,
+          "high": 0.9499613254188092
+        },
+        "health": {
+          "k": 24,
+          "n": 25,
+          "rate": 0.96,
+          "low": 0.8045552759497747,
+          "high": 0.9929039496133008
+        }
+      },
       "latency_ms": {
-        "mean": 0.27433781202489627,
-        "p50": 0.2366874996369006,
-        "p95": 0.5532776507607196,
+        "mean": 0.2724780559219653,
+        "p50": 0.23234699983731844,
+        "p95": 0.5383012010497622,
         "n": 500
       },
       "by_category": {
@@ -1919,10 +2377,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 70,
+          "n": 85,
+          "rate": 0.8235294117647058,
+          "low": 0.7290420197764076,
+          "high": 0.8900373304379063
+        },
+        "finance": {
+          "k": 32,
+          "n": 56,
+          "rate": 0.5714285714285714,
+          "low": 0.4413738892040555,
+          "high": 0.6923123758690708
+        },
+        "health": {
+          "k": 24,
+          "n": 25,
+          "rate": 0.96,
+          "low": 0.8045552759497747,
+          "high": 0.9929039496133008
+        }
+      },
       "latency_ms": {
-        "mean": 9.405939220017899,
-        "p50": 8.596929000304954,
-        "p95": 16.059300800316123,
+        "mean": 9.040994289927767,
+        "p50": 8.266223998361966,
+        "p95": 15.782357250463974,
         "n": 500
       },
       "by_category": {
@@ -2152,10 +2667,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 49,
+          "n": 85,
+          "rate": 0.5764705882352941,
+          "low": 0.47036157660275524,
+          "high": 0.6759662698115371
+        },
+        "finance": {
+          "k": 19,
+          "n": 56,
+          "rate": 0.3392857142857143,
+          "low": 0.2291979931933465,
+          "high": 0.47000791039211914
+        },
+        "health": {
+          "k": 8,
+          "n": 25,
+          "rate": 0.32,
+          "low": 0.1720498751689114,
+          "high": 0.515900862654233
+        }
+      },
       "latency_ms": {
-        "mean": 9.038247538010182,
-        "p50": 8.22246850020747,
-        "p95": 15.495270999326731,
+        "mean": 8.496261961990967,
+        "p50": 7.822579000276164,
+        "p95": 14.53055025122012,
         "n": 500
       },
       "by_category": {
@@ -2385,10 +2957,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 18,
+          "n": 85,
+          "rate": 0.21176470588235294,
+          "low": 0.13836125681504122,
+          "high": 0.3100953220849336
+        },
+        "finance": {
+          "k": 8,
+          "n": 56,
+          "rate": 0.14285714285714285,
+          "low": 0.0742070004258528,
+          "high": 0.25736167420851525
+        },
+        "health": {
+          "k": 7,
+          "n": 25,
+          "rate": 0.28,
+          "low": 0.14283673837381572,
+          "high": 0.47576971896558296
+        }
+      },
       "latency_ms": {
-        "mean": 108.645144980037,
-        "p50": 74.76384349956788,
-        "p95": 271.6756289006295,
+        "mean": 153.4055336779129,
+        "p50": 85.86039999863715,
+        "p95": 468.84094655142667,
         "n": 500
       },
       "by_category": {
@@ -2628,10 +3257,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 71,
+          "n": 85,
+          "rate": 0.8352941176470589,
+          "low": 0.7423150301896174,
+          "high": 0.8992762963961264
+        },
+        "finance": {
+          "k": 46,
+          "n": 56,
+          "rate": 0.8214285714285714,
+          "low": 0.7015856902425105,
+          "high": 0.9000025025865582
+        },
+        "health": {
+          "k": 24,
+          "n": 25,
+          "rate": 0.96,
+          "low": 0.8045552759497747,
+          "high": 0.9929039496133008
+        }
+      },
       "latency_ms": {
-        "mean": 73.2899576240452,
-        "p50": 59.71928100007062,
-        "p95": 123.998144649613,
+        "mean": 77.6045727640012,
+        "p50": 65.45257550169481,
+        "p95": 146.3326586508628,
         "n": 500
       },
       "by_category": {
@@ -2859,10 +3545,67 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 14,
+          "n": 85,
+          "rate": 0.16470588235294117,
+          "low": 0.1007237036038737,
+          "high": 0.2576849698103827
+        },
+        "finance": {
+          "k": 7,
+          "n": 56,
+          "rate": 0.125,
+          "low": 0.06188990138969254,
+          "high": 0.23625720697639396
+        },
+        "health": {
+          "k": 0,
+          "n": 25,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.13319649395317873
+        }
+      },
       "latency_ms": {
-        "mean": 74.1068124679914,
-        "p50": 57.730644500225026,
-        "p95": 153.90525199991305,
+        "mean": 71.3285717999679,
+        "p50": 63.42779599981441,
+        "p95": 110.80154654882786,
         "n": 500
       },
       "by_category": {
@@ -3090,10 +3833,54 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": null,
+      "contract_false_positive_cluster_bootstrap": null,
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 85,
+          "n": 85,
+          "rate": 1.0,
+          "low": 0.9567589957857582,
+          "high": 1.0
+        },
+        "finance": {
+          "k": 56,
+          "n": 56,
+          "rate": 1.0,
+          "low": 0.9358038555118846,
+          "high": 1.0
+        },
+        "health": {
+          "k": 25,
+          "n": 25,
+          "rate": 1.0,
+          "low": 0.8668035060468213,
+          "high": 1.0
+        }
+      },
       "latency_ms": {
-        "mean": 0.0012191940186312422,
-        "p50": 0.0006790005500079133,
-        "p95": 0.0022196497411641754,
+        "mean": 0.001122510089771822,
+        "p50": 0.0007189992174971849,
+        "p95": 0.0021751518943347037,
         "n": 500
       },
       "by_category": {
@@ -3291,10 +4078,54 @@
         "low": null,
         "high": null
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive": null,
+      "contract_false_positive_cluster_bootstrap": null,
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {},
+      "by_family": {
+        "credentials": {
+          "k": 77,
+          "n": 85,
+          "rate": 0.9058823529411765,
+          "low": 0.8251276663627338,
+          "high": 0.9515355184515875
+        },
+        "finance": {
+          "k": 49,
+          "n": 56,
+          "rate": 0.875,
+          "low": 0.763742793023606,
+          "high": 0.9381100986103075
+        },
+        "health": {
+          "k": 24,
+          "n": 25,
+          "rate": 0.96,
+          "low": 0.8045552759497747,
+          "high": 0.9929039496133008
+        }
+      },
       "latency_ms": {
-        "mean": 0.018838973926904146,
-        "p50": 0.016104999303934164,
-        "p95": 0.03922319992852859,
+        "mean": 0.01920247595262481,
+        "p50": 0.016258998584817164,
+        "p95": 0.03809720128629124,
         "n": 500
       },
       "by_category": {
@@ -3450,6 +4281,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.627025617018337e-30,
       "holm_family": "systems"
     },
@@ -3468,6 +4310,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.159728815010309e-35,
       "holm_family": "systems"
     },
@@ -3486,6 +4339,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.6174802267314676e-35,
       "holm_family": "systems"
     },
@@ -3504,6 +4368,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.4072740137825225e-37,
       "holm_family": "systems"
     },
@@ -3522,6 +4397,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0477058897466563e-31,
       "holm_family": "systems"
     },
@@ -3540,6 +4426,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.8587513820457954e-26,
       "holm_family": "systems"
     },
@@ -3558,6 +4455,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.2549734697521043e-72,
       "holm_family": "systems"
     },
@@ -3576,6 +4484,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.661947745443509e-34,
       "holm_family": "systems"
     },
@@ -3594,6 +4513,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.07917118072509766,
       "holm_family": "systems"
     },
@@ -3612,6 +4542,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.3768641966603375e-08,
       "holm_family": "systems"
     },
@@ -3630,6 +4571,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.4685999899274556e-42,
       "holm_family": "systems"
     },
@@ -3648,6 +4600,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 6.439146391462463e-22,
       "holm_family": "systems"
     },
@@ -3666,6 +4629,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3684,6 +4658,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3702,6 +4687,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.000457763671875,
       "holm_family": "systems"
     },
@@ -3720,6 +4716,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.000244140625,
       "holm_family": "systems"
     },
@@ -3738,6 +4745,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.059906005859375e-06,
       "holm_family": "systems"
     },
@@ -3756,6 +4774,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.5,
       "holm_family": "systems"
     },
@@ -3774,6 +4803,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.323642282568619e-68,
       "holm_family": "systems"
     },
@@ -3792,6 +4832,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.9075423857146105e-40,
       "holm_family": "systems"
     },
@@ -3810,6 +4861,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0001421979377482785,
       "holm_family": "systems"
     },
@@ -3828,6 +4890,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 6.933347799794049e-33,
       "holm_family": "systems"
     },
@@ -3846,6 +4919,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.2113984003561082e-34,
       "holm_family": "systems"
     },
@@ -3864,6 +4948,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.199956869002133e-15,
       "holm_family": "systems"
     },
@@ -3882,6 +4977,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.1130176656097788e-58,
       "holm_family": "systems"
     },
@@ -3900,6 +5006,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3918,6 +5035,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3936,6 +5064,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": false,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3954,6 +5093,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.25,
       "holm_family": "systems"
     },
@@ -3972,6 +5122,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.10636138916015625,
       "holm_family": "systems"
     },
@@ -3990,6 +5151,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.4580694749937563e-75,
       "holm_family": "systems"
     },
@@ -4008,6 +5180,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.674040118034617e-34,
       "holm_family": "systems"
     },
@@ -4026,6 +5209,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.43770833109738305,
       "holm_family": "systems"
     },
@@ -4044,6 +5238,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.3812058622161878e-37,
       "holm_family": "systems"
     },
@@ -4062,6 +5267,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.272836847841495e-40,
       "holm_family": "systems"
     },
@@ -4080,6 +5296,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.1593879139991136e-10,
       "holm_family": "systems"
     },
@@ -4098,6 +5325,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.799424968944395e-64,
       "holm_family": "systems"
     },
@@ -4116,6 +5354,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4134,6 +5383,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4152,6 +5412,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.4375,
       "holm_family": "systems"
     },
@@ -4170,6 +5441,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.07917118072509766,
       "holm_family": "systems"
     },
@@ -4188,6 +5470,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.2515697398203277e-75,
       "holm_family": "systems"
     },
@@ -4206,6 +5499,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 8.567152478500511e-34,
       "holm_family": "systems"
     },
@@ -4224,6 +5528,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": false,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.4943587479647249,
       "holm_family": "systems"
     },
@@ -4242,6 +5557,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.052966104933725e-38,
       "holm_family": "systems"
     },
@@ -4260,6 +5586,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.189467761269757e-40,
       "holm_family": "systems"
     },
@@ -4278,6 +5615,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.4023912829345547e-10,
       "holm_family": "systems"
     },
@@ -4296,6 +5644,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.066405790954039e-64,
       "holm_family": "systems"
     },
@@ -4314,6 +5673,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4332,6 +5702,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4350,6 +5731,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0001373291015625,
       "holm_family": "systems"
     },
@@ -4368,6 +5760,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 6.072306015300781e-79,
       "holm_family": "systems"
     },
@@ -4386,6 +5789,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.1733933147307353e-32,
       "holm_family": "systems"
     },
@@ -4404,6 +5818,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": false,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -4422,6 +5847,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.2958874039497803e-39,
       "holm_family": "systems"
     },
@@ -4440,6 +5876,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.5329793729296664e-41,
       "holm_family": "systems"
     },
@@ -4458,6 +5905,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.767515347683132e-09,
       "holm_family": "systems"
     },
@@ -4476,6 +5934,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.7463218546733928e-66,
       "holm_family": "systems"
     },
@@ -4494,6 +5963,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4512,6 +5992,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4530,6 +6021,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.930372206209832e-70,
       "holm_family": "systems"
     },
@@ -4548,6 +6050,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.612822580872285e-39,
       "holm_family": "systems"
     },
@@ -4566,6 +6079,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0009048220235854387,
       "holm_family": "systems"
     },
@@ -4584,6 +6108,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.674040118034617e-34,
       "holm_family": "systems"
     },
@@ -4602,6 +6137,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.4342331935123634e-35,
       "holm_family": "systems"
     },
@@ -4620,6 +6166,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.687322859612943e-14,
       "holm_family": "systems"
     },
@@ -4638,6 +6195,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.435572981374676e-60,
       "holm_family": "systems"
     },
@@ -4656,6 +6224,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4674,6 +6253,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4692,6 +6282,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.832994709731949e-118,
       "holm_family": "systems"
     },
@@ -4710,6 +6311,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.619755623197852e-81,
       "holm_family": "systems"
     },
@@ -4728,6 +6340,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.292921371399173e-24,
       "holm_family": "systems"
     },
@@ -4746,6 +6369,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0008088376520740003,
       "holm_family": "systems"
     },
@@ -4764,6 +6398,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.251133206222097e-90,
       "holm_family": "systems"
     },
@@ -4782,6 +6427,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": false,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -4800,6 +6456,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4818,6 +6485,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4836,6 +6514,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.231779662960235e-36,
       "holm_family": "systems"
     },
@@ -4854,6 +6543,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.395187372701975e-78,
       "holm_family": "systems"
     },
@@ -4872,6 +6572,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 6.801314519549519e-97,
       "holm_family": "systems"
     },
@@ -4890,6 +6601,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.384145242960924e-16,
       "holm_family": "systems"
     },
@@ -4908,6 +6630,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.908413295637744e-117,
       "holm_family": "systems"
     },
@@ -4926,6 +6659,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4944,6 +6688,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": false,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4962,6 +6717,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.874309994165254e-41,
       "holm_family": "systems"
     },
@@ -4980,6 +6746,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.7740755214395106e-44,
       "holm_family": "systems"
     },
@@ -4998,6 +6775,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.489482626186161e-07,
       "holm_family": "systems"
     },
@@ -5016,6 +6804,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.4761595143921183e-68,
       "holm_family": "systems"
     },
@@ -5034,6 +6833,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5052,6 +6862,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5070,6 +6891,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 6.472101889832403e-07,
       "holm_family": "systems"
     },
@@ -5088,6 +6920,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.785436564898567e-46,
       "holm_family": "systems"
     },
@@ -5106,6 +6949,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.704326358228428e-20,
       "holm_family": "systems"
     },
@@ -5124,6 +6978,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5142,6 +7007,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5160,6 +7036,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.546689970197152e-71,
       "holm_family": "systems"
     },
@@ -5178,6 +7065,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0011201387691369697,
       "holm_family": "systems"
     },
@@ -5196,6 +7094,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5214,6 +7123,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5232,6 +7152,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.3898726677992464e-97,
       "holm_family": "systems"
     },
@@ -5250,6 +7181,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5268,6 +7210,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5286,6 +7239,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5304,6 +7268,17 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -5322,11 +7297,30 @@
         "n_clusters": 500,
         "seed": 0
       },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     }
   ],
   "holm_family": "all pairs of non-mock adapters; mock pairs reported unadjusted",
+  "pairwise_summary": {
+    "alpha": 0.05,
+    "n_pairs": 78,
+    "holm_significant": 67,
+    "holm_significant_and_cluster_ci_excludes_0": 67,
+    "cluster_ci_excludes_0": 74,
+    "fpr_cluster_ci_excludes_0": 0
+  },
   "rank_intervals": {
     "presidio": {
       "rank": 5.0,

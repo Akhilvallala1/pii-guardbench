@@ -41,6 +41,7 @@ from pii_guardbench.adapters.base import (
 )
 from pii_guardbench.adapters.presidio import (
     NEMO_EXAMPLE_ENTITIES,
+    PRESIDIO_TO_CATEGORY,
     contract_for_entities,
     shared_default_analyzer,
 )
@@ -152,6 +153,11 @@ class NemoGuardrailsAdapter(GuardrailAdapter):
 
     def entity_contract(self) -> frozenset[str]:
         return contract_for_entities(self._resolve_entities())
+
+    def category_map(self) -> dict[str, str]:
+        # NeMo's actions do not expose Presidio findings; detected types are
+        # parsed from the <ENTITY> placeholders in the masked text (mask mode).
+        return dict(PRESIDIO_TO_CATEGORY)
 
     def describe(self) -> dict[str, Any]:
         def version(package: str) -> str | None:

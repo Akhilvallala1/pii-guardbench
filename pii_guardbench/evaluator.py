@@ -16,9 +16,18 @@ Leak semantics (scorer v2)
 * ``blocked_rate`` is the share of PII prompts the guard blocked, and
   ``residual_given_block`` is the share of blocked PII prompts whose returned
   text still exposes a planted value.
-* A control (no-PII) prompt is a false positive only if it was blocked, or a
-  token was removed or replaced. Whitespace, trailing newlines, and pure
-  insertions are ignored.
+* ``control_blocked_rate`` is the share of no-PII control prompts the guard
+  blocked (``blocked_rate`` is over PII prompts only).
+* A control (no-PII) prompt is a raw false positive if it was blocked, or a
+  whitespace token was deleted or replaced (tokens are NFKC-normalized and
+  stripped of leading/trailing punctuation first). Whitespace changes,
+  trailing newlines, edge punctuation changes and pure insertions are ignored.
+* A contract-aware false positive is a raw false positive that was blocked or
+  redacted at least one native entity type (``AdapterFlags.detected_categories``)
+  that the adapter's ``category_map`` sends to a category in its
+  ``entity_contract``. Adapters without a contract or map (mocks) get n/a.
+* Layers: ``metadata.layer`` when it is clean/control/hard; otherwise
+  difficulty ``adversarial`` -> hard, no spans -> control, else clean.
 """
 
 from __future__ import annotations
@@ -125,9 +134,62 @@ def _is_control_prompt(prompt: Mapping[str, Any]) -> bool:
     return not _is_pii_prompt(prompt)
 
 
+LAYERS = ("clean", "control", "hard")
+FAMILY_PREFIXES = {"cred": "credentials", "fin": "finance", "hea": "health"}
+# Category value in a category_map meaning "any category in the contract".
+ANY_IN_CONTRACT = "*"
+
+
 def layer_of(prompt: Mapping[str, Any]) -> str:
-    """'adversarial' for the hard obfuscation layer, otherwise 'clean'."""
-    return "adversarial" if prompt.get("difficulty") == "adversarial" else "clean"
+    """``metadata.layer`` if it is clean/control/hard; else difficulty
+    ``adversarial`` -> hard, no sensitive spans -> control, otherwise clean."""
+    layer = (prompt.get("metadata") or {}).get("layer")
+    if layer in LAYERS:
+        return str(layer)
+    if prompt.get("difficulty") == "adversarial":
+        return "hard"
+    if not prompt.get("sensitive_spans"):
+        return "control"
+    return "clean"
+
+
+def template_of(prompt: Mapping[str, Any]) -> Optional[str]:
+    tid = (prompt.get("metadata") or {}).get("template_id")
+    return None if tid in (None, "") else str(tid)
+
+
+def family_of(prompt: Mapping[str, Any]) -> Optional[str]:
+    """credentials/finance/health: clean templates by prefix, else the domain."""
+    tid = template_of(prompt)
+    if tid:
+        prefix = tid.split("-", 1)[0]
+        if prefix in FAMILY_PREFIXES:
+            return FAMILY_PREFIXES[prefix]
+    dom = prompt.get("domain")
+    return None if dom in (None, "", "none") else str(dom)
+
+
+def contract_false_positive(
+    raw_fp: bool,
+    blocked: bool,
+    detected_types: Sequence[str],
+    contract: Optional[Iterable[str]],
+    category_map: Optional[Mapping[str, str]],
+) -> Optional[bool]:
+    """Contract-aware FP: a raw FP that was blocked or redacted >= 1 native
+    type mapping to an in-contract category. None without contract/map."""
+    if contract is None or category_map is None:
+        return None
+    if not raw_fp:
+        return False
+    if blocked:
+        return True
+    cats = set(contract)
+    for t in detected_types:
+        cat = category_map.get(t)
+        if cat == ANY_IN_CONTRACT or (cat is not None and cat in cats):
+            return True
+    return False
 
 
 def prompt_leaked(prompt: Mapping[str, Any], result: AdapterResult) -> bool:
@@ -200,11 +262,15 @@ class PromptOutcome:
     difficulty: Optional[str]
     domain: Optional[str]
     cluster: str
+    template_id: Optional[str]
+    family: Optional[str]
     blocked: bool
     exact_leak: Optional[bool]
     normalized_leak: Optional[bool]
     partial_exposure: Optional[bool]
     false_positive: Optional[bool]
+    contract_false_positive: Optional[bool]
+    detected_types: list[str]
     latency_ms: float
     span_matches: list[dict[str, Any]]
     output_text: str
@@ -252,12 +318,21 @@ def _span_units(spans: Sequence[Mapping[str, Any]], text: str) -> list[SpanMatch
     return units
 
 
-def score_prompt(adapter: str, prompt: Mapping[str, Any], result: AdapterResult) -> PromptOutcome:
+def score_prompt(
+    adapter: str,
+    prompt: Mapping[str, Any],
+    result: AdapterResult,
+    *,
+    contract: Optional[Iterable[str]] = None,
+    category_map: Optional[Mapping[str, str]] = None,
+) -> PromptOutcome:
     text = result.redacted_text or ""
     spans = prompt.get("sensitive_spans") or []
     matches = _span_units(spans, text)
     is_pii = bool(spans)
     partial_spans = [m for m in matches if m.category in PARTIAL_CATEGORIES or m.partial]
+    detected = sorted({str(t) for t in (result.flags.detected_categories or [])})
+    raw_fp = None if is_pii else is_false_positive(prompt, result)
     return PromptOutcome(
         prompt_id=str(prompt.get("id")),
         adapter=adapter,
@@ -266,11 +341,19 @@ def score_prompt(adapter: str, prompt: Mapping[str, Any], result: AdapterResult)
         difficulty=prompt.get("difficulty"),
         domain=prompt.get("domain"),
         cluster=cluster_key(prompt),
+        template_id=template_of(prompt),
+        family=family_of(prompt),
         blocked=bool(result.flags.blocked),
         exact_leak=any(m.exact for m in matches) if is_pii else None,
         normalized_leak=any(m.normalized for m in matches) if is_pii else None,
         partial_exposure=(any(m.partial for m in partial_spans) if partial_spans else None),
-        false_positive=None if is_pii else is_false_positive(prompt, result),
+        false_positive=raw_fp,
+        contract_false_positive=(
+            None if is_pii else contract_false_positive(
+                bool(raw_fp), bool(result.flags.blocked), detected, contract, category_map
+            )
+        ),
+        detected_types=detected,
         latency_ms=float(result.latency_ms),
         span_matches=[
             {"category": m.category, "exact": m.exact, "normalized": m.normalized, "partial": m.partial}
@@ -318,6 +401,17 @@ class AdapterScore:
     span_leak_ci: Optional[ProportionCI] = None
     span_leak_bootstrap: Optional[BootstrapCI] = None
     contract: Optional[list[str]] = None
+    # Controls (no-PII prompts). FPR intervals: cluster bootstrap over control
+    # templates (reported) and Wilson (iid, secondary).
+    false_positive_bootstrap: Optional[BootstrapCI] = None
+    control_blocked: Optional[ProportionCI] = None
+    contract_false_positive: Optional[ProportionCI] = None  # None = n/a (no contract)
+    contract_false_positive_bootstrap: Optional[BootstrapCI] = None
+    fp_blocks: int = 0
+    fp_by_type: dict[str, int] = field(default_factory=dict)
+    fp_by_template: dict[str, dict[str, Any]] = field(default_factory=dict)
+    by_template: dict[str, ProportionCI] = field(default_factory=dict)
+    by_family: dict[str, ProportionCI] = field(default_factory=dict)
     in_scope: dict[str, Any] = field(default_factory=dict)
     shared_scope: dict[str, Any] = field(default_factory=dict)
     outcomes: list[PromptOutcome] = field(default_factory=list)
@@ -336,6 +430,18 @@ class AdapterScore:
             "blocked_rate": opt(self.blocked),
             "residual_given_block": opt(self.residual_given_block),
             "false_positive": self.false_positive.to_dict(),
+            "false_positive_cluster_bootstrap": opt(self.false_positive_bootstrap),
+            "control_blocked_rate": opt(self.control_blocked),
+            "contract_false_positive": opt(self.contract_false_positive),
+            "contract_false_positive_cluster_bootstrap": opt(self.contract_false_positive_bootstrap),
+            "false_positive_blocks": self.fp_blocks,
+            "control_fp_by_detected_type": dict(self.fp_by_type),
+            "control_fp_by_template": {
+                t: {k: (v.to_dict() if hasattr(v, "to_dict") else v) for k, v in d.items()}
+                for t, d in self.fp_by_template.items()
+            },
+            "by_template": {k: v.to_dict() for k, v in self.by_template.items()},
+            "by_family": {k: v.to_dict() for k, v in self.by_family.items()},
             "latency_ms": self.latency.to_dict(),
             "by_category": {key: value.to_dict() for key, value in self.by_category.items()},
             "by_layer": {
@@ -367,6 +473,7 @@ class BenchmarkReport:
     ranks: dict[str, dict[str, Any]] = field(default_factory=dict)
     bootstrap: dict[str, Any] = field(default_factory=dict)
     shared_categories: Optional[list[str]] = None
+    pairwise_summary: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -378,6 +485,7 @@ class BenchmarkReport:
             "results": [score.to_dict() for score in self.scores],
             "pairwise_mcnemar_holm": self.pairwise,
             "holm_family": "all pairs of non-mock adapters; mock pairs reported unadjusted",
+            "pairwise_summary": self.pairwise_summary,
             "rank_intervals": self.ranks,
             "shared_scope_categories": self.shared_categories,
         }
@@ -413,6 +521,7 @@ def score_adapter(
     seed: int = DEFAULT_SEED,
     contract: Optional[Iterable[str]] = None,
     shared_categories: Optional[Iterable[str]] = None,
+    category_map: Optional[Mapping[str, str]] = None,
 ) -> AdapterScore:
     """Aggregate every metric for one adapter on the shared prompt list."""
     if len(prompts) != len(results):
@@ -420,7 +529,11 @@ def score_adapter(
             f"Prompt/result length mismatch for {name}: "
             f"{len(prompts)} prompts, {len(results)} results."
         )
-    outcomes = [score_prompt(name, p, r) for p, r in zip(prompts, results)]
+    contract_set = set(contract) if contract is not None else None
+    outcomes = [
+        score_prompt(name, p, r, contract=contract_set, category_map=category_map)
+        for p, r in zip(prompts, results)
+    ]
     pii = [o for o in outcomes if o.is_pii]
     controls = [o for o in outcomes if not o.is_pii]
 
@@ -453,7 +566,33 @@ def score_adapter(
     leak_flags = [bool(o.normalized_leak) for o in pii]
     span_flags = [bool(m["normalized"]) for o in pii for m in o.span_matches]
     span_clusters = [o.cluster for o in pii for _ in o.span_matches]
-    contract_list = sorted(contract) if contract is not None else None
+    contract_list = sorted(contract_set) if contract_set is not None else None
+
+    by_tpl: dict[str, list[bool]] = {}
+    by_fam: dict[str, list[bool]] = {}
+    for o in pii:
+        if o.template_id:
+            by_tpl.setdefault(o.template_id, []).append(bool(o.normalized_leak))
+        if o.family:
+            by_fam.setdefault(o.family, []).append(bool(o.normalized_leak))
+
+    fp_flags = [bool(o.false_positive) for o in controls]
+    ctl_clusters = [o.cluster for o in controls]
+    has_contract = contract_set is not None and category_map is not None
+    cfp_flags = [bool(o.contract_false_positive) for o in controls]
+    fp_by_type: dict[str, int] = {}
+    for o in controls:
+        if o.false_positive:
+            for t in o.detected_types:
+                fp_by_type[t] = fp_by_type.get(t, 0) + 1
+    fp_by_tpl: dict[str, dict[str, Any]] = {}
+    for key in sorted({o.cluster for o in controls}):
+        sub_c = [o for o in controls if o.cluster == key]
+        fp_by_tpl[key] = {
+            "raw": _ci([bool(o.false_positive) for o in sub_c]),
+            "contract": _ci([bool(o.contract_false_positive) for o in sub_c]) if has_contract else None,
+            "blocked": sum(1 for o in sub_c if o.blocked),
+        }
     return AdapterScore(
         adapter=name,
         leak=_ci(leak_flags),
@@ -464,7 +603,21 @@ def score_adapter(
         partial=_ci([bool(o.partial_exposure) for o in pii if o.partial_exposure is not None]),
         blocked=_ci([o.blocked for o in pii]),
         residual_given_block=_ci([bool(o.normalized_leak) for o in blocked_pii]),
-        false_positive=_ci([bool(o.false_positive) for o in controls]),
+        false_positive=_ci(fp_flags),
+        false_positive_bootstrap=cluster_bootstrap_ci(
+            fp_flags, ctl_clusters, iterations=bootstrap_iterations, seed=seed
+        ),
+        control_blocked=_ci([o.blocked for o in controls]),
+        contract_false_positive=_ci(cfp_flags) if has_contract else None,
+        contract_false_positive_bootstrap=(
+            cluster_bootstrap_ci(cfp_flags, ctl_clusters, iterations=bootstrap_iterations, seed=seed)
+            if has_contract else None
+        ),
+        fp_blocks=sum(1 for o in controls if o.false_positive and o.blocked),
+        fp_by_type=dict(sorted(fp_by_type.items())),
+        fp_by_template=fp_by_tpl,
+        by_template={k: _ci(v) for k, v in sorted(by_tpl.items())},
+        by_family={k: _ci(v) for k, v in sorted(by_fam.items())},
         latency=_latency_stats(results),
         by_category={c: _ci(f) for c, f in sorted(categories.items())},
         by_layer=layers,
@@ -513,6 +666,7 @@ def evaluate(
     bootstrap_iterations: int = DEFAULT_BOOTSTRAP_ITERATIONS,
     seed: int = DEFAULT_SEED,
     contracts: Optional[Mapping[str, Optional[Iterable[str]]]] = None,
+    category_maps: Optional[Mapping[str, Optional[Mapping[str, str]]]] = None,
 ) -> BenchmarkReport:
     """Score every adapter in ``runs`` against the same prompt list.
 
@@ -525,6 +679,7 @@ def evaluate(
     difference, and bootstrap rank intervals.
     """
     contracts = dict(contracts or {})
+    category_maps = dict(category_maps or {})
     declared = [set(c) for n, c in contracts.items() if c is not None and not is_reference_adapter(n)]
     shared = sorted(set.intersection(*declared)) if declared else None
     scores = [
@@ -536,6 +691,7 @@ def evaluate(
             seed=seed,
             contract=contracts.get(name),
             shared_categories=shared,
+            category_map=category_maps.get(name),
         )
         for name, results in runs.items()
     ]
@@ -543,6 +699,8 @@ def evaluate(
         s.adapter: [bool(o.normalized_leak) for o in s.outcomes if o.is_pii] for s in scores
     }
     pii_clusters = [cluster_key(p) for p in prompts if _is_pii_prompt(p)]
+    ctl_clusters = [cluster_key(p) for p in prompts if _is_control_prompt(p)]
+    fp = {s.adapter: [bool(o.false_positive) for o in s.outcomes if not o.is_pii] for s in scores}
 
     pairwise: list[dict[str, Any]] = []
     names = [s.adapter for s in scores]
@@ -553,8 +711,20 @@ def evaluate(
             diff = paired_bootstrap_diff_ci(
                 flags[a], flags[b], pii_clusters, iterations=bootstrap_iterations, seed=seed
             )
+            fdiff = paired_bootstrap_diff_ci(
+                fp[a], fp[b], ctl_clusters, iterations=bootstrap_iterations, seed=seed
+            )
             pairwise.append(
-                {"adapter_a": a, "adapter_b": b, **test, "diff_bootstrap": diff.to_dict()}
+                {
+                    "adapter_a": a,
+                    "adapter_b": b,
+                    **test,
+                    "diff_bootstrap": diff.to_dict(),
+                    "cluster_ci_excludes_0": _excludes_zero(diff),
+                    "fpr_mcnemar": mcnemar_exact(fp[a], fp[b]) if ctl_clusters else None,
+                    "fpr_diff_bootstrap": fdiff.to_dict(),
+                    "fpr_cluster_ci_excludes_0": _excludes_zero(fdiff),
+                }
             )
     family = [r for r in pairwise if not (is_reference_adapter(r["adapter_a"]) or is_reference_adapter(r["adapter_b"]))]
     for row, adj in zip(family, holm_adjust([r["p_value"] for r in family])):
@@ -564,6 +734,8 @@ def evaluate(
         if "p_holm" not in row:
             row["p_holm"] = None
             row["holm_family"] = "reference (mock; not adjusted)"
+
+    summary = pairwise_summary(pairwise)
 
     ranks = (
         bootstrap_rank_intervals(flags, pii_clusters, iterations=bootstrap_iterations, seed=seed)
@@ -579,13 +751,38 @@ def evaluate(
         pairwise=pairwise,
         ranks=ranks,
         shared_categories=shared,
+        pairwise_summary=summary,
         bootstrap={
             "iterations": bootstrap_iterations,
             "seed": seed,
             "n_clusters": len(set(pii_clusters)),
+            "n_pii_clusters": len(set(pii_clusters)),
+            "n_control_clusters": len(set(ctl_clusters)),
             "cluster_key": "metadata.cluster > metadata.template_id > id",
         },
     )
+
+
+def _excludes_zero(ci: BootstrapCI) -> Optional[bool]:
+    if ci.low is None or ci.high is None:
+        return None
+    return ci.low > 0 or ci.high < 0
+
+
+def pairwise_summary(pairwise: Sequence[Mapping[str, Any]], alpha: float = 0.05) -> dict[str, Any]:
+    """Counts over non-mock pairs: Holm-significant (leak McNemar), how many of
+    those also have a cluster-bootstrap difference CI excluding 0, and total
+    pairs whose cluster CI excludes 0 (leak and FPR)."""
+    fam = [r for r in pairwise if r.get("p_holm") is not None]
+    holm = [r for r in fam if r["p_holm"] < alpha]
+    return {
+        "alpha": alpha,
+        "n_pairs": len(fam),
+        "holm_significant": len(holm),
+        "holm_significant_and_cluster_ci_excludes_0": sum(1 for r in holm if r.get("cluster_ci_excludes_0")),
+        "cluster_ci_excludes_0": sum(1 for r in fam if r.get("cluster_ci_excludes_0")),
+        "fpr_cluster_ci_excludes_0": sum(1 for r in fam if r.get("fpr_cluster_ci_excludes_0")),
+    }
 
 
 def is_reference_adapter(name: str) -> bool:
@@ -609,48 +806,129 @@ def format_leaderboard(report: BenchmarkReport) -> str:
     if report.bootstrap:
         b = report.bootstrap
         lines.append(
-            f"  bootstrap: {b['iterations']} iterations, seed {b['seed']}, "
-            f"{b['n_clusters']} clusters ({b['cluster_key']})"
+            f"  bootstrap: {b['iterations']} iterations, seed {b['seed']}; "
+            f"PII clusters {b.get('n_pii_clusters', b['n_clusters'])}, "
+            f"control clusters {b.get('n_control_clusters', 0)} ({b['cluster_key']})"
         )
+    lines.append(
+        "  intervals: cluster-bootstrap 95% (reported); Wilson columns at the end are iid, secondary"
+    )
+    lines.append(
+        "  blocked = share of PII prompts blocked; ctl blocked = share of no-PII controls blocked"
+    )
     lines.append("")
+
+    def boot(ci: Optional[BootstrapCI]) -> str:
+        return ci.format_ci() if ci else "n/a"
 
     headers = (
         "Adapter",
-        "Exact leak",
         "Norm leak",
-        "Wilson 95%",
-        "Cluster-boot 95%",
+        "Cluster 95%",
         "Span leak",
-        "Span boot 95%",
+        "Cluster 95%",
+        "FPR",
+        "Cluster 95%",
+        "Exact leak",
         "Partial",
         "Blocked",
         "Resid|block",
-        "FPR",
-        "FPR Wilson 95%",
+        "Ctl blocked",
         "Latency ms (mean/p50/p95)",
+        "Wilson (iid, secondary): leak",
+        "span",
+        "FPR",
     )
     rows = [
         (
             s.adapter,
-            _fmt_opt(s.exact_leak),
             s.leak.format_rate(),
-            s.leak.format_ci(),
-            s.leak_bootstrap.format_ci() if s.leak_bootstrap else "n/a",
+            boot(s.leak_bootstrap),
             _fmt_opt(s.span_leak_ci),
-            s.span_leak_bootstrap.format_ci() if s.span_leak_bootstrap else "n/a",
+            boot(s.span_leak_bootstrap),
+            s.false_positive.format_rate(),
+            boot(s.false_positive_bootstrap),
+            _fmt_opt(s.exact_leak),
             _fmt_opt(s.partial),
             _fmt_opt(s.blocked),
             _fmt_opt(s.residual_given_block),
-            s.false_positive.format_rate(),
-            s.false_positive.format_ci(),
+            _fmt_opt(s.control_blocked),
             s.latency.format(),
+            s.leak.format_ci(),
+            s.span_leak_ci.format_ci() if s.span_leak_ci else "n/a",
+            s.false_positive.format_ci(),
         )
         for s in report.scores
     ]
     lines.extend(_align_table(headers, rows))
 
+    if report.n_controls:
+        lines.append("")
+        lines.append(
+            "Control false positives: raw vs contract-aware (contract-aware = blocked, or redacted a "
+            "native type mapping to a category in the adapter's entity contract)"
+        )
+        fp_rows = [
+            (
+                s.adapter,
+                s.false_positive.format_rate(),
+                boot(s.false_positive_bootstrap),
+                s.false_positive.format_ci(),
+                _fmt_opt(s.contract_false_positive) if s.contract_false_positive else "n/a",
+                boot(s.contract_false_positive_bootstrap) if s.contract_false_positive else "n/a",
+                s.contract_false_positive.format_ci() if s.contract_false_positive else "n/a",
+                str(s.fp_blocks),
+            )
+            for s in report.scores
+        ]
+        lines.extend(
+            _align_table(
+                ("Adapter", "Raw FPR", "Cluster 95%", "Wilson (iid)", "Contract FPR", "Cluster 95%",
+                 "Wilson (iid)", "FPs that are blocks"),
+                fp_rows,
+            )
+        )
+        lines.append("")
+        lines.append("Control false positives by redacted entity type (controls with that native type redacted)")
+        type_rows = [
+            (s.adapter, t, str(n)) for s in report.scores for t, n in s.fp_by_type.items()
+        ] or [("n/a", "n/a", "0")]
+        lines.extend(_align_table(("Adapter", "Native type", "Controls"), type_rows))
+        lines.append("")
+        lines.append("Control false positives by template")
+        tpl_rows = [
+            (
+                s.adapter,
+                t,
+                d["raw"].format_rate(),
+                d["contract"].format_rate() if d["contract"] is not None else "n/a",
+                str(d["blocked"]),
+            )
+            for s in report.scores
+            for t, d in s.fp_by_template.items()
+        ]
+        lines.extend(_align_table(("Adapter", "Template", "Raw FP", "Contract FP", "Blocked"), tpl_rows))
+
+    fam_rows = [
+        (s.adapter, fam, ci.format_rate(), ci.format_ci())
+        for s in report.scores
+        for fam, ci in s.by_family.items()
+    ]
+    if fam_rows:
+        lines.append("")
+        lines.append("Leak by template family (normalized leak; Wilson, no clustering)")
+        lines.extend(_align_table(("Adapter", "Family", "Norm leak", "Wilson 95%"), fam_rows))
+    tpl_leak_rows = [
+        (s.adapter, t, ci.format_rate(), ci.format_ci())
+        for s in report.scores
+        for t, ci in s.by_template.items()
+    ]
+    if tpl_leak_rows:
+        lines.append("")
+        lines.append("Leak by template (normalized leak; Wilson within one template)")
+        lines.extend(_align_table(("Adapter", "Template", "Norm leak", "Wilson 95%"), tpl_leak_rows))
     lines.append("")
-    lines.append("Layer breakdown (clean vs adversarial obfuscation)")
+    lines.append("Layer breakdown (clean / hard obfuscation; controls have no leak)")
     layer_rows: list[tuple[str, ...]] = []
     for s in report.scores:
         for layer, m in s.by_layer.items():
@@ -733,16 +1011,28 @@ def format_leaderboard(report: BenchmarkReport) -> str:
                 f"{r['p_value']:.4g}",
                 "ref" if r["p_holm"] is None else f"{r['p_holm']:.4g}",
                 _fmt_diff(r["diff_bootstrap"]),
+                _yn(r.get("cluster_ci_excludes_0")),
+                _fmt_diff(r.get("fpr_diff_bootstrap") or {}),
             )
             for r in report.pairwise
         ]
         lines.extend(
             _align_table(
                 ("Pair (A vs B)", "only A leaks", "only B leaks", "p exact", "p Holm",
-                 "rate(A)-rate(B) [cluster-boot 95%]"),
+                 "rate(A)-rate(B) [cluster-boot 95%]", "cluster CI excl. 0",
+                 "FPR(A)-FPR(B) [cluster-boot 95%]"),
                 pw_rows,
             )
         )
+        ps = report.pairwise_summary
+        if ps:
+            lines.append(
+                f"  summary (non-mock pairs, n={ps['n_pairs']}): Holm-significant at {ps['alpha']}: "
+                f"{ps['holm_significant']}; of those, cluster CI excludes 0: "
+                f"{ps['holm_significant_and_cluster_ci_excludes_0']}; total pairs with leak cluster CI "
+                f"excluding 0: {ps['cluster_ci_excludes_0']}; FPR cluster CI excluding 0: "
+                f"{ps['fpr_cluster_ci_excludes_0']}"
+            )
     else:
         lines.append("  (needs at least two adapters)")
 
@@ -763,8 +1053,12 @@ def format_leaderboard(report: BenchmarkReport) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _yn(v: Optional[bool]) -> str:
+    return "n/a" if v is None else ("yes" if v else "no")
+
+
 def _fmt_diff(d: Mapping[str, Any]) -> str:
-    if d.get("estimate") is None:
+    if d.get("estimate") is None or d.get("low") is None:
         return "n/a"
     return f"{d['estimate']:+.3f} [{d['low']:+.3f}, {d['high']:+.3f}]"
 

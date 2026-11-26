@@ -26,6 +26,9 @@ class AdapterFlags:
     """Outcome flags from a single guardrail call."""
 
     blocked: bool = False
+    # Native entity types the guard actually redacted in this prompt (for
+    # example Presidio ``DATE_TIME``), taken from its own findings. Mapped to
+    # benchmark categories via ``GuardrailAdapter.category_map()``.
     detected_categories: list[str] = field(default_factory=list)
 
 
@@ -66,6 +69,15 @@ class GuardrailAdapter(ABC):
         are scored on all categories only. Real adapters return the categories
         their configured entity types map to, so leak can also be reported on
         in-scope spans only.
+        """
+        return None
+
+    def category_map(self) -> dict[str, str] | None:
+        """Native entity type -> benchmark category for this adapter's
+        ``AdapterFlags.detected_categories`` (the native types it redacted).
+
+        Types missing from the map are out of contract (for example Presidio's
+        DATE_TIME). ``None`` (mocks/references) means no attribution is possible.
         """
         return None
 

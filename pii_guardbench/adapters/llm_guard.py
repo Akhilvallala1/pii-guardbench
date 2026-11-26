@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 from typing import Any, Optional
@@ -45,6 +46,13 @@ LLM_GUARD_TO_CATEGORY = {
     "IBAN_CODE": "account_number",
 }
 _WORKERS: dict[str, Any] = {}
+# The worker returns only the sanitized text, so the redacted native types are
+# parsed from LLM Guard's placeholders ``[REDACTED_<TYPE>_<n>]``.
+_PLACEHOLDER_RE = re.compile(r"\[REDACTED_([A-Z_]+?)_\d+\]")
+
+
+def placeholder_types(text: str) -> list[str]:
+    return sorted(set(_PLACEHOLDER_RE.findall(text or "")))
 
 
 def _start_worker(python: str) -> dict[str, Any]:
@@ -107,10 +115,14 @@ class LlmGuardAdapter(GuardrailAdapter):
 
     def parse(self, raw: dict[str, Any]) -> AdapterResult:
         blocked = self.block_on_invalid and not raw["is_valid"]
+        detected = sorted(set(placeholder_types(str(raw["text"]))) - set(placeholder_types(str(raw.get("original") or ""))))
         return AdapterResult(
             redacted_text=BLOCK_MESSAGE if blocked else str(raw["text"]),
-            flags=AdapterFlags(blocked=blocked, detected_categories=[]),
+            flags=AdapterFlags(blocked=blocked, detected_categories=detected),
         )
+
+    def category_map(self) -> dict[str, str]:
+        return dict(LLM_GUARD_TO_CATEGORY)
 
     def entity_contract(self) -> frozenset[str]:
         types = self._worker()["entity_types"]

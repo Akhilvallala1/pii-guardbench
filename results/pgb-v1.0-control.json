@@ -7,6 +7,8 @@
     "iterations": 2000,
     "seed": 0,
     "n_clusters": 0,
+    "n_pii_clusters": 0,
+    "n_control_clusters": 8,
     "cluster_key": "metadata.cluster > metadata.template_id > id"
   },
   "results": [
@@ -69,10 +71,189 @@
         "low": 0.6540756858222899,
         "high": 0.7776320715736488
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.72,
+        "low": 0.44,
+        "high": 1.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 49,
+        "n": 200,
+        "rate": 0.245,
+        "low": 0.19056777914685893,
+        "high": 0.3090436838714848
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.245,
+        "low": 0.035,
+        "high": 0.515,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "DATE_TIME": 94,
+        "LOCATION": 5,
+        "PERSON": 2,
+        "US_BANK_NUMBER": 17,
+        "US_DRIVER_LICENSE": 27,
+        "US_SSN": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 1,
+            "n": 25,
+            "rate": 0.04,
+            "low": 0.007096050386699165,
+            "high": 0.19544472405022525
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 17,
+            "n": 25,
+            "rate": 0.68,
+            "low": 0.48409913734576715,
+            "high": 0.8279501248310887
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 4.32069541000601,
-        "p50": 4.186991999631573,
-        "p95": 5.005780549890915,
+        "mean": 4.392430329808121,
+        "p50": 4.139940998356906,
+        "p95": 6.013194249317164,
         "n": 200
       },
       "by_category": {},
@@ -214,10 +395,187 @@
         "low": 0.5561417515728713,
         "high": 0.6891467469475485
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.625,
+        "low": 0.345,
+        "high": 0.89,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 32,
+        "n": 200,
+        "rate": 0.16,
+        "low": 0.11567342208544587,
+        "high": 0.2171418619390124
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.16,
+        "low": 0.015,
+        "high": 0.41,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "DATE_TIME": 94,
+        "LOCATION": 5,
+        "PERSON": 2,
+        "US_SSN": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 1,
+            "n": 25,
+            "rate": 0.04,
+            "low": 0.007096050386699165,
+            "high": 0.19544472405022525
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 6,
+            "n": 25,
+            "rate": 0.24,
+            "low": 0.11496157730326725,
+            "high": 0.43430059955238565
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 4.06503518503996,
-        "p50": 4.0407685009995475,
-        "p95": 4.594647399517271,
+        "mean": 37.425949685239175,
+        "p50": 6.440489500164404,
+        "p95": 21.450675100095367,
         "n": 200
       },
       "by_category": {},
@@ -359,10 +717,186 @@
         "low": 0.11567342208544587,
         "high": 0.2171418619390124
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.16,
+        "low": 0.015,
+        "high": 0.41,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 32,
+        "n": 200,
+        "rate": 0.16,
+        "low": 0.11567342208544587,
+        "high": 0.2171418619390124
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.16,
+        "low": 0.015,
+        "high": 0.41,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "LOCATION": 5,
+        "PERSON": 2,
+        "US_SSN": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 1,
+            "n": 25,
+            "rate": 0.04,
+            "low": 0.007096050386699165,
+            "high": 0.19544472405022525
+          },
+          "contract": {
+            "k": 1,
+            "n": 25,
+            "rate": 0.04,
+            "low": 0.007096050386699165,
+            "high": 0.19544472405022525
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 3.700201595065664,
-        "p50": 3.6819314991589636,
-        "p95": 4.209505700873706,
+        "mean": 4.763582930081611,
+        "p50": 4.671460001191008,
+        "p95": 6.017471798986662,
         "n": 200
       },
       "by_category": {},
@@ -502,10 +1036,186 @@
         "low": 0.11567342208544587,
         "high": 0.2171418619390124
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.16,
+        "low": 0.015,
+        "high": 0.41,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 32,
+        "n": 200,
+        "rate": 0.16,
+        "low": 0.11567342208544587,
+        "high": 0.2171418619390124
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.16,
+        "low": 0.015,
+        "high": 0.41,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "LOCATION": 5,
+        "PERSON": 2,
+        "US_SSN": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 1,
+            "n": 25,
+            "rate": 0.04,
+            "low": 0.007096050386699165,
+            "high": 0.19544472405022525
+          },
+          "contract": {
+            "k": 1,
+            "n": 25,
+            "rate": 0.04,
+            "low": 0.007096050386699165,
+            "high": 0.19544472405022525
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 3.7811357600730844,
-        "p50": 3.76681599937001,
-        "p95": 4.35582025002077,
+        "mean": 4.610023924942652,
+        "p50": 4.298922000089078,
+        "p95": 6.952531049500974,
         "n": 200
       },
       "by_category": {},
@@ -645,10 +1355,185 @@
         "low": 0.09446507976920288,
         "high": 0.18929250455117141
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 27,
+        "n": 200,
+        "rate": 0.135,
+        "low": 0.09446507976920288,
+        "high": 0.18929250455117141
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "PERSON": 2,
+        "US_SSN": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "contract": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 4.292201185007798,
-        "p50": 4.248145000019576,
-        "p95": 4.897365799843101,
+        "mean": 5.101374040132214,
+        "p50": 4.319067998949322,
+        "p95": 6.5536053511095735,
         "n": 200
       },
       "by_category": {},
@@ -788,10 +1673,186 @@
         "low": 0.5358822087449843,
         "high": 0.6701601300121683
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.605,
+        "low": 0.305,
+        "high": 0.885,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 27,
+        "n": 200,
+        "rate": 0.135,
+        "low": 0.09446507976920288,
+        "high": 0.18929250455117141
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "DATE_TIME": 94,
+        "PERSON": 2,
+        "US_SSN": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 6,
+            "n": 25,
+            "rate": 0.24,
+            "low": 0.11496157730326725,
+            "high": 0.43430059955238565
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "contract": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 4.532436484960272,
-        "p50": 4.507495999860112,
-        "p95": 5.193318799774715,
+        "mean": 5.002673094986676,
+        "p50": 4.624667499228963,
+        "p95": 6.719884950507549,
         "n": 200
       },
       "by_category": {},
@@ -933,10 +1994,182 @@
         "low": 0.09446507976920288,
         "high": 0.18929250455117141
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 27,
+        "n": 200,
+        "rate": 0.135,
+        "low": 0.09446507976920288,
+        "high": 0.18929250455117141
+      },
+      "contract_false_positive": {
+        "k": 27,
+        "n": 200,
+        "rate": 0.135,
+        "low": 0.09446507976920288,
+        "high": 0.18929250455117141
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 27,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 25
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "contract": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "blocked": 2
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 4.056342249978115,
-        "p50": 4.0150079994418775,
-        "p95": 4.60305664983025,
+        "mean": 4.517767385132174,
+        "p50": 4.140336499403929,
+        "p95": 5.54938150053203,
         "n": 200
       },
       "by_category": {},
@@ -1076,10 +2309,184 @@
         "low": 0.08611915159215679,
         "high": 0.17801535284658393
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.125,
+        "low": 0.0,
+        "high": 0.375,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 25,
+        "n": 200,
+        "rate": 0.125,
+        "low": 0.08611915159215679,
+        "high": 0.17801535284658393
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.125,
+        "low": 0.0,
+        "high": 0.375,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "ssn": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 0.194165345028523,
-        "p50": 0.18022449967247667,
-        "p95": 0.3143084498333337,
+        "mean": 0.10421509014122421,
+        "p50": 0.09742100155563094,
+        "p95": 0.15873625252424972,
         "n": 200
       },
       "by_category": {},
@@ -1215,10 +2622,185 @@
         "low": 0.09446507976920288,
         "high": 0.18929250455117141
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 27,
+        "n": 200,
+        "rate": 0.135,
+        "low": 0.09446507976920288,
+        "high": 0.18929250455117141
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "person": 2,
+        "ssn": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "contract": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 4.37325333001354,
-        "p50": 4.25917549910082,
-        "p95": 5.047965950143406,
+        "mean": 4.824875070171402,
+        "p50": 4.0495950015611015,
+        "p95": 5.196535850336639,
         "n": 200
       },
       "by_category": {},
@@ -1360,10 +2942,191 @@
         "low": 0.6540756858222899,
         "high": 0.7776320715736488
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.72,
+        "low": 0.44,
+        "high": 1.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 54,
+        "n": 200,
+        "rate": 0.27,
+        "low": 0.21323354731040559,
+        "high": 0.3354356154120221
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.27,
+        "low": 0.035,
+        "high": 0.57,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "piiguard:ssn": 25,
+        "presidio:DATE_TIME": 94,
+        "presidio:LOCATION": 5,
+        "presidio:PERSON": 2,
+        "presidio:US_BANK_NUMBER": 22,
+        "presidio:US_DRIVER_LICENSE": 50,
+        "presidio:US_ITIN": 13,
+        "presidio:US_SSN": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 1,
+            "n": 25,
+            "rate": 0.04,
+            "low": 0.007096050386699165,
+            "high": 0.19544472405022525
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 22,
+            "n": 25,
+            "rate": 0.88,
+            "low": 0.7004380781662651,
+            "high": 0.9583325864293191
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "contract": {
+            "k": 3,
+            "n": 25,
+            "rate": 0.12,
+            "low": 0.04166741357068093,
+            "high": 0.2995619218337349
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 4.309407809914774,
-        "p50": 4.2547185003058985,
-        "p95": 4.867887600448739,
+        "mean": 4.434655260138243,
+        "p50": 4.258315999322804,
+        "p95": 5.410655649575347,
         "n": 200
       },
       "by_category": {},
@@ -1505,10 +3268,187 @@
         "low": 0.4215615528275274,
         "high": 0.5588153672908391
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.49,
+        "low": 0.125,
+        "high": 0.855,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 98,
+        "n": 200,
+        "rate": 0.49,
+        "low": 0.4215615528275274,
+        "high": 0.5588153672908391
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.49,
+        "low": 0.125,
+        "high": 0.855,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "address": 23,
+        "api key": 25,
+        "password": 25,
+        "person": 50
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 23,
+            "n": 25,
+            "rate": 0.92,
+            "low": 0.7503348787704218,
+            "high": 0.977780066308908
+          },
+          "contract": {
+            "k": 23,
+            "n": 25,
+            "rate": 0.92,
+            "low": 0.7503348787704218,
+            "high": 0.977780066308908
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 53.04174124000383,
-        "p50": 50.84559700026148,
-        "p95": 65.26524909941145,
+        "mean": 69.05379819512746,
+        "p50": 57.27271950127033,
+        "p95": 154.2223110029226,
         "n": 200
       },
       "by_category": {},
@@ -1660,10 +3600,187 @@
         "low": 0.18157345326946356,
         "high": 0.29841492986724655
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.235,
+        "low": 0.035,
+        "high": 0.505,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": {
+        "k": 47,
+        "n": 200,
+        "rate": 0.235,
+        "low": 0.18157345326946356,
+        "high": 0.29841492986724655
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.235,
+        "low": 0.035,
+        "high": 0.505,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "CREDIT_CARD_RE": 3,
+        "PERSON": 15,
+        "PHONE_NUMBER": 4,
+        "US_SSN_RE": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 7,
+            "n": 25,
+            "rate": 0.28,
+            "low": 0.14283673837381572,
+            "high": 0.47576971896558296
+          },
+          "contract": {
+            "k": 7,
+            "n": 25,
+            "rate": 0.28,
+            "low": 0.14283673837381572,
+            "high": 0.47576971896558296
+          },
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "contract": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "contract": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 39.15121959991666,
-        "p50": 38.23342850046174,
-        "p95": 47.18583704843695,
+        "mean": 50.28978756505239,
+        "p50": 45.007117001659935,
+        "p95": 80.95457750005153,
         "n": 200
       },
       "by_category": {},
@@ -1803,10 +3920,187 @@
         "low": 0.18157345326946356,
         "high": 0.29841492986724655
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.235,
+        "low": 0.035,
+        "high": 0.505,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 47,
+        "n": 200,
+        "rate": 0.235,
+        "low": 0.18157345326946356,
+        "high": 0.29841492986724655
+      },
+      "contract_false_positive": {
+        "k": 47,
+        "n": 200,
+        "rate": 0.235,
+        "low": 0.18157345326946356,
+        "high": 0.29841492986724655
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": 0.235,
+        "low": 0.035,
+        "high": 0.505,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "false_positive_blocks": 47,
+      "control_fp_by_detected_type": {
+        "CREDIT_CARD_RE": 3,
+        "PERSON": 15,
+        "PHONE_NUMBER": 4,
+        "US_SSN_RE": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 7,
+            "n": 25,
+            "rate": 0.28,
+            "low": 0.14283673837381572,
+            "high": 0.47576971896558296
+          },
+          "contract": {
+            "k": 7,
+            "n": 25,
+            "rate": 0.28,
+            "low": 0.14283673837381572,
+            "high": 0.47576971896558296
+          },
+          "blocked": 7
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "blocked": 25
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "contract": {
+            "k": 13,
+            "n": 25,
+            "rate": 0.52,
+            "low": 0.334982179531473,
+            "high": 0.6996899607103998
+          },
+          "blocked": 13
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "contract": {
+            "k": 2,
+            "n": 25,
+            "rate": 0.08,
+            "low": 0.022219933691091917,
+            "high": 0.24966512122957818
+          },
+          "blocked": 2
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 40.96314074000475,
-        "p50": 38.18068799955654,
-        "p95": 54.04940944990811,
+        "mean": 44.323030859886785,
+        "p50": 40.122698999766726,
+        "p95": 72.29350369980237,
         "n": 200
       },
       "by_category": {},
@@ -1946,10 +4240,121 @@
         "low": 0.0,
         "high": 0.018846005918320894
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": null,
+      "contract_false_positive_cluster_bootstrap": null,
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 0.0010691949864849448,
-        "p50": 0.0006994996510911733,
-        "p95": 0.0023444988983101207,
+        "mean": 0.0010662449312803801,
+        "p50": 0.0006579994078492746,
+        "p95": 0.0022081472707213825,
         "n": 200
       },
       "by_category": {},
@@ -2059,10 +4464,125 @@
         "low": 0.3108532530524515,
         "high": 0.44385824842712884
       },
+      "false_positive_cluster_bootstrap": {
+        "estimate": 0.375,
+        "low": 0.125,
+        "high": 0.75,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 200,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.018846005918320894
+      },
+      "contract_false_positive": null,
+      "contract_false_positive_cluster_bootstrap": null,
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {
+        "credit_card": 25,
+        "other": 25,
+        "ssn": 25
+      },
+      "control_fp_by_template": {
+        "ctl-01": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-02": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-03": {
+          "raw": {
+            "k": 25,
+            "n": 25,
+            "rate": 1.0,
+            "low": 0.8668035060468213,
+            "high": 1.0
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-04": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-05": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-06": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-07": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        },
+        "ctl-08": {
+          "raw": {
+            "k": 0,
+            "n": 25,
+            "rate": 0.0,
+            "low": 0.0,
+            "high": 0.13319649395317873
+          },
+          "contract": null,
+          "blocked": 0
+        }
+      },
+      "by_template": {},
+      "by_family": {},
       "latency_ms": {
-        "mean": 0.0064208100229734555,
-        "p50": 0.005877500370843336,
-        "p95": 0.008580649864597941,
+        "mean": 0.0061430951063812245,
+        "p50": 0.005890000466024503,
+        "p95": 0.007632952838321216,
         "n": 200
       },
       "by_category": {},
@@ -2130,6 +4650,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 19,
+        "c": 0,
+        "discordant": 19,
+        "p_value": 3.814697265625e-06
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.095,
+        "low": 0.0,
+        "high": 0.285,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2148,6 +4684,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 112,
+        "c": 0,
+        "discordant": 112,
+        "p_value": 3.851859888774472e-34
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.56,
+        "low": 0.25,
+        "high": 0.87,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2166,6 +4718,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 112,
+        "c": 0,
+        "discordant": 112,
+        "p_value": 3.851859888774472e-34
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.56,
+        "low": 0.25,
+        "high": 0.87,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2184,6 +4752,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 117,
+        "c": 0,
+        "discordant": 117,
+        "p_value": 1.2037062152420224e-35
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.585,
+        "low": 0.28,
+        "high": 0.88,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2202,6 +4786,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 23,
+        "c": 0,
+        "discordant": 23,
+        "p_value": 2.384185791015625e-07
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.115,
+        "low": 0.005,
+        "high": 0.305,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2220,6 +4820,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 117,
+        "c": 0,
+        "discordant": 117,
+        "p_value": 1.2037062152420224e-35
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.585,
+        "low": 0.28,
+        "high": 0.88,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2238,6 +4854,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 119,
+        "c": 0,
+        "discordant": 119,
+        "p_value": 3.009265538105056e-36
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.595,
+        "low": 0.295,
+        "high": 0.89,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2256,6 +4888,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 117,
+        "c": 0,
+        "discordant": 117,
+        "p_value": 1.2037062152420224e-35
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.585,
+        "low": 0.28,
+        "high": 0.88,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2274,6 +4922,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 0,
+        "discordant": 0,
+        "p_value": 1.0
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2292,6 +4956,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 90,
+        "c": 44,
+        "discordant": 134,
+        "p_value": 8.745456628345134e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.23,
+        "low": -0.305,
+        "high": 0.7501249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2310,6 +4990,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 112,
+        "c": 15,
+        "discordant": 127,
+        "p_value": 1.5787915213027008e-19
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.485,
+        "low": 0.14,
+        "high": 0.82,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2328,6 +5024,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 112,
+        "c": 15,
+        "discordant": 127,
+        "p_value": 1.5787915213027008e-19
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.485,
+        "low": 0.14,
+        "high": 0.82,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2346,6 +5058,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 144,
+        "c": 0,
+        "discordant": 144,
+        "p_value": 8.96831017167883e-44
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.72,
+        "low": 0.44,
+        "high": 1.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -2364,6 +5092,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 69,
+        "c": 0,
+        "discordant": 69,
+        "p_value": 3.3881317890172014e-21
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.345,
+        "low": 0.08,
+        "high": 0.6452499999999987,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -2382,6 +5126,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 93,
+        "c": 0,
+        "discordant": 93,
+        "p_value": 2.0194839173657902e-28
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.465,
+        "low": 0.16,
+        "high": 0.7601249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2400,6 +5160,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 93,
+        "c": 0,
+        "discordant": 93,
+        "p_value": 2.0194839173657902e-28
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.465,
+        "low": 0.16,
+        "high": 0.7601249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2418,6 +5194,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 98,
+        "c": 0,
+        "discordant": 98,
+        "p_value": 6.310887241768095e-30
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.49,
+        "low": 0.204875,
+        "high": 0.78,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2436,6 +5228,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 4,
+        "c": 0,
+        "discordant": 4,
+        "p_value": 0.125
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.02,
+        "low": 0.0,
+        "high": 0.05,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2454,6 +5262,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 98,
+        "c": 0,
+        "discordant": 98,
+        "p_value": 6.310887241768095e-30
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.49,
+        "low": 0.204875,
+        "high": 0.78,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2472,6 +5296,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 100,
+        "c": 0,
+        "discordant": 100,
+        "p_value": 1.5777218104420236e-30
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.5,
+        "low": 0.22,
+        "high": 0.78,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2490,6 +5330,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 98,
+        "c": 0,
+        "discordant": 98,
+        "p_value": 6.310887241768095e-30
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.49,
+        "low": 0.204875,
+        "high": 0.78,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2508,6 +5364,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 19,
+        "discordant": 19,
+        "p_value": 3.814697265625e-06
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.095,
+        "low": -0.285,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2526,6 +5398,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 71,
+        "c": 44,
+        "discordant": 115,
+        "p_value": 0.014964671136824323
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.135,
+        "low": -0.35,
+        "high": 0.59,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2544,6 +5432,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 93,
+        "c": 15,
+        "discordant": 108,
+        "p_value": 6.404555406738942e-15
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.39,
+        "low": 0.065,
+        "high": 0.7201249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2562,6 +5466,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 93,
+        "c": 15,
+        "discordant": 108,
+        "p_value": 6.404555406738942e-15
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.39,
+        "low": 0.065,
+        "high": 0.7201249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2580,6 +5500,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 125,
+        "c": 0,
+        "discordant": 125,
+        "p_value": 4.70197740328915e-38
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.625,
+        "low": 0.345,
+        "high": 0.89,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -2598,6 +5534,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 69,
+        "c": 19,
+        "discordant": 88,
+        "p_value": 7.836624631346799e-08
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.25,
+        "low": -0.145,
+        "high": 0.6302499999999986,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -2616,6 +5568,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 0,
+        "discordant": 0,
+        "p_value": 1.0
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2634,6 +5602,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 5,
+        "c": 0,
+        "discordant": 5,
+        "p_value": 0.0625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.025,
+        "low": 0.005,
+        "high": 0.055,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2652,6 +5636,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 4,
+        "c": 93,
+        "discordant": 97,
+        "p_value": 4.5653387447282835e-23
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.445,
+        "low": -0.755,
+        "high": -0.13,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2670,6 +5670,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 5,
+        "c": 0,
+        "discordant": 5,
+        "p_value": 0.0625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.025,
+        "low": 0.005,
+        "high": 0.055,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2688,6 +5704,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 7,
+        "c": 0,
+        "discordant": 7,
+        "p_value": 0.015625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.035,
+        "low": 0.005,
+        "high": 0.075,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2706,6 +5738,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 5,
+        "c": 0,
+        "discordant": 5,
+        "p_value": 0.0625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.025,
+        "low": 0.005,
+        "high": 0.055,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2724,6 +5772,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 112,
+        "discordant": 112,
+        "p_value": 3.851859888774472e-34
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.56,
+        "low": -0.87,
+        "high": -0.25,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2742,6 +5806,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 26,
+        "c": 92,
+        "discordant": 118,
+        "p_value": 7.747818821928e-10
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.33,
+        "low": -0.79,
+        "high": 0.155,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2760,6 +5840,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 7,
+        "c": 22,
+        "discordant": 29,
+        "p_value": 0.008130058646202087
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.075,
+        "low": -0.185,
+        "high": 0.01,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2778,6 +5874,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 7,
+        "c": 22,
+        "discordant": 29,
+        "p_value": 0.008130058646202087
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.075,
+        "low": -0.185,
+        "high": 0.01,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2796,6 +5908,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 32,
+        "c": 0,
+        "discordant": 32,
+        "p_value": 4.656612873077393e-10
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.16,
+        "low": 0.015,
+        "high": 0.41,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -2814,6 +5942,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 6,
+        "c": 49,
+        "discordant": 55,
+        "p_value": 1.822834494458192e-09
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.215,
+        "low": -0.585,
+        "high": 0.04537499999999795,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -2832,6 +5976,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 5,
+        "c": 0,
+        "discordant": 5,
+        "p_value": 0.0625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.025,
+        "low": 0.005,
+        "high": 0.055,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2850,6 +6010,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 4,
+        "c": 93,
+        "discordant": 97,
+        "p_value": 4.5653387447282835e-23
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.445,
+        "low": -0.755,
+        "high": -0.13,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2868,6 +6044,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 5,
+        "c": 0,
+        "discordant": 5,
+        "p_value": 0.0625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.025,
+        "low": 0.005,
+        "high": 0.055,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2886,6 +6078,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 7,
+        "c": 0,
+        "discordant": 7,
+        "p_value": 0.015625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.035,
+        "low": 0.005,
+        "high": 0.075,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2904,6 +6112,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 5,
+        "c": 0,
+        "discordant": 5,
+        "p_value": 0.0625
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.025,
+        "low": 0.005,
+        "high": 0.055,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2922,6 +6146,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 112,
+        "discordant": 112,
+        "p_value": 3.851859888774472e-34
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.56,
+        "low": -0.87,
+        "high": -0.25,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2940,6 +6180,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 26,
+        "c": 92,
+        "discordant": 118,
+        "p_value": 7.747818821928e-10
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.33,
+        "low": -0.79,
+        "high": 0.155,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2958,6 +6214,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 7,
+        "c": 22,
+        "discordant": 29,
+        "p_value": 0.008130058646202087
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.075,
+        "low": -0.185,
+        "high": 0.01,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2976,6 +6248,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 7,
+        "c": 22,
+        "discordant": 29,
+        "p_value": 0.008130058646202087
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.075,
+        "low": -0.185,
+        "high": 0.01,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -2994,6 +6282,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 32,
+        "c": 0,
+        "discordant": 32,
+        "p_value": 4.656612873077393e-10
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.16,
+        "low": 0.015,
+        "high": 0.41,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3012,6 +6316,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 6,
+        "c": 49,
+        "discordant": 55,
+        "p_value": 1.822834494458192e-09
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.215,
+        "low": -0.585,
+        "high": 0.04537499999999795,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3030,6 +6350,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 94,
+        "discordant": 94,
+        "p_value": 1.0097419586828951e-28
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.47,
+        "low": -0.78,
+        "high": -0.16,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3048,6 +6384,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 0,
+        "discordant": 0,
+        "p_value": 1.0
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3066,6 +6418,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 0,
+        "discordant": 2,
+        "p_value": 0.5
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.01,
+        "low": 0.0,
+        "high": 0.03,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3084,6 +6452,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 0,
+        "discordant": 0,
+        "p_value": 1.0
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3102,6 +6486,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 117,
+        "discordant": 117,
+        "p_value": 1.2037062152420224e-35
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.585,
+        "low": -0.88,
+        "high": -0.28,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3120,6 +6520,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 25,
+        "c": 96,
+        "discordant": 121,
+        "p_value": 5.303093183678633e-11
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.355,
+        "low": -0.835,
+        "high": 0.135,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3138,6 +6554,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 22,
+        "discordant": 24,
+        "p_value": 3.5881996154785156e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.1,
+        "low": -0.235,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3156,6 +6588,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 22,
+        "discordant": 24,
+        "p_value": 3.5881996154785156e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.1,
+        "low": -0.235,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3174,6 +6622,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 27,
+        "c": 0,
+        "discordant": 27,
+        "p_value": 1.4901161193847656e-08
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3192,6 +6656,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 50,
+        "discordant": 52,
+        "p_value": 6.123990203832363e-13
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.24,
+        "low": -0.615,
+        "high": 0.02,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3210,6 +6690,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 94,
+        "c": 0,
+        "discordant": 94,
+        "p_value": 1.0097419586828951e-28
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.47,
+        "low": 0.16,
+        "high": 0.78,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3228,6 +6724,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 96,
+        "c": 0,
+        "discordant": 96,
+        "p_value": 2.524354896707238e-29
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.48,
+        "low": 0.18,
+        "high": 0.78,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3246,6 +6758,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 94,
+        "c": 0,
+        "discordant": 94,
+        "p_value": 1.0097419586828951e-28
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.47,
+        "low": 0.16,
+        "high": 0.78,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3264,6 +6792,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 23,
+        "discordant": 23,
+        "p_value": 2.384185791015625e-07
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.115,
+        "low": -0.305,
+        "high": -0.005,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3282,6 +6826,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 71,
+        "c": 48,
+        "discordant": 119,
+        "p_value": 0.04326826257460874
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.115,
+        "low": -0.395,
+        "high": 0.5851249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3300,6 +6860,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 89,
+        "c": 15,
+        "discordant": 104,
+        "p_value": 5.628741461792486e-14
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.37,
+        "low": 0.025,
+        "high": 0.72,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3318,6 +6894,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 89,
+        "c": 15,
+        "discordant": 104,
+        "p_value": 5.628741461792486e-14
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.37,
+        "low": 0.025,
+        "high": 0.72,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3336,6 +6928,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 121,
+        "c": 0,
+        "discordant": 121,
+        "p_value": 7.52316384526264e-37
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.605,
+        "low": 0.305,
+        "high": 0.885,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3354,6 +6962,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 65,
+        "c": 19,
+        "discordant": 84,
+        "p_value": 4.748492975346606e-07
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.23,
+        "low": -0.17,
+        "high": 0.63,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3372,6 +6996,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 0,
+        "discordant": 2,
+        "p_value": 0.5
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.01,
+        "low": 0.0,
+        "high": 0.03,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3390,6 +7030,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 0,
+        "discordant": 0,
+        "p_value": 1.0
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3408,6 +7064,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 117,
+        "discordant": 117,
+        "p_value": 1.2037062152420224e-35
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.585,
+        "low": -0.88,
+        "high": -0.28,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3426,6 +7098,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 25,
+        "c": 96,
+        "discordant": 121,
+        "p_value": 5.303093183678633e-11
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.355,
+        "low": -0.835,
+        "high": 0.135,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3444,6 +7132,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 22,
+        "discordant": 24,
+        "p_value": 3.5881996154785156e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.1,
+        "low": -0.235,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3462,6 +7166,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 22,
+        "discordant": 24,
+        "p_value": 3.5881996154785156e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.1,
+        "low": -0.235,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3480,6 +7200,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 27,
+        "c": 0,
+        "discordant": 27,
+        "p_value": 1.4901161193847656e-08
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3498,6 +7234,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 50,
+        "discordant": 52,
+        "p_value": 6.123990203832363e-13
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.24,
+        "low": -0.615,
+        "high": 0.02,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3516,6 +7268,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 2,
+        "discordant": 2,
+        "p_value": 0.5
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.01,
+        "low": -0.03,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3534,6 +7302,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 119,
+        "discordant": 119,
+        "p_value": 3.009265538105056e-36
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.595,
+        "low": -0.89,
+        "high": -0.295,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3552,6 +7336,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 25,
+        "c": 98,
+        "discordant": 123,
+        "p_value": 2.078916997942999e-11
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.365,
+        "low": -0.84525,
+        "high": 0.135,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3570,6 +7370,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 22,
+        "discordant": 22,
+        "p_value": 4.76837158203125e-07
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.11,
+        "low": -0.24512499999999998,
+        "high": -0.01,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3588,6 +7404,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 22,
+        "discordant": 22,
+        "p_value": 4.76837158203125e-07
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.11,
+        "low": -0.24512499999999998,
+        "high": -0.01,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3606,6 +7438,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 25,
+        "c": 0,
+        "discordant": 25,
+        "p_value": 5.960464477539063e-08
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.125,
+        "low": 0.0,
+        "high": 0.375,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3624,6 +7472,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 50,
+        "discordant": 50,
+        "p_value": 1.7763568394002505e-15
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.25,
+        "low": -0.625,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3642,6 +7506,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 117,
+        "discordant": 117,
+        "p_value": 1.2037062152420224e-35
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.585,
+        "low": -0.88,
+        "high": -0.28,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3660,6 +7540,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 25,
+        "c": 96,
+        "discordant": 121,
+        "p_value": 5.303093183678633e-11
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.355,
+        "low": -0.835,
+        "high": 0.135,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3678,6 +7574,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 22,
+        "discordant": 24,
+        "p_value": 3.5881996154785156e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.1,
+        "low": -0.235,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3696,6 +7608,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 22,
+        "discordant": 24,
+        "p_value": 3.5881996154785156e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.1,
+        "low": -0.235,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3714,6 +7642,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 27,
+        "c": 0,
+        "discordant": 27,
+        "p_value": 1.4901161193847656e-08
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3732,6 +7676,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 2,
+        "c": 50,
+        "discordant": 52,
+        "p_value": 6.123990203832363e-13
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.24,
+        "low": -0.615,
+        "high": 0.02,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3750,6 +7710,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 90,
+        "c": 44,
+        "discordant": 134,
+        "p_value": 8.745456628345134e-05
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.23,
+        "low": -0.305,
+        "high": 0.7501249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3768,6 +7744,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 112,
+        "c": 15,
+        "discordant": 127,
+        "p_value": 1.5787915213027008e-19
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.485,
+        "low": 0.14,
+        "high": 0.82,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3786,6 +7778,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 112,
+        "c": 15,
+        "discordant": 127,
+        "p_value": 1.5787915213027008e-19
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.485,
+        "low": 0.14,
+        "high": 0.82,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3804,6 +7812,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 144,
+        "c": 0,
+        "discordant": 144,
+        "p_value": 8.96831017167883e-44
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.72,
+        "low": 0.44,
+        "high": 1.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3822,6 +7846,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 69,
+        "c": 0,
+        "discordant": 69,
+        "p_value": 3.3881317890172014e-21
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.345,
+        "low": 0.08,
+        "high": 0.6452499999999987,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3840,6 +7880,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 83,
+        "c": 32,
+        "discordant": 115,
+        "p_value": 2.1594312802256026e-06
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.255,
+        "low": -0.21012499999999998,
+        "high": 0.7,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3858,6 +7914,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 83,
+        "c": 32,
+        "discordant": 115,
+        "p_value": 2.1594312802256026e-06
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.255,
+        "low": -0.21012499999999998,
+        "high": 0.7,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3876,6 +7948,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 98,
+        "c": 0,
+        "discordant": 98,
+        "p_value": 6.310887241768095e-30
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.49,
+        "low": 0.125,
+        "high": 0.855,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3894,6 +7982,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 98,
+        "c": 75,
+        "discordant": 173,
+        "p_value": 0.09411472301553844
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.115,
+        "low": -0.51,
+        "high": 0.74,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3912,6 +8016,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 0,
+        "discordant": 0,
+        "p_value": 1.0
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
       "holm_family": "systems"
     },
@@ -3930,6 +8050,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 47,
+        "c": 0,
+        "discordant": 47,
+        "p_value": 1.4210854715202004e-14
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.235,
+        "low": 0.035,
+        "high": 0.505,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3948,6 +8084,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 15,
+        "c": 43,
+        "discordant": 58,
+        "p_value": 0.0003069470155465659
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.14,
+        "low": -0.475,
+        "high": 0.1451249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3966,6 +8118,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 47,
+        "c": 0,
+        "discordant": 47,
+        "p_value": 1.4210854715202004e-14
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": 0.235,
+        "low": 0.035,
+        "high": 0.505,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -3984,6 +8152,22 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 15,
+        "c": 43,
+        "discordant": 58,
+        "p_value": 0.0003069470155465659
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.14,
+        "low": -0.475,
+        "high": 0.1451249999999993,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     },
@@ -4002,11 +8186,35 @@
         "n_clusters": 0,
         "seed": 0
       },
+      "cluster_ci_excludes_0": null,
+      "fpr_mcnemar": {
+        "b": 0,
+        "c": 75,
+        "discordant": 75,
+        "p_value": 5.293955920339377e-23
+      },
+      "fpr_diff_bootstrap": {
+        "estimate": -0.375,
+        "low": -0.75,
+        "high": -0.125,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
       "holm_family": "reference (mock; not adjusted)"
     }
   ],
   "holm_family": "all pairs of non-mock adapters; mock pairs reported unadjusted",
+  "pairwise_summary": {
+    "alpha": 0.05,
+    "n_pairs": 78,
+    "holm_significant": 0,
+    "holm_significant_and_cluster_ci_excludes_0": 0,
+    "cluster_ci_excludes_0": 0,
+    "fpr_cluster_ci_excludes_0": 44
+  },
   "rank_intervals": {},
   "shared_scope_categories": [
     "credit_card",

@@ -22,6 +22,7 @@ from pii_guardbench.evaluator import (
     DEFAULT_SEED,
     evaluate,
     format_leaderboard,
+    layer_of,
 )
 from pii_guardbench.prompts import load_prompts
 
@@ -105,12 +106,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def record_layer(prompt: dict) -> str:
-    layer = (prompt.get("metadata") or {}).get("layer")
-    if layer in ("clean", "control", "hard"):
-        return layer
-    if prompt.get("difficulty") == "adversarial":
-        return "hard"
-    return "clean" if prompt.get("sensitive_spans") else "control"
+    return layer_of(prompt)
 
 
 def parse_adapter_names(spec: str) -> list[str]:
@@ -149,6 +145,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             raise ValueError("--bootstrap-iters must be >= 1")
         runs = {}
         contracts: dict[str, object] = {}
+        category_maps: dict[str, object] = {}
         for name in names:
             uid = adapter_id(name)
             adapter = get_adapter(name)
@@ -165,6 +162,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             runs[uid] = [adapter.run(prompt["text"]) for prompt in prompts]
             descriptions[uid] = adapter.describe()
             contracts[uid] = adapter.entity_contract()
+            category_maps[uid] = adapter.category_map()
         if not runs:
             raise ValueError("No adapter could run; see warnings above.")
     except (ValueError, KeyError, NotImplementedError, OSError) as exc:
@@ -183,6 +181,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         bootstrap_iterations=args.bootstrap_iters,
         seed=args.seed,
         contracts=contracts,
+        category_maps=category_maps,
     )
     leaderboard = format_leaderboard(report)
     sys.stdout.write(leaderboard)

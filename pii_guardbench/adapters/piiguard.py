@@ -37,7 +37,17 @@ from pii_guardbench.adapters.base import (
     AdapterUnavailableError,
     GuardrailAdapter,
 )
-from pii_guardbench.adapters.presidio import contract_for_entities, shared_default_analyzer
+from pii_guardbench.adapters.presidio import (
+    PRESIDIO_TO_CATEGORY,
+    contract_for_entities,
+    shared_default_analyzer,
+)
+
+# Category value meaning "any category in this adapter's contract": piiguard's
+# generic obfuscation rules (spelled/fullwidth/split/encoded digits, generic
+# base64/hex/reversed PII) target the contract's identifiers without saying
+# which one, so a hit on a control counts as an in-contract redaction.
+ANY_IN_CONTRACT = "*"
 
 
 class PiiguardAdapter(GuardrailAdapter):
@@ -143,6 +153,9 @@ class PiiguardAdapter(GuardrailAdapter):
             "disclosure": "piiguard is written by the benchmark author (reference row).",
         }
 
+    def category_map(self) -> dict[str, str]:
+        return dict(PIIGUARD_TYPE_TO_CATEGORY)
+
     def entity_contract(self) -> frozenset[str]:
         contract = set(PIIGUARD_RULE_CONTRACT)
         if self.with_presidio:
@@ -160,6 +173,32 @@ PIIGUARD_PRESIDIO_ENTITIES: tuple[str, ...] = (
     "IP_ADDRESS", "US_BANK_NUMBER", "US_DRIVER_LICENSE", "US_PASSPORT", "US_ITIN",
     "MEDICAL_LICENSE", "CRYPTO", "MAC_ADDRESS",
 )
+
+
+_RULE_TYPES: dict[str, str] = {
+    "ssn": "ssn", "ssn_spaced": "ssn", "base64_ssn": "ssn", "hex_ssn": "ssn",
+    "email": "email", "base64_email": "email",
+    "phone_us": "phone", "phone_spaced": "phone", "base64_phone": "phone", "hex_phone": "phone",
+    "credit_card": "credit_card", "credit_card_spaced": "credit_card",
+    "base64_credit_card": "credit_card", "hex_credit_card": "credit_card",
+    "fullwidth_digits": ANY_IN_CONTRACT, "spelled_digits": ANY_IN_CONTRACT,
+    "split_line_digits": ANY_IN_CONTRACT, "unicode_separator_digits": ANY_IN_CONTRACT,
+    "url_encoded": ANY_IN_CONTRACT, "generic_base64_pii": ANY_IN_CONTRACT,
+    "generic_hex_pii": ANY_IN_CONTRACT, "generic_reversed_pii": ANY_IN_CONTRACT,
+    "scan_timeout": ANY_IN_CONTRACT,
+    # dob_*, adjuster_badge, claim_number, policy_number, split_line_identifier,
+    # reversed_* insurance ids: not benchmark categories (out of contract).
+}
+# piiguard's PresidioDetector lower-cases Presidio entity types (_norm_type).
+PIIGUARD_TYPE_TO_CATEGORY: dict[str, str] = {
+    **_RULE_TYPES,
+    **{k.lower(): v for k, v in PRESIDIO_TO_CATEGORY.items()},
+}
+# Union adapter records prefixed types so its generic <PII> token stays attributable.
+UNION_TYPE_TO_CATEGORY: dict[str, str] = {
+    **{f"piiguard:{k}": v for k, v in _RULE_TYPES.items()},
+    **{f"presidio:{k}": v for k, v in PRESIDIO_TO_CATEGORY.items()},
+}
 
 
 class PiiguardUnionPresidioAdapter(PiiguardAdapter):
@@ -191,6 +230,9 @@ class PiiguardUnionPresidioAdapter(PiiguardAdapter):
             types.add(f"presidio:{result.entity_type}")
             spans.append((result.start, result.end))
         return {"text": _replace_spans(text, spans, "<PII>"), "detected_categories": sorted(types)}
+
+    def category_map(self) -> dict[str, str]:
+        return dict(UNION_TYPE_TO_CATEGORY)
 
     def entity_contract(self) -> frozenset[str]:
         if self._analyzer is None:

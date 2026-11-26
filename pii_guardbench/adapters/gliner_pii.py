@@ -138,6 +138,9 @@ class GlinerPiiAdapter(GuardrailAdapter):
     def entity_contract(self) -> frozenset[str]:
         return frozenset(GLINER_LABELS.values())
 
+    def category_map(self) -> dict[str, str]:
+        return dict(GLINER_LABELS)
+
     def describe(self) -> dict[str, Any]:
         return {
             "adapter": self.name,

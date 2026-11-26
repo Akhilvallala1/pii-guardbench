@@ -131,10 +131,14 @@ class PresidioAdapter(GuardrailAdapter):
             score_threshold=self.score_threshold,
         )
         anonymized = anonymizer.anonymize(text=request["text"], analyzer_results=found)
-        return {
-            "text": anonymized.text,
-            "detected_categories": sorted({r.entity_type for r in found}),
-        }
+        # Native types actually replaced (the anonymizer resolves overlaps);
+        # fall back to the analyzer findings if items are not exposed.
+        items = getattr(anonymized, "items", None)
+        if items:
+            types = {str(getattr(i, "entity_type", "")) for i in items} - {""}
+        else:
+            types = {r.entity_type for r in found}
+        return {"text": anonymized.text, "detected_categories": sorted(types)}
 
     def parse(self, raw: dict[str, Any]) -> AdapterResult:
         return AdapterResult(
@@ -152,6 +156,9 @@ class PresidioAdapter(GuardrailAdapter):
 
     def entity_contract(self) -> frozenset[str]:
         return contract_for_entities(self.configured_entities())
+
+    def category_map(self) -> dict[str, str]:
+        return dict(PRESIDIO_TO_CATEGORY)
 
     def describe(self) -> dict[str, Any]:
         return {
