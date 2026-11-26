@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Akhilvallala1/pii-guardbench/schema/prompt.schema.json",
+  "title": "PII-GuardBench prompt record",
+  "description": "A single benchmark prompt with planted synthetic sensitive spans.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "text",
+    "sensitive_spans",
+    "difficulty",
+    "source",
+    "domain"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable unique identifier for the prompt, for example pgb-0001."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Full prompt text. Span offsets are character offsets into this string."
+    },
+    "sensitive_spans": {
+      "type": "array",
+      "description": "Planted sensitive values. Empty for no-PII control prompts.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "category",
+          "start",
+          "end",
+          "value"
+        ],
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "credit_card",
+              "ssn",
+              "mrn",
+              "diagnosis",
+              "api_key",
+              "password",
+              "token",
+              "email",
+              "phone",
+              "name",
+              "address",
+              "account_number",
+              "other"
+            ]
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Inclusive start offset into text."
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Exclusive end offset into text. Must satisfy text[start:end] == value."
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Exact planted string used for exact-match leak scoring."
+          }
+        }
+      }
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard",
+        "adversarial"
+      ]
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "generated",
+        "adapted",
+        "adversarial_corpus",
+        "control"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "finance",
+        "health",
+        "credentials",
+        "none"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Optional free-form annotations. Not used for scoring.",
+      "additionalProperties": true
+    }
+  }
+}
