@@ -40,6 +40,7 @@ from pii_guardbench.adapters.base import (
 from pii_guardbench.adapters.presidio import (
     PRESIDIO_TO_CATEGORY,
     contract_for_entities,
+    resolved_presidio_types,
     shared_default_analyzer,
 )
 
@@ -185,7 +186,8 @@ _RULE_TYPES: dict[str, str] = {
     "split_line_digits": ANY_IN_CONTRACT, "unicode_separator_digits": ANY_IN_CONTRACT,
     "url_encoded": ANY_IN_CONTRACT, "generic_base64_pii": ANY_IN_CONTRACT,
     "generic_hex_pii": ANY_IN_CONTRACT, "generic_reversed_pii": ANY_IN_CONTRACT,
-    "scan_timeout": ANY_IN_CONTRACT,
+    # scan_timeout is a scanner timeout, not a redaction of an identifier:
+    # deliberately unmapped (out of contract), so it never makes a contract FP.
     # dob_*, adjuster_badge, claim_number, policy_number, split_line_identifier,
     # reversed_* insurance ids: not benchmark categories (out of contract).
 }
@@ -206,9 +208,12 @@ class PiiguardUnionPresidioAdapter(PiiguardAdapter):
 
     name = "piiguard-union-presidio"
 
-    def __init__(self, guard_dir: str | os.PathLike[str] | None = None, *, analyzer: Any = None) -> None:
+    def __init__(
+        self, guard_dir: str | os.PathLike[str] | None = None, *, analyzer: Any = None, anonymizer: Any = None
+    ) -> None:
         super().__init__(guard_dir, with_presidio=False, name="piiguard-union-presidio")
         self._analyzer = analyzer
+        self._anonymizer = anonymizer
 
     def call(self, request: dict[str, str]) -> dict[str, Any]:
         text = request["text"]
@@ -226,9 +231,13 @@ class PiiguardUnionPresidioAdapter(PiiguardAdapter):
                 while start != -1:
                     spans.append((start, start + len(finding.value)))
                     start = text.find(finding.value, start + 1)
-        for result in self._analyzer.analyze(text=text, language="en", score_threshold=0.0):
-            types.add(f"presidio:{result.entity_type}")
+        found = list(self._analyzer.analyze(text=text, language="en", score_threshold=0.0))
+        for result in found:
             spans.append((result.start, result.end))
+        # Attribute Presidio types exactly as the ``presidio`` row does: the
+        # entity types surviving AnonymizerEngine conflict resolution.
+        for t in resolved_presidio_types(text, found, self._anonymizer):
+            types.add(f"presidio:{t}")
         return {"text": _replace_spans(text, spans, "<PII>"), "detected_categories": sorted(types)}
 
     def category_map(self) -> dict[str, str]:

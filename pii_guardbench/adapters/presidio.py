@@ -19,7 +19,8 @@ All Presidio-based adapters in one process share a single default
 from __future__ import annotations
 
 from importlib import metadata
-from typing import Any, Iterable, Optional
+import copy
+from typing import Any, Iterable, Optional, Sequence
 
 from pii_guardbench.adapters.base import (
     AdapterFlags,
@@ -83,6 +84,38 @@ def contract_for_entities(entities: Iterable[str]) -> frozenset[str]:
     return frozenset(PRESIDIO_TO_CATEGORY[e] for e in entities if e in PRESIDIO_TO_CATEGORY)
 
 
+def replaced_types(anonymized: Any, found: Iterable[Any]) -> list[str]:
+    """Native types of the spans the anonymizer actually replaced.
+
+    Uses ``anonymized.items`` (the result of Presidio's conflict resolution).
+    Falls back to the raw analyzer findings only when the ``items`` attribute
+    is missing (``None``); an empty list means nothing was replaced.
+    """
+    items = getattr(anonymized, "items", None)
+    if items is None:
+        return sorted({str(r.entity_type) for r in found})
+    return sorted({str(getattr(i, "entity_type", "")) for i in items} - {""})
+
+
+def resolved_presidio_types(text: str, found: Sequence[Any], anonymizer: Any = None) -> list[str]:
+    """Run ``AnonymizerEngine`` on copies of ``found`` and return the surviving
+    entity types, i.e. exactly what the ``presidio`` row attributes."""
+    if anonymizer is None:
+        anonymizer = shared_default_anonymizer()
+    copies = [copy.copy(r) for r in found]
+    return replaced_types(anonymizer.anonymize(text=text, analyzer_results=copies), copies)
+
+
+def shared_default_anonymizer() -> Any:
+    if "anonymizer" not in _SHARED:
+        try:
+            from presidio_anonymizer import AnonymizerEngine
+        except ImportError as exc:
+            raise AdapterUnavailableError("Presidio adapters need 'presidio-anonymizer'.") from exc
+        _SHARED["anonymizer"] = AnonymizerEngine()
+    return _SHARED["anonymizer"]
+
+
 class PresidioAdapter(GuardrailAdapter):
     """Wrapper around Presidio's analyzer and anonymizer."""
 
@@ -131,13 +164,7 @@ class PresidioAdapter(GuardrailAdapter):
             score_threshold=self.score_threshold,
         )
         anonymized = anonymizer.anonymize(text=request["text"], analyzer_results=found)
-        # Native types actually replaced (the anonymizer resolves overlaps);
-        # fall back to the analyzer findings if items are not exposed.
-        items = getattr(anonymized, "items", None)
-        if items:
-            types = {str(getattr(i, "entity_type", "")) for i in items} - {""}
-        else:
-            types = {r.entity_type for r in found}
+        types = replaced_types(anonymized, found)
         return {"text": anonymized.text, "detected_categories": sorted(types)}
 
     def parse(self, raw: dict[str, Any]) -> AdapterResult:

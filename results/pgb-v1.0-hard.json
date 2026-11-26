@@ -7,6 +7,7 @@
     "iterations": 2000,
     "seed": 0,
     "n_clusters": 12,
+    "n_clusters_note": "legacy alias of n_pii_clusters",
     "n_pii_clusters": 12,
     "n_control_clusters": 0,
     "cluster_key": "metadata.cluster > metadata.template_id > id"
@@ -85,6 +86,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -214,9 +231,9 @@
         }
       },
       "latency_ms": {
-        "mean": 4.312481720098731,
-        "p50": 4.036786000142456,
-        "p95": 5.340220350990421,
+        "mean": 4.531682150100096,
+        "p50": 4.123432499909541,
+        "p95": 5.533894299333042,
         "n": 200
       },
       "by_category": {
@@ -392,6 +409,14 @@
           "low": 0.5038395533408654,
           "high": 0.6797360998546861
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.5948275862068966,
+          "low": 0.29199947053929354,
+          "high": 0.8706896551724138,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
         "span_leak": {
           "k": 69,
           "n": 116,
@@ -413,6 +438,14 @@
           "rate": 0.62,
           "low": 0.5220957382071033,
           "high": 0.7090255079986562
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.62,
+          "low": 0.26,
+          "high": 0.94,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 62,
@@ -496,6 +529,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -625,9 +674,9 @@
         }
       },
       "latency_ms": {
-        "mean": 4.103645239993057,
-        "p50": 3.9558219996251864,
-        "p95": 5.164065997996658,
+        "mean": 4.3871001999832515,
+        "p50": 4.071949000717723,
+        "p95": 5.293663449083397,
         "n": 200
       },
       "by_category": {
@@ -803,6 +852,14 @@
           "low": 0.5211597659068572,
           "high": 0.6957932787787944
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.6120689655172413,
+          "low": 0.3275862068965517,
+          "high": 0.8706896551724138,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
         "span_leak": {
           "k": 71,
           "n": 116,
@@ -824,6 +881,14 @@
           "rate": 0.64,
           "low": 0.542352199811621,
           "high": 0.7272892540950986
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.64,
+          "low": 0.3,
+          "high": 0.94,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 64,
@@ -908,6 +973,22 @@
         "low": null,
         "high": null
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
       "contract_false_positive": {
         "k": 0,
         "n": 0,
@@ -1036,9 +1117,9 @@
         }
       },
       "latency_ms": {
-        "mean": 3.8492057499934162,
-        "p50": 3.673436000099173,
-        "p95": 5.0627235488718725,
+        "mean": 4.386326974945405,
+        "p50": 3.760551000596024,
+        "p95": 5.005093850013509,
         "n": 200
       },
       "by_category": {
@@ -1212,6 +1293,14 @@
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
+        },
         "span_leak": {
           "k": 98,
           "n": 100,
@@ -1233,6 +1322,14 @@
           "rate": 0.98,
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 98,
@@ -1317,6 +1414,22 @@
         "low": null,
         "high": null
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
       "contract_false_positive": {
         "k": 0,
         "n": 0,
@@ -1445,9 +1558,9 @@
         }
       },
       "latency_ms": {
-        "mean": 3.724940530155436,
-        "p50": 3.6082759997952962,
-        "p95": 4.861201601306674,
+        "mean": 4.242634124802862,
+        "p50": 3.794601001573028,
+        "p95": 5.119074948379421,
         "n": 200
       },
       "by_category": {
@@ -1621,6 +1734,14 @@
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
+        },
         "span_leak": {
           "k": 98,
           "n": 100,
@@ -1642,6 +1763,14 @@
           "rate": 0.98,
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 98,
@@ -1725,6 +1854,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -1854,9 +1999,9 @@
         }
       },
       "latency_ms": {
-        "mean": 4.297955919992091,
-        "p50": 4.141950001212535,
-        "p95": 5.4080409985544975,
+        "mean": 4.326334264915204,
+        "p50": 4.130837498451001,
+        "p95": 5.479792401820304,
         "n": 200
       },
       "by_category": {
@@ -2030,6 +2175,14 @@
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
+        },
         "span_leak": {
           "k": 98,
           "n": 100,
@@ -2051,6 +2204,14 @@
           "rate": 0.98,
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 98,
@@ -2134,6 +2295,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -2263,9 +2440,9 @@
         }
       },
       "latency_ms": {
-        "mean": 4.617472674835881,
-        "p50": 4.639114498786512,
-        "p95": 5.652834350257763,
+        "mean": 4.628173839901137,
+        "p50": 4.545809499177267,
+        "p95": 5.689778899977681,
         "n": 200
       },
       "by_category": {
@@ -2441,6 +2618,14 @@
           "low": 0.5211597659068572,
           "high": 0.6957932787787944
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.6120689655172413,
+          "low": 0.3275862068965517,
+          "high": 0.8706896551724138,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
         "span_leak": {
           "k": 71,
           "n": 116,
@@ -2462,6 +2647,14 @@
           "rate": 0.64,
           "low": 0.542352199811621,
           "high": 0.7272892540950986
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.64,
+          "low": 0.3,
+          "high": 0.94,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 64,
@@ -2545,6 +2738,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.08,
+        "low": 0.014925373134328358,
+        "high": 0.17676767676767677,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -2674,9 +2883,9 @@
         }
       },
       "latency_ms": {
-        "mean": 4.190386014961405,
-        "p50": 4.027644999951008,
-        "p95": 5.391666349532896,
+        "mean": 4.351264054894273,
+        "p50": 4.0553884991823,
+        "p95": 5.301132752538251,
         "n": 200
       },
       "by_category": {
@@ -2850,6 +3059,14 @@
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
+        },
         "span_leak": {
           "k": 98,
           "n": 100,
@@ -2871,6 +3088,14 @@
           "rate": 0.98,
           "low": 0.9299868370580063,
           "high": 0.9944981477650318
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.98,
+          "low": 0.9387755102040817,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 98,
@@ -2954,6 +3179,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -3083,9 +3324,9 @@
         }
       },
       "latency_ms": {
-        "mean": 0.1245875201675517,
-        "p50": 0.10579200170468539,
-        "p95": 0.26013905189756764,
+        "mean": 0.1315284802331007,
+        "p50": 0.11210150114493445,
+        "p95": 0.2807346012559719,
         "n": 200
       },
       "by_category": {
@@ -3255,6 +3496,14 @@
           "low": 0.5627754565831095,
           "high": 0.74538620502457
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.66,
+          "low": 0.32,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
+        },
         "span_leak": {
           "k": 66,
           "n": 100,
@@ -3276,6 +3525,14 @@
           "rate": 0.66,
           "low": 0.5627754565831095,
           "high": 0.74538620502457
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.66,
+          "low": 0.32,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 66,
@@ -3359,6 +3616,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -3488,9 +3761,9 @@
         }
       },
       "latency_ms": {
-        "mean": 4.374588760038023,
-        "p50": 4.0950090005935635,
-        "p95": 5.458901850397524,
+        "mean": 4.269800610145467,
+        "p50": 4.076417000760557,
+        "p95": 5.383982200692117,
         "n": 200
       },
       "by_category": {
@@ -3666,6 +3939,14 @@
           "low": 0.4610104889496263,
           "high": 0.6391216855206745
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.5517241379310345,
+          "low": 0.14655172413793102,
+          "high": 0.855962469733656,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
         "span_leak": {
           "k": 64,
           "n": 116,
@@ -3687,6 +3968,14 @@
           "rate": 0.64,
           "low": 0.542352199811621,
           "high": 0.7272892540950986
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.64,
+          "low": 0.3,
+          "high": 0.9801980198019802,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 64,
@@ -3770,6 +4059,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -3899,9 +4204,9 @@
         }
       },
       "latency_ms": {
-        "mean": 4.473077444963565,
-        "p50": 4.342269001426757,
-        "p95": 6.009754699880431,
+        "mean": 4.6113606948711094,
+        "p50": 4.399319501317223,
+        "p95": 6.03346194820915,
         "n": 200
       },
       "by_category": {
@@ -4077,6 +4382,14 @@
           "low": 0.18007382859915583,
           "high": 0.3359539947943903
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.25,
+          "low": 0.008547008547008548,
+          "high": 0.5555797101449274,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
         "span_leak": {
           "k": 29,
           "n": 116,
@@ -4098,6 +4411,14 @@
           "rate": 0.29,
           "low": 0.21014706973984149,
           "high": 0.3853907494000793
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.29,
+          "low": 0.009900990099009901,
+          "high": 0.622544320758606,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 29,
@@ -4181,6 +4502,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 0,
@@ -4310,9 +4647,9 @@
         }
       },
       "latency_ms": {
-        "mean": 57.27037154496429,
-        "p50": 52.0623064985557,
-        "p95": 82.84311549850823,
+        "mean": 128.17235370499475,
+        "p50": 71.2643865008431,
+        "p95": 207.56598565003475,
         "n": 200
       },
       "by_category": {
@@ -4498,6 +4835,14 @@
           "low": 0.19960402982802747,
           "high": 0.3196305130719498
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.255,
+          "low": 0.01,
+          "high": 0.505,
+          "iterations": 2000,
+          "n_clusters": 12,
+          "seed": 0
+        },
         "span_leak": {
           "k": 51,
           "n": 200,
@@ -4519,6 +4864,14 @@
           "rate": 0.33,
           "low": 0.24562983793895452,
           "high": 0.4269483966028862
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.33,
+          "low": 0.0,
+          "high": 0.67,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 33,
@@ -4603,6 +4956,22 @@
         "low": null,
         "high": null
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
       "contract_false_positive": {
         "k": 0,
         "n": 0,
@@ -4731,9 +5100,9 @@
         }
       },
       "latency_ms": {
-        "mean": 50.76269159490039,
-        "p50": 45.81885400148167,
-        "p95": 78.00139059763751,
+        "mean": 57.14414117988781,
+        "p50": 50.82500200114737,
+        "p95": 93.44960169783005,
         "n": 200
       },
       "by_category": {
@@ -4907,6 +5276,14 @@
           "low": 0.9267119938162736,
           "high": 0.9911662721614838
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.9741379310344828,
+          "low": 0.9380530973451328,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
         "span_leak": {
           "k": 113,
           "n": 116,
@@ -4928,6 +5305,14 @@
           "rate": 0.97,
           "low": 0.9154792191959729,
           "high": 0.9897456617765852
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.97,
+          "low": 0.9285714285714286,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 97,
@@ -5012,6 +5397,22 @@
         "low": null,
         "high": null
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.1,
+        "low": 0.0,
+        "high": 0.275,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
       "contract_false_positive": {
         "k": 0,
         "n": 0,
@@ -5140,9 +5541,9 @@
         }
       },
       "latency_ms": {
-        "mean": 59.48117933001413,
-        "p50": 53.98497600072005,
-        "p95": 94.95403155106031,
+        "mean": 50.695520430072065,
+        "p50": 45.42254550142388,
+        "p95": 77.41864604940926,
         "n": 200
       },
       "by_category": {
@@ -5316,6 +5717,14 @@
           "low": 0.9267119938162736,
           "high": 0.9911662721614838
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.9741379310344828,
+          "low": 0.9380530973451328,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
         "span_leak": {
           "k": 113,
           "n": 116,
@@ -5337,6 +5746,14 @@
           "rate": 0.97,
           "low": 0.9154792191959729,
           "high": 0.9897456617765852
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.97,
+          "low": 0.9285714285714286,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
         },
         "span_leak": {
           "k": 97,
@@ -5420,6 +5837,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": null,
       "contract_false_positive_cluster_bootstrap": null,
@@ -5536,9 +5969,9 @@
         }
       },
       "latency_ms": {
-        "mean": 0.00111339999421034,
-        "p50": 0.0007130001904442906,
-        "p95": 0.002320949897693935,
+        "mean": 0.0021321298663679045,
+        "p50": 0.0012830005289288238,
+        "p95": 0.005607648745353763,
         "n": 200
       },
       "by_category": {
@@ -5704,6 +6137,14 @@
           "low": 0.9630051925239981,
           "high": 0.9999999999999999
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 1.0,
+          "low": 1.0,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
+        },
         "span_leak": {
           "k": 100,
           "n": 100,
@@ -5786,6 +6227,22 @@
         "rate": null,
         "low": null,
         "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 12,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
       },
       "contract_false_positive": null,
       "contract_false_positive_cluster_bootstrap": null,
@@ -5902,9 +6359,9 @@
         }
       },
       "latency_ms": {
-        "mean": 0.006793410102545749,
-        "p50": 0.006567001037183218,
-        "p95": 0.00872204927873099,
+        "mean": 0.006844149884273065,
+        "p50": 0.006656999175902456,
+        "p95": 0.008513149623468049,
         "n": 200
       },
       "by_category": {
@@ -6070,6 +6527,14 @@
           "low": 0.5730516033971139,
           "high": 0.7543701620610456
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.67,
+          "low": 0.33,
+          "high": 1.0,
+          "iterations": 2000,
+          "n_clusters": 6,
+          "seed": 0
+        },
         "span_leak": {
           "k": 67,
           "n": 100,
@@ -6108,7 +6573,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0068359375,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6137,7 +6603,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.958078640513122e-13,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6166,7 +6633,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.958078640513122e-13,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6195,7 +6663,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.121147867408581e-13,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6224,7 +6693,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0037841796875,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6253,7 +6723,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.121147867408581e-13,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6282,7 +6753,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6311,7 +6783,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6340,7 +6813,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.276845958083868e-11,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6369,7 +6843,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.139841243950577e-16,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6398,7 +6873,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.0942133174982086e-05,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6427,7 +6903,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 3.0942133174982086e-05,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6456,7 +6933,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -6485,7 +6963,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6514,7 +6993,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.3551048040390015e-09,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6543,7 +7023,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.3551048040390015e-09,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6572,7 +7053,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.7939677238464355e-09,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6601,7 +7083,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6630,7 +7113,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.7939677238464355e-09,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6659,7 +7143,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6688,7 +7173,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6717,7 +7203,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.354472090042691e-14,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6746,7 +7233,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.1313843102679751e-26,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6775,7 +7263,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.005828933592444434,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6804,7 +7293,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.005828933592444434,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6833,7 +7323,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -6862,7 +7353,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -6891,7 +7383,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -6920,7 +7413,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -6949,7 +7443,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 8.800998330116272e-08,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -6978,7 +7473,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7007,7 +7503,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.072753595593895e-05,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7036,7 +7533,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.777068044058979e-10,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7065,7 +7563,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 8.788794008375919e-25,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7094,7 +7593,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.791799083202933e-38,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7123,7 +7623,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7152,7 +7653,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7181,7 +7683,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -7210,7 +7713,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7239,7 +7743,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7268,7 +7773,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 8.800998330116272e-08,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7297,7 +7803,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7326,7 +7833,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.072753595593895e-05,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7355,7 +7863,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 9.777068044058979e-10,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7384,7 +7893,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 8.788794008375919e-25,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7413,7 +7923,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.791799083202933e-38,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7442,7 +7953,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7471,7 +7983,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7500,7 +8013,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -7529,7 +8043,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7558,7 +8073,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.3551048040390015e-09,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7587,7 +8103,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7616,7 +8133,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.496163375553806e-05,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7645,7 +8163,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.8203219193965197e-11,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7674,7 +8193,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.52364397489937e-25,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7703,7 +8223,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.432633740064663e-38,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7732,7 +8253,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7761,7 +8283,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7790,7 +8313,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -7819,7 +8343,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -7848,7 +8373,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.3551048040390015e-09,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -7877,7 +8403,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -7906,7 +8433,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -7935,7 +8463,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 6.994405055138486e-15,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -7964,7 +8493,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 5.793394487943111e-27,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -7993,7 +8523,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.007752198140864289,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -8022,7 +8553,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.007752198140864289,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -8051,7 +8583,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -8080,7 +8613,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8109,7 +8643,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 2.496163375553806e-05,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8138,7 +8673,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.8203219193965197e-11,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8167,7 +8703,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 4.52364397489937e-25,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8196,7 +8733,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.432633740064663e-38,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8225,7 +8763,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8254,7 +8793,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8283,7 +8823,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -8312,7 +8853,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -8341,7 +8883,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.359375,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -8370,7 +8913,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 6.994405055138486e-15,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -8399,7 +8943,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.7445355177716273e-17,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -8428,7 +8973,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.01100712516284921,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -8457,7 +9003,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.01100712516284921,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -8486,7 +9033,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -8515,7 +9063,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -8544,7 +9093,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.958078640513122e-13,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -8573,7 +9123,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 8.202520143940489e-16,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -8602,7 +9153,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0005581493643985256,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -8631,7 +9183,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0005581493643985256,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -8660,7 +9213,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -8689,7 +9243,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -8718,7 +9273,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 0.0002936165646984584,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -8747,7 +9303,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.1855347148654002e-13,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -8776,7 +9333,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.1855347148654002e-13,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -8805,7 +9363,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -8834,7 +9393,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "gliner-pii",
@@ -8863,7 +9423,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.176393011770065e-36,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "gliner-pii",
@@ -8892,7 +9453,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 7.176393011770065e-36,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "gliner-pii",
@@ -8921,7 +9483,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "gliner-pii",
@@ -8950,7 +9513,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-anonymize",
@@ -8979,7 +9543,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-anonymize",
@@ -9008,7 +9573,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-anonymize",
@@ -9037,7 +9603,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-block",
@@ -9066,7 +9633,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-block",
@@ -9095,7 +9663,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "mock-leaky",
@@ -9124,7 +9693,8 @@
       },
       "fpr_cluster_ci_excludes_0": null,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     }
   ],
   "holm_family": "all pairs of non-mock adapters; mock pairs reported unadjusted",
@@ -9134,7 +9704,9 @@
     "holm_significant": 55,
     "holm_significant_and_cluster_ci_excludes_0": 33,
     "cluster_ci_excludes_0": 34,
-    "fpr_cluster_ci_excludes_0": 0
+    "fpr_cluster_ci_excludes_0": 0,
+    "fpr_holm_significant": 0,
+    "fpr_holm_significant_and_cluster_ci_excludes_0": 0
   },
   "rank_intervals": {
     "presidio": {

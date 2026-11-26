@@ -7,6 +7,7 @@
     "iterations": 2000,
     "seed": 0,
     "n_clusters": 0,
+    "n_clusters_note": "legacy alias of n_pii_clusters",
     "n_pii_clusters": 0,
     "n_control_clusters": 8,
     "cluster_key": "metadata.cluster > metadata.template_id > id"
@@ -85,6 +86,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 49,
@@ -251,9 +268,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 4.392430329808121,
-        "p50": 4.139940998356906,
-        "p95": 6.013194249317164,
+        "mean": 4.195478814908711,
+        "p50": 4.050391498822137,
+        "p95": 5.005088899815744,
         "n": 200
       },
       "by_category": {},
@@ -305,6 +322,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -326,6 +351,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -410,6 +443,22 @@
         "low": 0.0,
         "high": 0.018846005918320894
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
       "contract_false_positive": {
         "k": 32,
         "n": 200,
@@ -573,9 +622,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 37.425949685239175,
-        "p50": 6.440489500164404,
-        "p95": 21.450675100095367,
+        "mean": 3.9851305200136267,
+        "p50": 3.9676550004514866,
+        "p95": 4.549594299714953,
         "n": 200
       },
       "by_category": {},
@@ -627,6 +676,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -648,6 +705,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -732,6 +797,22 @@
         "low": 0.0,
         "high": 0.018846005918320894
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
       "contract_false_positive": {
         "k": 32,
         "n": 200,
@@ -894,9 +975,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 4.763582930081611,
-        "p50": 4.671460001191008,
-        "p95": 6.017471798986662,
+        "mean": 3.656277444897569,
+        "p50": 3.6521965012070723,
+        "p95": 4.18049424952187,
         "n": 200
       },
       "by_category": {},
@@ -946,6 +1027,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -967,6 +1056,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -1051,6 +1148,22 @@
         "low": 0.0,
         "high": 0.018846005918320894
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
       "contract_false_positive": {
         "k": 32,
         "n": 200,
@@ -1213,9 +1326,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 4.610023924942652,
-        "p50": 4.298922000089078,
-        "p95": 6.952531049500974,
+        "mean": 3.602320919962949,
+        "p50": 3.6183654992782976,
+        "p95": 4.149753099954978,
         "n": 200
       },
       "by_category": {},
@@ -1265,6 +1378,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -1286,6 +1407,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -1369,6 +1498,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 27,
@@ -1531,9 +1676,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 5.101374040132214,
-        "p50": 4.319067998949322,
-        "p95": 6.5536053511095735,
+        "mean": 4.229978089897486,
+        "p50": 4.135810000661877,
+        "p95": 5.078687298191651,
         "n": 200
       },
       "by_category": {},
@@ -1583,6 +1728,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -1604,6 +1757,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -1687,6 +1848,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 27,
@@ -1850,9 +2027,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 5.002673094986676,
-        "p50": 4.624667499228963,
-        "p95": 6.719884950507549,
+        "mean": 4.667114599997149,
+        "p50": 4.6148779983923305,
+        "p95": 5.327321749246037,
         "n": 200
       },
       "by_category": {},
@@ -1904,6 +2081,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -1925,6 +2110,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -2008,6 +2201,22 @@
         "rate": 0.135,
         "low": 0.09446507976920288,
         "high": 0.18929250455117141
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.135,
+        "low": 0.0,
+        "high": 0.385,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 27,
@@ -2167,9 +2376,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 4.517767385132174,
-        "p50": 4.140336499403929,
-        "p95": 5.54938150053203,
+        "mean": 4.532349190121749,
+        "p50": 4.1052500000660075,
+        "p95": 4.7276604529542965,
         "n": 200
       },
       "by_category": {},
@@ -2219,6 +2428,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -2240,6 +2457,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -2323,6 +2548,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 25,
@@ -2484,9 +2725,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 0.10421509014122421,
-        "p50": 0.09742100155563094,
-        "p95": 0.15873625252424972,
+        "mean": 0.10631648508933722,
+        "p50": 0.10013150131271686,
+        "p95": 0.16427254922746215,
         "n": 200
       },
       "by_category": {},
@@ -2532,6 +2773,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -2553,6 +2802,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -2636,6 +2893,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 27,
@@ -2798,9 +3071,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 4.824875070171402,
-        "p50": 4.0495950015611015,
-        "p95": 5.196535850336639,
+        "mean": 4.464753824977379,
+        "p50": 4.114818999369163,
+        "p95": 6.797531650954624,
         "n": 200
       },
       "by_category": {},
@@ -2852,6 +3125,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -2873,6 +3154,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -2957,17 +3246,33 @@
         "low": 0.0,
         "high": 0.018846005918320894
       },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
       "contract_false_positive": {
-        "k": 54,
+        "k": 49,
         "n": 200,
-        "rate": 0.27,
-        "low": 0.21323354731040559,
-        "high": 0.3354356154120221
+        "rate": 0.245,
+        "low": 0.19056777914685893,
+        "high": 0.3090436838714848
       },
       "contract_false_positive_cluster_bootstrap": {
-        "estimate": 0.27,
+        "estimate": 0.245,
         "low": 0.035,
-        "high": 0.57,
+        "high": 0.515,
         "iterations": 2000,
         "n_clusters": 8,
         "seed": 0
@@ -2978,9 +3283,8 @@
         "presidio:DATE_TIME": 94,
         "presidio:LOCATION": 5,
         "presidio:PERSON": 2,
-        "presidio:US_BANK_NUMBER": 22,
-        "presidio:US_DRIVER_LICENSE": 50,
-        "presidio:US_ITIN": 13,
+        "presidio:US_BANK_NUMBER": 17,
+        "presidio:US_DRIVER_LICENSE": 27,
         "presidio:US_SSN": 25
       },
       "control_fp_by_template": {
@@ -3027,11 +3331,11 @@
             "high": 1.0
           },
           "contract": {
-            "k": 22,
+            "k": 17,
             "n": 25,
-            "rate": 0.88,
-            "low": 0.7004380781662651,
-            "high": 0.9583325864293191
+            "rate": 0.68,
+            "low": 0.48409913734576715,
+            "high": 0.8279501248310887
           },
           "blocked": 0
         },
@@ -3124,9 +3428,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 4.434655260138243,
-        "p50": 4.258315999322804,
-        "p95": 5.410655649575347,
+        "mean": 4.1349387248192215,
+        "p50": 4.091134498594329,
+        "p95": 4.687745449700742,
         "n": 200
       },
       "by_category": {},
@@ -3178,6 +3482,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -3199,6 +3511,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -3282,6 +3602,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 98,
@@ -3446,9 +3782,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 69.05379819512746,
-        "p50": 57.27271950127033,
-        "p95": 154.2223110029226,
+        "mean": 50.358051779894595,
+        "p50": 44.37596050047432,
+        "p95": 67.34735770132826,
         "n": 200
       },
       "by_category": {},
@@ -3510,6 +3846,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -3531,6 +3875,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -3614,6 +3966,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 47,
@@ -3778,9 +4146,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 50.28978756505239,
-        "p50": 45.007117001659935,
-        "p95": 80.95457750005153,
+        "mean": 39.78633272512525,
+        "p50": 36.9919695021963,
+        "p95": 57.84094490118149,
         "n": 200
       },
       "by_category": {},
@@ -3830,6 +4198,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -3851,6 +4227,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -3934,6 +4318,22 @@
         "rate": 0.235,
         "low": 0.18157345326946356,
         "high": 0.29841492986724655
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.235,
+        "low": 0.035,
+        "high": 0.505,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": {
         "k": 47,
@@ -4098,9 +4498,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 44.323030859886785,
-        "p50": 40.122698999766726,
-        "p95": 72.29350369980237,
+        "mean": 42.236517865185306,
+        "p50": 40.5028349996428,
+        "p95": 50.96283804941773,
         "n": 200
       },
       "by_category": {},
@@ -4150,6 +4550,14 @@
           "low": null,
           "high": null
         },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
+        },
         "span_leak": {
           "k": 0,
           "n": 0,
@@ -4171,6 +4579,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -4254,6 +4670,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": null,
       "contract_false_positive_cluster_bootstrap": null,
@@ -4352,9 +4784,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 0.0010662449312803801,
-        "p50": 0.0006579994078492746,
-        "p95": 0.0022081472707213825,
+        "mean": 0.0008863600487529766,
+        "p50": 0.0006549998943228275,
+        "p95": 0.0023290507670026273,
         "n": 200
       },
       "by_category": {},
@@ -4395,6 +4827,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -4478,6 +4918,22 @@
         "rate": 0.0,
         "low": 0.0,
         "high": 0.018846005918320894
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
       },
       "contract_false_positive": null,
       "contract_false_positive_cluster_bootstrap": null,
@@ -4580,9 +5036,9 @@
       "by_template": {},
       "by_family": {},
       "latency_ms": {
-        "mean": 0.0061430951063812245,
-        "p50": 0.005890000466024503,
-        "p95": 0.007632952838321216,
+        "mean": 0.0059694848823710345,
+        "p50": 0.005725501978304237,
+        "p95": 0.007604100937896873,
         "n": 200
       },
       "by_category": {},
@@ -4623,6 +5079,14 @@
           "rate": null,
           "low": null,
           "high": null
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": null,
+          "low": null,
+          "high": null,
+          "iterations": 2000,
+          "n_clusters": 0,
+          "seed": 0
         },
         "span_leak": {
           "k": 0,
@@ -4667,7 +5131,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.00012969970703125
     },
     {
       "adapter_a": "presidio",
@@ -4701,7 +5166,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.69630192214213e-32
     },
     {
       "adapter_a": "presidio",
@@ -4735,7 +5201,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.69630192214213e-32
     },
     {
       "adapter_a": "presidio",
@@ -4769,7 +5236,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.14816723583937e-34
     },
     {
       "adapter_a": "presidio",
@@ -4803,7 +5271,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.5367431640625e-06
     },
     {
       "adapter_a": "presidio",
@@ -4837,7 +5306,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.14816723583937e-34
     },
     {
       "adapter_a": "presidio",
@@ -4871,7 +5341,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.3472271197219437e-34
     },
     {
       "adapter_a": "presidio",
@@ -4905,7 +5376,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.14816723583937e-34
     },
     {
       "adapter_a": "presidio",
@@ -4939,7 +5411,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio",
@@ -4973,7 +5446,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.002273818723369735
     },
     {
       "adapter_a": "presidio",
@@ -5007,7 +5481,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 8.525474215034585e-18
     },
     {
       "adapter_a": "presidio",
@@ -5041,7 +5516,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 8.525474215034585e-18
     },
     {
       "adapter_a": "presidio",
@@ -5075,7 +5551,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio",
@@ -5109,7 +5586,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5143,7 +5621,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.1713006720721583e-26
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5177,7 +5656,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.1713006720721583e-26
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5211,7 +5691,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 4.102076707149261e-28
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5245,7 +5726,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5279,7 +5761,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 4.102076707149261e-28
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5313,7 +5796,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0412963948917356e-28
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5347,7 +5831,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 4.102076707149261e-28
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5381,7 +5866,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.00012969970703125
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5415,7 +5901,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.29929342273648646
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5449,7 +5936,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 3.2022777033694713e-13
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5483,7 +5971,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 3.2022777033694713e-13
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5517,7 +6006,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-all-t0.4",
@@ -5551,7 +6041,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5585,7 +6076,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5619,7 +6111,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5653,7 +6146,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.5565896970478388e-21
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5687,7 +6181,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5721,7 +6216,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.29929342273648646
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5755,7 +6251,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5789,7 +6286,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.69630192214213e-32
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5823,7 +6321,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 3.25408390520976e-08
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5857,7 +6356,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.1951214075088501
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5891,7 +6391,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.1951214075088501
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5925,7 +6426,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0",
@@ -5959,7 +6461,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -5993,7 +6496,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6027,7 +6531,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.5565896970478388e-21
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6061,7 +6566,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6095,7 +6601,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.29929342273648646
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6129,7 +6636,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6163,7 +6671,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.69630192214213e-32
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6197,7 +6706,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 3.25408390520976e-08
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6231,7 +6741,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.1951214075088501
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6265,7 +6776,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.1951214075088501
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6299,7 +6811,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "presidio-nemo6-t0.4",
@@ -6333,7 +6846,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6367,7 +6881,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 6.15942594796566e-27
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6401,7 +6916,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6435,7 +6951,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6469,7 +6986,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6503,7 +7021,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.14816723583937e-34
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6537,7 +7056,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.3863919326553848e-09
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6571,7 +7091,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.001148223876953125
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6605,7 +7126,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.001148223876953125
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6639,7 +7161,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails",
@@ -6673,7 +7196,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6707,7 +7231,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 6.15942594796566e-27
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6741,7 +7266,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.5651000359584874e-27
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6775,7 +7301,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 6.15942594796566e-27
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6809,7 +7336,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.5367431640625e-06
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6843,7 +7371,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.7355604637683485
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6877,7 +7406,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.7017959016603935e-12
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6911,7 +7441,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.7017959016603935e-12
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6945,7 +7476,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-all",
@@ -6979,7 +7511,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7013,7 +7546,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7047,7 +7581,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7081,7 +7616,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.14816723583937e-34
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7115,7 +7651,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.3863919326553848e-09
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7149,7 +7686,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.001148223876953125
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7183,7 +7721,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.001148223876953125
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7217,7 +7756,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "nemo-guardrails-detect",
@@ -7251,7 +7791,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -7285,7 +7826,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "piiguard",
@@ -7319,7 +7861,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.3472271197219437e-34
     },
     {
       "adapter_a": "piiguard",
@@ -7353,7 +7896,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.563018190537796e-10
     },
     {
       "adapter_a": "piiguard",
@@ -7387,7 +7931,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.811981201171875e-05
     },
     {
       "adapter_a": "piiguard",
@@ -7421,7 +7966,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.811981201171875e-05
     },
     {
       "adapter_a": "piiguard",
@@ -7455,7 +8001,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard",
@@ -7489,7 +8036,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -7523,7 +8071,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 9.14816723583937e-34
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -7557,7 +8106,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 2.3863919326553848e-09
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -7591,7 +8141,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.001148223876953125
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -7625,7 +8176,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.001148223876953125
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -7659,7 +8211,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-pgpresidio",
@@ -7693,7 +8246,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -7727,7 +8281,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 0.002273818723369735
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -7761,7 +8316,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 8.525474215034585e-18
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -7795,7 +8351,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 8.525474215034585e-18
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -7829,7 +8386,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "piiguard-union-presidio",
@@ -7863,7 +8421,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "gliner-pii",
@@ -7897,7 +8456,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 7.77395260881217e-05
     },
     {
       "adapter_a": "gliner-pii",
@@ -7931,7 +8491,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 7.77395260881217e-05
     },
     {
       "adapter_a": "gliner-pii",
@@ -7965,7 +8526,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "gliner-pii",
@@ -7999,7 +8561,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-anonymize",
@@ -8033,7 +8596,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": 1.0,
-      "holm_family": "systems"
+      "holm_family": "systems",
+      "fpr_p_holm": 1.0
     },
     {
       "adapter_a": "llm-guard-anonymize",
@@ -8067,7 +8631,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-anonymize",
@@ -8101,7 +8666,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-block",
@@ -8135,7 +8701,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "llm-guard-block",
@@ -8169,7 +8736,8 @@
       },
       "fpr_cluster_ci_excludes_0": false,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     },
     {
       "adapter_a": "mock-leaky",
@@ -8203,7 +8771,8 @@
       },
       "fpr_cluster_ci_excludes_0": true,
       "p_holm": null,
-      "holm_family": "reference (mock; not adjusted)"
+      "holm_family": "reference (mock; not adjusted)",
+      "fpr_p_holm": null
     }
   ],
   "holm_family": "all pairs of non-mock adapters; mock pairs reported unadjusted",
@@ -8213,7 +8782,9 @@
     "holm_significant": 0,
     "holm_significant_and_cluster_ci_excludes_0": 0,
     "cluster_ci_excludes_0": 0,
-    "fpr_cluster_ci_excludes_0": 44
+    "fpr_cluster_ci_excludes_0": 44,
+    "fpr_holm_significant": 54,
+    "fpr_holm_significant_and_cluster_ci_excludes_0": 36
   },
   "rank_intervals": {},
   "shared_scope_categories": [

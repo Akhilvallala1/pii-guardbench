@@ -413,6 +413,8 @@ class AdapterScore:
     by_template: dict[str, ProportionCI] = field(default_factory=dict)
     by_family: dict[str, ProportionCI] = field(default_factory=dict)
     in_scope: dict[str, Any] = field(default_factory=dict)
+    blocked_bootstrap: Optional[BootstrapCI] = None
+    control_blocked_bootstrap: Optional[BootstrapCI] = None
     shared_scope: dict[str, Any] = field(default_factory=dict)
     outcomes: list[PromptOutcome] = field(default_factory=list)
 
@@ -432,6 +434,8 @@ class AdapterScore:
             "false_positive": self.false_positive.to_dict(),
             "false_positive_cluster_bootstrap": opt(self.false_positive_bootstrap),
             "control_blocked_rate": opt(self.control_blocked),
+            "blocked_rate_cluster_bootstrap": opt(self.blocked_bootstrap),
+            "control_blocked_rate_cluster_bootstrap": opt(self.control_blocked_bootstrap),
             "contract_false_positive": opt(self.contract_false_positive),
             "contract_false_positive_cluster_bootstrap": opt(self.contract_false_positive_bootstrap),
             "false_positive_blocks": self.fp_blocks,
@@ -608,6 +612,12 @@ def score_adapter(
             fp_flags, ctl_clusters, iterations=bootstrap_iterations, seed=seed
         ),
         control_blocked=_ci([o.blocked for o in controls]),
+        blocked_bootstrap=cluster_bootstrap_ci(
+            [o.blocked for o in pii], [o.cluster for o in pii], iterations=bootstrap_iterations, seed=seed
+        ),
+        control_blocked_bootstrap=cluster_bootstrap_ci(
+            [o.blocked for o in controls], ctl_clusters, iterations=bootstrap_iterations, seed=seed
+        ),
         contract_false_positive=_ci(cfp_flags) if has_contract else None,
         contract_false_positive_bootstrap=(
             cluster_bootstrap_ci(cfp_flags, ctl_clusters, iterations=bootstrap_iterations, seed=seed)
@@ -632,28 +642,44 @@ def score_adapter(
             span_flags, span_clusters, iterations=bootstrap_iterations, seed=seed
         ),
         contract=contract_list,
-        in_scope=_scope_metrics(pii, contract_list),
-        shared_scope=_scope_metrics(pii, sorted(shared_categories) if shared_categories is not None else None),
+        in_scope=_scope_metrics(pii, contract_list, bootstrap_iterations, seed),
+        shared_scope=_scope_metrics(
+            pii, sorted(shared_categories) if shared_categories is not None else None, bootstrap_iterations, seed
+        ),
         outcomes=outcomes,
     )
 
 
-def _scope_metrics(pii: Sequence[PromptOutcome], categories: Optional[Sequence[str]]) -> dict[str, Any]:
-    """Prompt- and span-level normalized leak restricted to ``categories``."""
+def _scope_metrics(
+    pii: Sequence[PromptOutcome],
+    categories: Optional[Sequence[str]],
+    bootstrap_iterations: int = DEFAULT_BOOTSTRAP_ITERATIONS,
+    seed: int = DEFAULT_SEED,
+) -> dict[str, Any]:
+    """Prompt- and span-level normalized leak restricted to ``categories``.
+
+    ``prompt_leak_cluster_bootstrap`` is the prompt-level cluster-bootstrap CI
+    over the same prompt cluster keys as overall leak (the reported interval);
+    ``prompt_leak`` keeps the Wilson (iid) interval."""
     if categories is None:
         return {}
     cats = set(categories)
     prompt_flags: list[bool] = []
+    prompt_clusters: list[str] = []
     span_flags: list[bool] = []
     for o in pii:
         inside = [m for m in o.span_matches if m["category"] in cats]
         if not inside:
             continue
         prompt_flags.append(any(m["normalized"] for m in inside))
+        prompt_clusters.append(o.cluster)
         span_flags.extend(bool(m["normalized"]) for m in inside)
     return {
         "categories": sorted(cats),
         "prompt_leak": _ci(prompt_flags),
+        "prompt_leak_cluster_bootstrap": cluster_bootstrap_ci(
+            prompt_flags, prompt_clusters, iterations=bootstrap_iterations, seed=seed
+        ),
         "span_leak": _ci(span_flags),
     }
 
@@ -730,10 +756,15 @@ def evaluate(
     for row, adj in zip(family, holm_adjust([r["p_value"] for r in family])):
         row["p_holm"] = adj
         row["holm_family"] = "systems"
+    # FPR McNemar: Holm-adjusted separately (own family, same non-mock pairs).
+    fpr_family = [r for r in family if r.get("fpr_mcnemar") is not None]
+    for row, adj in zip(fpr_family, holm_adjust([r["fpr_mcnemar"]["p_value"] for r in fpr_family])):
+        row["fpr_p_holm"] = adj
     for row in pairwise:
         if "p_holm" not in row:
             row["p_holm"] = None
             row["holm_family"] = "reference (mock; not adjusted)"
+        row.setdefault("fpr_p_holm", None)
 
     summary = pairwise_summary(pairwise)
 
@@ -755,7 +786,10 @@ def evaluate(
         bootstrap={
             "iterations": bootstrap_iterations,
             "seed": seed,
+            # Legacy alias of n_pii_clusters (kept for old readers; 0 on a
+            # controls-only run). Use n_pii_clusters / n_control_clusters.
             "n_clusters": len(set(pii_clusters)),
+            "n_clusters_note": "legacy alias of n_pii_clusters",
             "n_pii_clusters": len(set(pii_clusters)),
             "n_control_clusters": len(set(ctl_clusters)),
             "cluster_key": "metadata.cluster > metadata.template_id > id",
@@ -782,6 +816,11 @@ def pairwise_summary(pairwise: Sequence[Mapping[str, Any]], alpha: float = 0.05)
         "holm_significant_and_cluster_ci_excludes_0": sum(1 for r in holm if r.get("cluster_ci_excludes_0")),
         "cluster_ci_excludes_0": sum(1 for r in fam if r.get("cluster_ci_excludes_0")),
         "fpr_cluster_ci_excludes_0": sum(1 for r in fam if r.get("fpr_cluster_ci_excludes_0")),
+        "fpr_holm_significant": sum(1 for r in fam if r.get("fpr_p_holm") is not None and r["fpr_p_holm"] < alpha),
+        "fpr_holm_significant_and_cluster_ci_excludes_0": sum(
+            1 for r in fam
+            if r.get("fpr_p_holm") is not None and r["fpr_p_holm"] < alpha and r.get("fpr_cluster_ci_excludes_0")
+        ),
     }
 
 
@@ -807,7 +846,7 @@ def format_leaderboard(report: BenchmarkReport) -> str:
         b = report.bootstrap
         lines.append(
             f"  bootstrap: {b['iterations']} iterations, seed {b['seed']}; "
-            f"PII clusters {b.get('n_pii_clusters', b['n_clusters'])}, "
+            f"PII clusters {b.get('n_pii_clusters', b.get('n_clusters', 0))}, "
             f"control clusters {b.get('n_control_clusters', 0)} ({b['cluster_key']})"
         )
     lines.append(
@@ -832,8 +871,10 @@ def format_leaderboard(report: BenchmarkReport) -> str:
         "Exact leak",
         "Partial",
         "Blocked",
+        "Cluster 95%",
         "Resid|block",
         "Ctl blocked",
+        "Cluster 95%",
         "Latency ms (mean/p50/p95)",
         "Wilson (iid, secondary): leak",
         "span",
@@ -851,8 +892,10 @@ def format_leaderboard(report: BenchmarkReport) -> str:
             _fmt_opt(s.exact_leak),
             _fmt_opt(s.partial),
             _fmt_opt(s.blocked),
+            boot(s.blocked_bootstrap),
             _fmt_opt(s.residual_given_block),
             _fmt_opt(s.control_blocked),
+            boot(s.control_blocked_bootstrap),
             s.latency.format(),
             s.leak.format_ci(),
             s.span_leak_ci.format_ci() if s.span_leak_ci else "n/a",
@@ -962,7 +1005,7 @@ def format_leaderboard(report: BenchmarkReport) -> str:
     scope_rows: list[tuple[str, ...]] = []
     for s in report.scores:
         if s.contract is None:
-            scope_rows.append((s.adapter, "(none declared: reference)", "n/a", "n/a", "n/a", "n/a"))
+            scope_rows.append((s.adapter, "(none declared: reference)", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a"))
             continue
         ins, sh = s.in_scope, s.shared_scope
         scope_rows.append(
@@ -970,15 +1013,17 @@ def format_leaderboard(report: BenchmarkReport) -> str:
                 s.adapter,
                 ",".join(s.contract) or "(empty)",
                 ins["prompt_leak"].format_rate() if ins else "n/a",
+                boot(ins.get("prompt_leak_cluster_bootstrap")) if ins else "n/a",
                 ins["span_leak"].format_rate() if ins else "n/a",
                 sh["prompt_leak"].format_rate() if sh else "n/a",
+                boot(sh.get("prompt_leak_cluster_bootstrap")) if sh else "n/a",
                 sh["span_leak"].format_rate() if sh else "n/a",
             )
         )
     lines.extend(
         _align_table(
-            ("Adapter", "Configured categories", "In-scope prompt leak", "In-scope span leak",
-             "Shared-scope prompt leak", "Shared-scope span leak"),
+            ("Adapter", "Configured categories", "In-scope prompt leak", "Cluster 95%", "In-scope span leak",
+             "Shared-scope prompt leak", "Cluster 95%", "Shared-scope span leak"),
             scope_rows,
         )
     )
@@ -1013,6 +1058,8 @@ def format_leaderboard(report: BenchmarkReport) -> str:
                 _fmt_diff(r["diff_bootstrap"]),
                 _yn(r.get("cluster_ci_excludes_0")),
                 _fmt_diff(r.get("fpr_diff_bootstrap") or {}),
+                "n/a" if not r.get("fpr_mcnemar") else f"{r['fpr_mcnemar']['p_value']:.4g}",
+                "ref" if r.get("fpr_p_holm") is None else f"{r['fpr_p_holm']:.4g}",
             )
             for r in report.pairwise
         ]
@@ -1020,7 +1067,7 @@ def format_leaderboard(report: BenchmarkReport) -> str:
             _align_table(
                 ("Pair (A vs B)", "only A leaks", "only B leaks", "p exact", "p Holm",
                  "rate(A)-rate(B) [cluster-boot 95%]", "cluster CI excl. 0",
-                 "FPR(A)-FPR(B) [cluster-boot 95%]"),
+                 "FPR(A)-FPR(B) [cluster-boot 95%]", "FPR p exact", "FPR p Holm"),
                 pw_rows,
             )
         )
@@ -1031,7 +1078,9 @@ def format_leaderboard(report: BenchmarkReport) -> str:
                 f"{ps['holm_significant']}; of those, cluster CI excludes 0: "
                 f"{ps['holm_significant_and_cluster_ci_excludes_0']}; total pairs with leak cluster CI "
                 f"excluding 0: {ps['cluster_ci_excludes_0']}; FPR cluster CI excluding 0: "
-                f"{ps['fpr_cluster_ci_excludes_0']}"
+                f"{ps['fpr_cluster_ci_excludes_0']}; FPR Holm-significant (separate Holm family): "
+                f"{ps.get('fpr_holm_significant', 0)}; of those, FPR cluster CI excludes 0: "
+                f"{ps.get('fpr_holm_significant_and_cluster_ci_excludes_0', 0)}"
             )
     else:
         lines.append("  (needs at least two adapters)")

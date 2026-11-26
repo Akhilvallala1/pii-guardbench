@@ -183,7 +183,14 @@ def test_piiguard_and_union_record_types() -> None:
     class An:
         def analyze(self, text, language, score_threshold): return [AR("DATE_TIME", 15, 20)]
 
-    u = PiiguardUnionPresidioAdapter(analyzer=An())
+    class Item:
+        def __init__(self, t): self.entity_type = t
+
+    class Anon:  # fake anonymizer: replaces every finding (no conflicts here)
+        def anonymize(self, text, analyzer_results):
+            return type("R", (), {"text": text, "items": [Item(r.entity_type) for r in analyzer_results]})()
+
+    u = PiiguardUnionPresidioAdapter(analyzer=An(), anonymizer=Anon())
     u._guard = Guard()
     res = u.parse(u.call({"text": "id 931-48-3943 today"}))
     assert res.redacted_text == "id <PII> <PII>"
@@ -278,7 +285,28 @@ def _result_row(name, leak, fpr, block, cfpr=None):
             "false_positive": ci(fpr), "false_positive_cluster_bootstrap": ci(fpr),
             "contract_false_positive": ci(cfpr) if cfpr is not None else None,
             "contract_false_positive_cluster_bootstrap": ci(cfpr) if cfpr is not None else None,
-            "blocked_rate": ci(block), "in_scope": {"prompt_leak": ci(leak / 2)}}
+            "blocked_rate": ci(block), "blocked_rate_cluster_bootstrap": ci(block),
+            "in_scope": {"prompt_leak": ci(leak / 2), "prompt_leak_cluster_bootstrap": ci(leak / 2)}}
+
+
+@pytest.mark.skipif(importlib.util.find_spec("matplotlib") is None, reason="matplotlib not installed (figures extra)")
+@pytest.mark.parametrize("drop", ["leak_cluster_bootstrap", "blocked_rate", "blocked_rate_cluster_bootstrap",
+                                  "in_scope.prompt_leak_cluster_bootstrap"])
+def test_make_figures_requires_cluster_ci_and_blocked_rate(tmp_path: Path, drop: str) -> None:
+    import importlib.util as iu
+
+    spec = iu.spec_from_file_location("make_figures", Path(__file__).resolve().parent.parent / "scripts" / "make_figures.py")
+    mf = iu.module_from_spec(spec)
+    spec.loader.exec_module(mf)
+    row = _result_row("sys-a", 0.2, 0.7, 0.0, 0.1)
+    if drop.startswith("in_scope."):
+        del row["in_scope"][drop.split(".", 1)[1]]
+    else:
+        del row[drop]
+    for layer in ("clean", "hard", "control"):
+        (tmp_path / f"pgb-v1.0-{layer}.json").write_text(json.dumps({"results": [row]}), encoding="utf-8")
+    with pytest.raises(KeyError, match=drop.split(".")[-1]):
+        mf.build_series(tmp_path)
 
 
 @pytest.mark.skipif(importlib.util.find_spec("matplotlib") is None, reason="matplotlib not installed (figures extra)")
@@ -297,7 +325,118 @@ def test_make_figures_on_synthetic_results(tmp_path: Path) -> None:
     assert mf.pareto_front([(0.7, 0.2), (0.1, 0.5), (0.8, 0.6)]) == [(0.1, 0.5), (0.7, 0.2)]
     out = tmp_path / "figs"
     paths = mf.make_figures(tmp_path, out)
-    assert len(paths) == 4 and all(p.exists() and p.stat().st_size > 1000 for p in paths)
-    first = [p.read_bytes() for p in paths]
+    assert all(p.exists() and p.stat().st_size > 1000 for p in paths)
+    assert len(paths) == 8 and {p.suffix for p in paths} == {".png", ".pdf"}
+    first = [p.read_bytes() for p in paths if p.suffix == ".png"]
     mf.make_figures(tmp_path, out)
-    assert [p.read_bytes() for p in paths] == first  # deterministic
+    assert [p.read_bytes() for p in paths if p.suffix == ".png"] == first  # deterministic
+    _assert_no_label_overlap(mf)
+    assert mf.merge_label(["presidio-nemo6-t0", "presidio-nemo6-t0.4", "nemo-guardrails"]) == "pres-n6@0/@.4, nemo-mask"
+
+
+def _assert_no_label_overlap(mf) -> None:
+    for key, boxes in mf.LABEL_BOXES.items():
+        for i in range(len(boxes)):
+            for j in range(i + 1, len(boxes)):
+                a, b = boxes[i], boxes[j]
+                assert a[2] <= b[0] or b[2] <= a[0] or a[3] <= b[1] or b[3] <= a[1], (key, i, j, a, b)
+
+
+@pytest.mark.skipif(importlib.util.find_spec("matplotlib") is None, reason="matplotlib not installed (figures extra)")
+@pytest.mark.skipif(not (Path(__file__).resolve().parent.parent / "results" / "pgb-v1.0-control.json").exists(),
+                    reason="committed results not present")
+def test_real_figures_labels_do_not_overlap(tmp_path: Path) -> None:
+    import importlib.util as iu
+
+    root = Path(__file__).resolve().parent.parent
+    spec = iu.spec_from_file_location("make_figures", root / "scripts" / "make_figures.py")
+    mf = iu.module_from_spec(spec)
+    spec.loader.exec_module(mf)
+    mf.make_figures(root / "results", tmp_path)
+    assert set(mf.LABEL_BOXES) == {"a", "b", "c", "d"} and all(mf.LABEL_BOXES.values())
+    _assert_no_label_overlap(mf)
+
+
+# ---- presidio vs union type attribution (review finding 1) --------------------
+
+def test_presidio_items_fallback_only_when_missing() -> None:
+    from pii_guardbench.adapters.presidio import replaced_types
+
+    class AR:
+        def __init__(self, t): self.entity_type = t
+
+    found = [AR("DATE_TIME"), AR("US_BANK_NUMBER")]
+    assert replaced_types(type("R", (), {"items": None})(), found) == ["DATE_TIME", "US_BANK_NUMBER"]
+    assert replaced_types(type("R", (), {})(), found) == ["DATE_TIME", "US_BANK_NUMBER"]
+    assert replaced_types(type("R", (), {"items": []})(), found) == []  # empty: nothing replaced
+
+
+@pytest.mark.skipif(importlib.util.find_spec("presidio_anonymizer") is None, reason="presidio-anonymizer not installed")
+def test_presidio_and_union_attribute_identical_presidio_types() -> None:
+    """Same (fake) analyzer output, incl. overlapping low-score findings, gives the
+    same Presidio types in both adapters (the anonymizer's surviving entities)."""
+    from presidio_anonymizer import AnonymizerEngine
+    from presidio_anonymizer.entities import RecognizerResult
+
+    from pii_guardbench.adapters.piiguard import PiiguardUnionPresidioAdapter
+    from pii_guardbench.adapters.presidio import PresidioAdapter
+
+    text = "invoice 2024010112345 due Tuesday"
+    inv = (text.find("2024"), text.find("2024") + 13)
+    day = (text.find("Tuesday"), text.find("Tuesday") + 7)
+
+    class An:
+        def analyze(self, text, language, score_threshold, entities=None):
+            return [
+                RecognizerResult("DATE_TIME", inv[0], inv[1], 0.85),
+                RecognizerResult("US_BANK_NUMBER", inv[0], inv[1], 0.05),  # same span, lower score
+                RecognizerResult("US_DRIVER_LICENSE", inv[0] + 2, inv[1] - 2, 0.01),  # contained
+                RecognizerResult("DATE_TIME", day[0], day[1], 0.6),
+            ]
+
+    class Guard:
+        def redact(self, text):
+            return type("Red", (), {"text": text, "findings": []})()
+
+    p = PresidioAdapter(analyzer=An(), anonymizer=AnonymizerEngine())
+    pres = p.parse(p.call(p.normalize(text))).flags.detected_categories
+    u = PiiguardUnionPresidioAdapter(analyzer=An(), anonymizer=AnonymizerEngine())
+    u._guard = Guard()
+    uni = u.parse(u.call({"text": text})).flags.detected_categories
+    assert pres == ["DATE_TIME"]
+    assert uni == [f"presidio:{t}" for t in pres]
+    # And both are therefore not contract FPs on this control.
+    ctr = {"account_number", "address", "name"}
+    assert contract_false_positive(True, False, pres, ctr, p.category_map()) is False
+    assert contract_false_positive(True, False, uni, ctr, u.category_map()) is False
+
+
+def test_scan_timeout_is_out_of_contract() -> None:
+    from pii_guardbench.adapters.piiguard import PIIGUARD_TYPE_TO_CATEGORY, UNION_TYPE_TO_CATEGORY
+
+    assert "scan_timeout" not in PIIGUARD_TYPE_TO_CATEGORY
+    assert "piiguard:scan_timeout" not in UNION_TYPE_TO_CATEGORY
+    assert contract_false_positive(True, False, ["scan_timeout"], {"ssn"}, PIIGUARD_TYPE_TO_CATEGORY) is False
+
+
+def test_any_in_contract_with_empty_contract_counts() -> None:
+    """Documented semantics: '*' means 'some identifier the guard targets'; it
+    counts as a contract FP even when the declared contract is empty."""
+    cm = {"spelled_digits": "*"}
+    assert contract_false_positive(True, False, ["spelled_digits"], set(), cm) is True
+    assert contract_false_positive(False, False, ["spelled_digits"], set(), cm) is False
+    assert contract_false_positive(True, False, ["other"], set(), cm) is False
+
+
+def test_pareto_front_ties_duplicates_dominated() -> None:
+    import importlib.util as iu
+
+    spec = iu.spec_from_file_location("make_figures", Path(__file__).resolve().parent.parent / "scripts" / "make_figures.py")
+    mf = iu.module_from_spec(spec)
+    spec.loader.exec_module(mf)
+    pf = mf.pareto_front
+    assert pf([]) == []
+    assert pf([(0.2, 0.2), (0.2, 0.2)]) == [(0.2, 0.2)]  # duplicates collapse
+    assert pf([(0.1, 0.5), (0.1, 0.3)]) == [(0.1, 0.3)]  # tie on x: lower y wins
+    assert pf([(0.1, 0.5), (0.3, 0.5)]) == [(0.1, 0.5)]  # tie on y: lower x wins
+    assert pf([(0.5, 0.5), (0.1, 0.1), (0.9, 0.0)]) == [(0.1, 0.1), (0.9, 0.0)]  # dominated dropped
