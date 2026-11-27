@@ -1,0 +1,42 @@
+{
+  "frozen_at_utc": "2026-11-27T04:45:15Z",
+  "label": "SECOND, disclosed run after external review found test-only name cues (v2-ablated). Not a fresh unseen-test result.",
+  "selected_variant": "v2h-ablated",
+  "derived_from": "v2g-name2 (frozen v2, f540775e...) by REMOVING cues only",
+  "removed_cues": {
+    "name_context": [
+      "Customer",
+      "Client",
+      "Cardholder",
+      "Employee"
+    ],
+    "name_after_preposition": [
+      "ask",
+      "cc",
+      "dear",
+      "Dear",
+      "Hello"
+    ]
+  },
+  "piiguard_v2_rules_sha256": "21d97fe2091f96332e16f6092d9c636de767ed99ae70e2602d9480da5fb1f702",
+  "piiguard_v2_rules_version": "version: 107",
+  "archived_rules": "results/piiguard-v2/frozen_v2_ablated_rules.yaml",
+  "guard_dir": "/workspace/external-cache/piiguard-v2/guard (rules.yaml == archived copy)",
+  "piiguard_v2_worktree_head": "0602e6b212339f82b575305af255b54cc9566404",
+  "piiguard_main_rules_sha256": "4369f4e8988280d4ef6b48721ae80352e33f82a74898d14e9fd164d6e486a4c0",
+  "presidio_whitelist": [
+    "CREDIT_CARD",
+    "EMAIL_ADDRESS",
+    "IBAN_CODE"
+  ],
+  "presidio_threshold": 0.0,
+  "adapter_file_sha256": {
+    "pii_guardbench/adapters/piiguard_v2.py": "019d974b881c488bce70e0c56ec11efcbd85ea334ae76ce785d2c6ea3d4e746b",
+    "pii_guardbench/adapters/piiguard.py": "0afc3654aee10aff1faab2336ac31a3c3fbb00136c9db7260b4256e10817152f",
+    "pii_guardbench/adapters/presidio.py": "ef99b95ac193c07d2225ba754847610db70b5dc312ce48f7a758839fc96cd243",
+    "pii_guardbench/evaluator.py": "dacf6e2431c1ac1a57ca2ceea563501830ebf7c10516f3067d8b6f198e3c6cd0",
+    "pii_guardbench/matching.py": "032a7d5aa2c47e5653da16f92b1722b62750d16ff2223c73e8f200afba7efe2e"
+  },
+  "adapter_files_unchanged_vs_FROZEN_json": true,
+  "pgb_head": "7b8d0f47409b117bbfed2dc9804d2ad60151b7bb"
+}

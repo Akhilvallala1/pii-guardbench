@@ -1,0 +1,10 @@
+tests/test_proxy.py:194: AssertionError
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_bench.py:24: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_bench.py:32: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_export.py:43: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [2] tests/test_export.py:56: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_export.py:75: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_export.py:93: could not import 'nemoguardrails': No module named 'nemoguardrails'
+SKIPPED [1] tests/test_proxy.py:176: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+12 failed, 172 passed, 8 skipped in 3.11s

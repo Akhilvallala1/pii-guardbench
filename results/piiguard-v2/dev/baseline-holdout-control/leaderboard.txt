@@ -1,0 +1,89 @@
+PII-GuardBench results (scorer v2)
+  prompts : data/dev/pgb-dev-v1/holdout.jsonl
+  counts  : 100 total, 0 PII, 100 control
+  bootstrap: 2000 iterations, seed 0; PII clusters 0, control clusters 5 (metadata.cluster > metadata.template_id > id)
+  intervals: cluster-bootstrap 95% (reported); Wilson columns at the end are iid, secondary
+  blocked = share of PII prompts blocked; ctl blocked = share of no-PII controls blocked
+
+Adapter                  Norm leak  Cluster 95%  Span leak  Cluster 95%  FPR              Cluster 95%     Exact leak  Partial    Blocked    Cluster 95%  Resid|block  Ctl blocked    Cluster 95%     Latency ms (mean/p50/p95)  Wilson (iid, secondary): leak  span  FPR
+-----------------------  ---------  -----------  ---------  -----------  ---------------  --------------  ----------  ---------  ---------  -----------  -----------  -------------  --------------  -------------------------  -----------------------------  ----  --------------
+piiguard                 n/a (0/0)  n/a          n/a (0/0)  n/a          0.200 (20/100)   [0.000, 0.600]  n/a (0/0)   n/a (0/0)  n/a (0/0)  n/a          n/a (0/0)    0.000 (0/100)  [0.000, 0.000]  0.08 / 0.08 / 0.10         n/a                            n/a   [0.133, 0.289]
+presidio                 n/a (0/0)  n/a          n/a (0/0)  n/a          1.000 (100/100)  [1.000, 1.000]  n/a (0/0)   n/a (0/0)  n/a (0/0)  n/a          n/a (0/0)    0.000 (0/100)  [0.000, 0.000]  4.09 / 3.95 / 4.81         n/a                            n/a   [0.963, 1.000]
+piiguard-union-presidio  n/a (0/0)  n/a          n/a (0/0)  n/a          1.000 (100/100)  [1.000, 1.000]  n/a (0/0)   n/a (0/0)  n/a (0/0)  n/a          n/a (0/0)    0.000 (0/100)  [0.000, 0.000]  3.91 / 3.90 / 4.21         n/a                            n/a   [0.963, 1.000]
+
+Control false positives: raw vs contract-aware (contract-aware = blocked, or redacted a native type mapping to a category in the adapter's entity contract)
+Adapter                  Raw FPR          Cluster 95%     Wilson (iid)    Contract FPR    Cluster 95%     Wilson (iid)    FPs that are blocks
+-----------------------  ---------------  --------------  --------------  --------------  --------------  --------------  -------------------
+piiguard                 0.200 (20/100)   [0.000, 0.600]  [0.133, 0.289]  0.200 (20/100)  [0.000, 0.600]  [0.133, 0.289]  0
+presidio                 1.000 (100/100)  [1.000, 1.000]  [0.963, 1.000]  0.350 (35/100)  [0.070, 0.680]  [0.264, 0.447]  0
+piiguard-union-presidio  1.000 (100/100)  [1.000, 1.000]  [0.963, 1.000]  0.350 (35/100)  [0.070, 0.680]  [0.264, 0.447]  0
+
+Control false positives by redacted entity type (controls with that native type redacted)
+Adapter                  Native type                 Controls
+-----------------------  --------------------------  --------
+piiguard                 ssn                         20
+presidio                 DATE_TIME                   44
+presidio                 LOCATION                    9
+presidio                 PERSON                      1
+presidio                 PHONE_NUMBER                2
+presidio                 US_BANK_NUMBER              4
+presidio                 US_DRIVER_LICENSE           41
+presidio                 US_SSN                      20
+piiguard-union-presidio  piiguard:ssn                20
+piiguard-union-presidio  presidio:DATE_TIME          44
+piiguard-union-presidio  presidio:LOCATION           9
+piiguard-union-presidio  presidio:PERSON             1
+piiguard-union-presidio  presidio:PHONE_NUMBER       2
+piiguard-union-presidio  presidio:US_BANK_NUMBER     4
+piiguard-union-presidio  presidio:US_DRIVER_LICENSE  41
+piiguard-union-presidio  presidio:US_SSN             20
+
+Control false positives by template
+Adapter                  Template  Raw FP         Contract FP    Blocked
+-----------------------  --------  -------------  -------------  -------
+piiguard                 ctl-d02   1.000 (20/20)  1.000 (20/20)  0
+piiguard                 ctl-d04   0.000 (0/20)   0.000 (0/20)   0
+piiguard                 ctl-d06   0.000 (0/20)   0.000 (0/20)   0
+piiguard                 ctl-d08   0.000 (0/20)   0.000 (0/20)   0
+piiguard                 ctl-d10   0.000 (0/20)   0.000 (0/20)   0
+presidio                 ctl-d02   1.000 (20/20)  1.000 (20/20)  0
+presidio                 ctl-d04   1.000 (20/20)  0.350 (7/20)   0
+presidio                 ctl-d06   1.000 (20/20)  0.000 (0/20)   0
+presidio                 ctl-d08   1.000 (20/20)  0.400 (8/20)   0
+presidio                 ctl-d10   1.000 (20/20)  0.000 (0/20)   0
+piiguard-union-presidio  ctl-d02   1.000 (20/20)  1.000 (20/20)  0
+piiguard-union-presidio  ctl-d04   1.000 (20/20)  0.350 (7/20)   0
+piiguard-union-presidio  ctl-d06   1.000 (20/20)  0.000 (0/20)   0
+piiguard-union-presidio  ctl-d08   1.000 (20/20)  0.400 (8/20)   0
+piiguard-union-presidio  ctl-d10   1.000 (20/20)  0.000 (0/20)   0
+
+Layer breakdown (clean / hard obfuscation; controls have no leak)
+Adapter  Layer  Exact leak  Norm leak  Wilson 95%
+-------  -----  ----------  ---------  ----------
+n/a      n/a    n/a         n/a        n/a
+
+In-scope entity contract (normalized leak on categories each system is configured for)
+Adapter                  Configured categories                                    In-scope prompt leak  Cluster 95%  In-scope span leak  Shared-scope prompt leak  Cluster 95%  Shared-scope span leak
+-----------------------  -------------------------------------------------------  --------------------  -----------  ------------------  ------------------------  -----------  ----------------------
+piiguard                 credit_card,email,phone,ssn                              n/a (0/0)             n/a          n/a (0/0)           n/a (0/0)                 n/a          n/a (0/0)
+presidio                 account_number,address,credit_card,email,name,phone,ssn  n/a (0/0)             n/a          n/a (0/0)           n/a (0/0)                 n/a          n/a (0/0)
+piiguard-union-presidio  account_number,address,credit_card,email,name,phone,ssn  n/a (0/0)             n/a          n/a (0/0)           n/a (0/0)                 n/a          n/a (0/0)
+  shared scope = credit_card,email,phone,ssn (intersection of declared contracts of non-mock adapters)
+
+Category breakdown (normalized leak)
+Adapter                  Category  Leak rate  95% CI
+-----------------------  --------  ---------  ------
+piiguard                 n/a       n/a (0/0)  n/a
+presidio                 n/a       n/a (0/0)  n/a
+piiguard-union-presidio  n/a       n/a (0/0)  n/a
+
+Paired McNemar exact tests on normalized leak (Holm over non-mock pairs; 'ref' = mock pair, unadjusted)
+Pair (A vs B)                        only A leaks  only B leaks  p exact  p Holm  rate(A)-rate(B) [cluster-boot 95%]  cluster CI excl. 0  FPR(A)-FPR(B) [cluster-boot 95%]  FPR p exact  FPR p Holm
+-----------------------------------  ------------  ------------  -------  ------  ----------------------------------  ------------------  --------------------------------  -----------  ----------
+piiguard vs presidio                 0             0             1        1       n/a                                 n/a                 -0.800 [-1.000, -0.400]           1.654e-24    4.963e-24
+piiguard vs piiguard-union-presidio  0             0             1        1       n/a                                 n/a                 -0.800 [-1.000, -0.400]           1.654e-24    4.963e-24
+presidio vs piiguard-union-presidio  0             0             1        1       n/a                                 n/a                 +0.000 [+0.000, +0.000]           1            1
+  summary (non-mock pairs, n=3): Holm-significant at 0.05: 0; of those, cluster CI excludes 0: 0; total pairs with leak cluster CI excluding 0: 0; FPR cluster CI excluding 0: 2; FPR Holm-significant (separate Holm family): 2; of those, FPR cluster CI excludes 0: 2
+
+Bootstrap rank intervals (1 = least leakage, normalized leak)
+  (no PII prompts)

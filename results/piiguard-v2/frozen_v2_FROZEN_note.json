@@ -1,0 +1,24 @@
+{
+  "frozen_at_utc": "2026-11-27T04:21:27Z",
+  "selected_variant": "v2g-name2",
+  "selection_rule": "lowest dev-holdout2 clean+hard leak among candidates with dev control raw FP and contract FP <= piiguard main's on every dev split",
+  "piiguard_v2_rules_sha256": "f540775e33255575dd44c01d4bf2deb6a5b2c749f24a4defe6fa26b89b49ea41",
+  "piiguard_v2_rules_version": "version: 106",
+  "piiguard_v2_worktree_head": "0602e6b212339f82b575305af255b54cc9566404",
+  "piiguard_v2_worktree_note": "not committed (task forbids commits); rules identified by SHA-256; worktree HEAD is main 0602e6b plus uncommitted guard/rules.yaml + guard-variants/",
+  "piiguard_main_rules_sha256": "4369f4e8988280d4ef6b48721ae80352e33f82a74898d14e9fd164d6e486a4c0",
+  "presidio_whitelist": [
+    "CREDIT_CARD",
+    "EMAIL_ADDRESS",
+    "IBAN_CODE"
+  ],
+  "presidio_threshold": 0.0,
+  "adapter_file_sha256": {
+    "pii_guardbench/adapters/piiguard_v2.py": "019d974b881c488bce70e0c56ec11efcbd85ea334ae76ce785d2c6ea3d4e746b",
+    "pii_guardbench/adapters/piiguard.py": "0afc3654aee10aff1faab2336ac31a3c3fbb00136c9db7260b4256e10817152f",
+    "pii_guardbench/adapters/presidio.py": "ef99b95ac193c07d2225ba754847610db70b5dc312ce48f7a758839fc96cd243",
+    "pii_guardbench/evaluator.py": "dacf6e2431c1ac1a57ca2ceea563501830ebf7c10516f3067d8b6f198e3c6cd0",
+    "pii_guardbench/matching.py": "032a7d5aa2c47e5653da16f92b1722b62750d16ff2223c73e8f200afba7efe2e"
+  },
+  "pgb_head": "7b8d0f47409b117bbfed2dc9804d2ad60151b7bb"
+}

@@ -1,0 +1,86 @@
+{
+  "name": "pgb-dev-v1",
+  "file": "prompts.jsonl",
+  "sha256": "c2d8a7124da6d27322beae4b1e13eb5ab50b2d2312cca0536e42690fa9051e93",
+  "n": 1000,
+  "seed": 48151623,
+  "generator": "pgb-dev-gen-v1",
+  "purpose": "development only (not a test set)",
+  "holdout2": {
+    "file": "holdout2.jsonl",
+    "seed": 90210417,
+    "n": 500,
+    "sha256": "6dcc4fb0b1a7f17cfda6700e2c77e0d94c946b7834fc36eadaf6ef75efd0cd98",
+    "layer": {
+      "clean": 300,
+      "hard": 100,
+      "control": 100
+    }
+  },
+  "counts": {
+    "layer": {
+      "clean": 600,
+      "hard": 200,
+      "control": 200
+    },
+    "layer_split": {
+      "clean/train": 300,
+      "clean/holdout": 300,
+      "hard/train": 100,
+      "hard/holdout": 100,
+      "control/train": 100,
+      "control/holdout": 100
+    },
+    "template_id": {
+      "cred-d01": 37,
+      "cred-d02": 37,
+      "cred-d03": 37,
+      "cred-d04": 37,
+      "cred-d05": 37,
+      "ctl-d01": 20,
+      "ctl-d02": 20,
+      "ctl-d03": 20,
+      "ctl-d04": 20,
+      "ctl-d05": 20,
+      "ctl-d06": 20,
+      "ctl-d07": 20,
+      "ctl-d08": 20,
+      "ctl-d09": 20,
+      "ctl-d10": 20,
+      "fin-d01": 38,
+      "fin-d02": 38,
+      "fin-d03": 38,
+      "fin-d04": 38,
+      "fin-d05": 38,
+      "fin-d06": 38,
+      "hard-d01": 20,
+      "hard-d02": 20,
+      "hard-d03": 20,
+      "hard-d04": 20,
+      "hard-d05": 20,
+      "hard-d06": 20,
+      "hard-d07": 20,
+      "hard-d08": 20,
+      "hard-d09": 20,
+      "hard-d10": 20,
+      "hea-d01": 38,
+      "hea-d02": 38,
+      "hea-d03": 37,
+      "hea-d04": 37,
+      "hea-d05": 37
+    },
+    "span_category": {
+      "account_number": 96,
+      "api_key": 114,
+      "credit_card": 154,
+      "diagnosis": 112,
+      "email": 187,
+      "mrn": 150,
+      "name": 302,
+      "password": 151,
+      "phone": 134,
+      "ssn": 210,
+      "token": 111
+    }
+  }
+}

@@ -1,0 +1,924 @@
+{
+ "rules_file": "results/piiguard-v2/frozen_v2_rules.yaml",
+ "n_dev_prompts": 1500,
+ "n_official_prompts": 1000,
+ "note": "case-insensitive word-boundary prompt counts; flag = in official but not in dev",
+ "flagged_official_only": [
+  {
+   "rule": "icd10_context",
+   "word": "cm",
+   "dev_prompts": 0,
+   "official_prompts": 1,
+   "flag": true
+  },
+  {
+   "rule": "icd10_context",
+   "word": "diagnosis",
+   "dev_prompts": 0,
+   "official_prompts": 50,
+   "flag": true
+  },
+  {
+   "rule": "name_context",
+   "word": "cardholder",
+   "dev_prompts": 0,
+   "official_prompts": 50,
+   "flag": true
+  },
+  {
+   "rule": "name_context",
+   "word": "customer",
+   "dev_prompts": 0,
+   "official_prompts": 125,
+   "flag": true
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "ask",
+   "dev_prompts": 0,
+   "official_prompts": 17,
+   "flag": true
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "cc",
+   "dev_prompts": 0,
+   "official_prompts": 3,
+   "flag": true
+  }
+ ],
+ "all": [
+  {
+   "rule": "spelled_digits",
+   "word": "dash",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "eight",
+   "dev_prompts": 15,
+   "official_prompts": 22,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "five",
+   "dev_prompts": 17,
+   "official_prompts": 31,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "four",
+   "dev_prompts": 18,
+   "official_prompts": 15,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "nine",
+   "dev_prompts": 14,
+   "official_prompts": 23,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "one",
+   "dev_prompts": 56,
+   "official_prompts": 28,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "seven",
+   "dev_prompts": 16,
+   "official_prompts": 22,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "six",
+   "dev_prompts": 39,
+   "official_prompts": 17,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "three",
+   "dev_prompts": 18,
+   "official_prompts": 18,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "two",
+   "dev_prompts": 36,
+   "official_prompts": 11,
+   "flag": false
+  },
+  {
+   "rule": "spelled_digits",
+   "word": "zero",
+   "dev_prompts": 16,
+   "official_prompts": 24,
+   "flag": false
+  },
+  {
+   "rule": "base64_ssn",
+   "word": "ssn",
+   "dev_prompts": 153,
+   "official_prompts": 100,
+   "flag": false
+  },
+  {
+   "rule": "base64_phone",
+   "word": "phone",
+   "dev_prompts": 76,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "base64_credit_card",
+   "word": "credit_card",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "base64_dob",
+   "word": "dob",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "base64_email",
+   "word": "email",
+   "dev_prompts": 37,
+   "official_prompts": 100,
+   "flag": false
+  },
+  {
+   "rule": "hex_ssn",
+   "word": "ssn",
+   "dev_prompts": 153,
+   "official_prompts": 100,
+   "flag": false
+  },
+  {
+   "rule": "hex_phone",
+   "word": "phone",
+   "dev_prompts": 76,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "hex_credit_card",
+   "word": "credit_card",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "hex_dob",
+   "word": "dob",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "adjuster_badge",
+   "word": "ADJ",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "claim_number",
+   "word": "CLM",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "split_line_identifier",
+   "word": "ADJ",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "split_line_identifier",
+   "word": "CLM",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "ssn_keyword_fragment",
+   "word": "number",
+   "dev_prompts": 251,
+   "official_prompts": 66,
+   "flag": false
+  },
+  {
+   "rule": "ssn_keyword_fragment",
+   "word": "security",
+   "dev_prompts": 57,
+   "official_prompts": 17,
+   "flag": false
+  },
+  {
+   "rule": "ssn_keyword_fragment",
+   "word": "social",
+   "dev_prompts": 132,
+   "official_prompts": 34,
+   "flag": false
+  },
+  {
+   "rule": "ssn_keyword_fragment",
+   "word": "ssn",
+   "dev_prompts": 153,
+   "official_prompts": 100,
+   "flag": false
+  },
+  {
+   "rule": "api_key_prefixed",
+   "word": "live",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "api_key_prefixed",
+   "word": "pk",
+   "dev_prompts": 2,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "api_key_prefixed",
+   "word": "rk",
+   "dev_prompts": 1,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "api_key_prefixed",
+   "word": "sk",
+   "dev_prompts": 131,
+   "official_prompts": 142,
+   "flag": false
+  },
+  {
+   "rule": "api_key_prefixed",
+   "word": "test",
+   "dev_prompts": 111,
+   "official_prompts": 125,
+   "flag": false
+  },
+  {
+   "rule": "token_prefixed",
+   "word": "gh",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "token_prefixed",
+   "word": "github_pat_",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "token_prefixed",
+   "word": "xox",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "secret_assignment",
+   "word": "access",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "secret_assignment",
+   "word": "api",
+   "dev_prompts": 37,
+   "official_prompts": 17,
+   "flag": false
+  },
+  {
+   "rule": "secret_assignment",
+   "word": "auth",
+   "dev_prompts": 37,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "secret_assignment",
+   "word": "key",
+   "dev_prompts": 74,
+   "official_prompts": 151,
+   "flag": false
+  },
+  {
+   "rule": "secret_assignment",
+   "word": "secret",
+   "dev_prompts": 114,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "secret_assignment",
+   "word": "token",
+   "dev_prompts": 37,
+   "official_prompts": 100,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "is",
+   "dev_prompts": 397,
+   "official_prompts": 274,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "of",
+   "dev_prompts": 20,
+   "official_prompts": 16,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "pass",
+   "dev_prompts": 94,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "phrase",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "pwd",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "to",
+   "dev_prompts": 209,
+   "official_prompts": 275,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "was",
+   "dev_prompts": 132,
+   "official_prompts": 50,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "wd",
+   "dev_prompts": 1,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "password_context",
+   "word": "word",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "mrn_prefixed",
+   "word": "MRN",
+   "dev_prompts": 87,
+   "official_prompts": 200,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "chart",
+   "dev_prompts": 112,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "id",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "medical",
+   "dev_prompts": 58,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "mrn",
+   "dev_prompts": 87,
+   "official_prompts": 200,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "no",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "number",
+   "dev_prompts": 251,
+   "official_prompts": 66,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "patient",
+   "dev_prompts": 75,
+   "official_prompts": 84,
+   "flag": false
+  },
+  {
+   "rule": "mrn_context",
+   "word": "record",
+   "dev_prompts": 96,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "icd10_context",
+   "word": "cm",
+   "dev_prompts": 0,
+   "official_prompts": 1,
+   "flag": true
+  },
+  {
+   "rule": "icd10_context",
+   "word": "code",
+   "dev_prompts": 16,
+   "official_prompts": 50,
+   "flag": false
+  },
+  {
+   "rule": "icd10_context",
+   "word": "diagnosed",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "icd10_context",
+   "word": "diagnosis",
+   "dev_prompts": 0,
+   "official_prompts": 50,
+   "flag": true
+  },
+  {
+   "rule": "icd10_context",
+   "word": "dx",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "icd10_context",
+   "word": "icd",
+   "dev_prompts": 37,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "icd10_context",
+   "word": "with",
+   "dev_prompts": 212,
+   "official_prompts": 58,
+   "flag": false
+  },
+  {
+   "rule": "account_context",
+   "word": "account",
+   "dev_prompts": 112,
+   "official_prompts": 82,
+   "flag": false
+  },
+  {
+   "rule": "account_context",
+   "word": "acct",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "account_context",
+   "word": "no",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "account_context",
+   "word": "number",
+   "dev_prompts": 251,
+   "official_prompts": 66,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "Dr",
+   "dev_prompts": 2,
+   "official_prompts": 1,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "Mr",
+   "dev_prompts": 60,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "Mrs",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "Ms",
+   "dev_prompts": 2,
+   "official_prompts": 1,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "accountant",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "applicant",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "belonging",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "cardholder",
+   "dev_prompts": 0,
+   "official_prompts": 50,
+   "flag": true
+  },
+  {
+   "rule": "name_context",
+   "word": "client",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "contact",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "customer",
+   "dev_prompts": 0,
+   "official_prompts": 125,
+   "flag": true
+  },
+  {
+   "rule": "name_context",
+   "word": "employee",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "is",
+   "dev_prompts": 397,
+   "official_prompts": 274,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "member",
+   "dev_prompts": 37,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "name",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "owner",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "patient",
+   "dev_prompts": 75,
+   "official_prompts": 84,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "this",
+   "dev_prompts": 152,
+   "official_prompts": 101,
+   "flag": false
+  },
+  {
+   "rule": "name_context",
+   "word": "to",
+   "dev_prompts": 209,
+   "official_prompts": 275,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Ave",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Clinic",
+   "dev_prompts": 20,
+   "official_prompts": 25,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Corp",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Dear",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Hello",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Hi",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Hospital",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Inc",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "LLC",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Road",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "St",
+   "dev_prompts": 1,
+   "official_prompts": 1,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "Street",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "University",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "ask",
+   "dev_prompts": 0,
+   "official_prompts": 17,
+   "flag": true
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "by",
+   "dev_prompts": 75,
+   "official_prompts": 51,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "call",
+   "dev_prompts": 37,
+   "official_prompts": 67,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "cc",
+   "dev_prompts": 0,
+   "official_prompts": 3,
+   "flag": true
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "dear",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "for",
+   "dev_prompts": 360,
+   "official_prompts": 325,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "from",
+   "dev_prompts": 78,
+   "official_prompts": 67,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "give",
+   "dev_prompts": 37,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "to",
+   "dev_prompts": 209,
+   "official_prompts": 275,
+   "flag": false
+  },
+  {
+   "rule": "name_after_preposition",
+   "word": "with",
+   "dev_prompts": 212,
+   "official_prompts": 58,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "asked",
+   "dev_prompts": 38,
+   "official_prompts": 100,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "called",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "has",
+   "dev_prompts": 37,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "is",
+   "dev_prompts": 397,
+   "official_prompts": 274,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "needs",
+   "dev_prompts": 20,
+   "official_prompts": 50,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "said",
+   "dev_prompts": 20,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "should",
+   "dev_prompts": 74,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "wants",
+   "dev_prompts": 38,
+   "official_prompts": 0,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "was",
+   "dev_prompts": 132,
+   "official_prompts": 50,
+   "flag": false
+  },
+  {
+   "rule": "name_sentence_subject",
+   "word": "will",
+   "dev_prompts": 0,
+   "official_prompts": 0,
+   "flag": false
+  }
+ ],
+ "declared_shared_generator_components": [
+  "generators.generate_prompts._ValueFactory (value pools/shapes reused by generate_dev.py)",
+  "generators.generate_prompts._fill and validate_record",
+  "obfuscation encoders (zero-width spacing, base64_wrapped, leet maps, spelled digits, split_sentences)",
+  "SSN convention: invalid areas 000/666/9xx used for lookalike controls (invalid_ssn_shape)",
+  "ICD-10 regex _ICD10_RE == v2 rule icd10_dotted",
+  "API_KEY_PREFIXES (sk_test_, ghp_, xoxb-) == v2 rules api_key_prefixed/token_prefixed",
+  "MRN- digits shape (pgb MRN shape; one of dev's three MRN shapes)",
+  "Luhn-valid cards / Luhn-invalid lookalikes, 555-01xx phones",
+  "parallel control semantics (ctl-d02 <-> ctl-02, ctl-d05 <-> ctl-05, ...)"
+ ]
+}

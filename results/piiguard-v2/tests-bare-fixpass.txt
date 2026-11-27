@@ -1,0 +1,18 @@
+........ssss........ss........................ssssss.s.................. [ 46%]
+......................................sss............................... [ 92%]
+...........                                                              [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_adapters.py:100: piiguard not installed
+SKIPPED [1] tests/test_adapters.py:107: piiguard not installed
+SKIPPED [1] tests/test_adapters.py:120: presidio/spaCy model not installed
+SKIPPED [1] tests/test_adapters.py:130: nemoguardrails/spaCy model not installed
+SKIPPED [1] tests/test_adapters.py:226: gliner or its cached model not available (no download in tests)
+SKIPPED [1] tests/test_adapters.py:239: PGB_LLM_GUARD_PYTHON not set (LLM Guard runs in its own venv)
+SKIPPED [4] tests/test_contract_fpr_layers.py:292: matplotlib not installed (figures extra)
+SKIPPED [1] tests/test_contract_fpr_layers.py:312: matplotlib not installed (figures extra)
+SKIPPED [1] tests/test_contract_fpr_layers.py:345: matplotlib not installed (figures extra)
+SKIPPED [1] tests/test_contract_fpr_layers.py:374: presidio-anonymizer not installed
+SKIPPED [1] tests/test_piiguard_v2_adapter.py:45: piiguard not installed
+SKIPPED [1] tests/test_piiguard_v2_adapter.py:55: PIIGUARD_V2_GUARD_DIR not set
+SKIPPED [1] tests/test_piiguard_v2_adapter.py:72: needs PIIGUARD_V2_GUARD_DIR and presidio
+139 passed, 16 skipped in 3.67s

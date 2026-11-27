@@ -71,3 +71,11 @@ register_adapter(
 register_adapter("gliner-pii", GlinerPiiAdapter)
 register_adapter("llm-guard-anonymize", LlmGuardAdapter)
 register_adapter("llm-guard-block", lambda: LlmGuardAdapter(block_on_invalid=True))
+
+from pii_guardbench.adapters.piiguard_v2 import (  # noqa: E402
+    PiiguardV2Adapter,
+    PiiguardV2UnionFilteredAdapter,
+)
+
+register_adapter("piiguard-v2", PiiguardV2Adapter)
+register_adapter("piiguard-v2-union-filtered", PiiguardV2UnionFilteredAdapter)

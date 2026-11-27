@@ -1,0 +1,18 @@
+........................................................................ [ 46%]
+........................................................................ [ 92%]
+...........                                                              [100%]
+=============================== warnings summary ===============================
+tests/test_adapters.py::test_presidio_default_engine_redacts_card_and_email
+  /workspace/venvs/pgb/lib/python3.13/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+tests/test_adapters.py::test_nemo_pii_rail_masks_email_offline
+  /workspace/venvs/pgb/lib/python3.13/site-packages/nemoguardrails/library/jailbreak_detection/rail_config.py:77: DeprecationWarning: Use 'nim_base_url' instead. This field will be removed in a future version.
+    if self.nim_url and not self.nim_base_url:
+
+tests/test_adapters.py::test_gliner_live_redacts_email_offline
+  /workspace/venvs/pgb/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py:190: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+155 passed, 3 warnings in 33.32s

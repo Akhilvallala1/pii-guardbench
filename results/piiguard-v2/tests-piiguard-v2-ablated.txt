@@ -1,0 +1,33 @@
+.ss...................................ssss.s............................ [ 37%]
+.....................................I1126 23:56:10.608560  297499 chttp2_transport.cc:1403] ipv4:127.0.0.1:46369: Got goaway [2] err=UNAVAILABLE:GOAWAY received; Error code: 2; Debug Text: Cancelling all calls {http2_error:2}
+...............sF.................. [ 74%]
+...................................s.............                        [100%]
+=================================== FAILURES ===================================
+_ test_demo_run_reports_rules_only_and_classifier_panes_with_route_and_latency _
+
+    def test_demo_run_reports_rules_only_and_classifier_panes_with_route_and_latency():
+        up = FakeUpstream()
+        calls = []
+        def clf(text, prompt, regex_findings=None):
+            calls.append(text); return [{"text": "Devon Okafor", "type": "name"}]
+        clf.last = {"route": "small", "ms": 12, "score": 3, "signals": {"name_like": 1}}
+        client = TestClient(create_app(upstream=up, token="t", classifier=clf))
+        r = client.post("/demo/run", headers={"Authorization": "Bearer t"}, json={"prompt": "Devon Okafor called from (555) 010-2345"})
+        body = r.json()
+>       assert body["rules_only"]["left"] == "Devon Okafor called from [PII_PHONE_US_1]"
+E       AssertionError: assert '[PII_NAME_SE...I_PHONE_US_1]' == 'Devon Okafor...I_PHONE_US_1]'
+E         
+E         - Devon Okafor called from [PII_PHONE_US_1]
+E         + [PII_NAME_SENTENCE_SUBJECT_1] called from [PII_PHONE_US_1]
+
+tests/test_proxy.py:194: AssertionError
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_bench.py:24: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_bench.py:32: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_export.py:43: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [2] tests/test_export.py:56: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_export.py:75: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_export.py:93: could not import 'nemoguardrails': No module named 'nemoguardrails'
+SKIPPED [1] tests/test_proxy.py:176: could not import 'presidio_analyzer': No module named 'presidio_analyzer'
+SKIPPED [1] tests/test_rules_v2.py:68: merge-type fix is v2.1 (v108) only
+1 failed, 183 passed, 9 skipped in 3.59s

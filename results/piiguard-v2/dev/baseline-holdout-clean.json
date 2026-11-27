@@ -1,0 +1,1369 @@
+{
+  "prompts_path": "data/dev/pgb-dev-v1/holdout.jsonl",
+  "n_prompts": 300,
+  "n_pii": 300,
+  "n_controls": 0,
+  "bootstrap": {
+    "iterations": 2000,
+    "seed": 0,
+    "n_clusters": 8,
+    "n_clusters_note": "legacy alias of n_pii_clusters",
+    "n_pii_clusters": 8,
+    "n_control_clusters": 0,
+    "cluster_key": "metadata.cluster > metadata.template_id > id"
+  },
+  "results": [
+    {
+      "adapter": "piiguard",
+      "leak": {
+        "k": 257,
+        "n": 300,
+        "rate": 0.8566666666666667,
+        "low": 0.8124985303950185,
+        "high": 0.8918158228732633
+      },
+      "normalized_leak": {
+        "k": 257,
+        "n": 300,
+        "rate": 0.8566666666666667,
+        "low": 0.8124985303950185,
+        "high": 0.8918158228732633
+      },
+      "exact_leak": {
+        "k": 257,
+        "n": 300,
+        "rate": 0.8566666666666667,
+        "low": 0.8124985303950185,
+        "high": 0.8918158228732633
+      },
+      "leak_cluster_bootstrap": {
+        "estimate": 0.8566666666666667,
+        "low": 0.6033333333333334,
+        "high": 1.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "partial_exposure": {
+        "k": 0,
+        "n": 76,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.04811526823109757
+      },
+      "blocked_rate": {
+        "k": 0,
+        "n": 300,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.012643429997735661
+      },
+      "residual_given_block": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {
+        "cred-d02": {
+          "k": 37,
+          "n": 37,
+          "rate": 1.0,
+          "low": 0.9059390425448564,
+          "high": 1.0
+        },
+        "cred-d04": {
+          "k": 37,
+          "n": 37,
+          "rate": 1.0,
+          "low": 0.9059390425448564,
+          "high": 1.0
+        },
+        "cred-d05": {
+          "k": 37,
+          "n": 37,
+          "rate": 1.0,
+          "low": 0.9059390425448564,
+          "high": 1.0
+        },
+        "fin-d02": {
+          "k": 33,
+          "n": 38,
+          "rate": 0.868421052631579,
+          "low": 0.7267282994850112,
+          "high": 0.9424621712426856
+        },
+        "fin-d04": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "fin-d06": {
+          "k": 38,
+          "n": 38,
+          "rate": 1.0,
+          "low": 0.90818706741616,
+          "high": 0.9999999999999999
+        },
+        "hea-d02": {
+          "k": 38,
+          "n": 38,
+          "rate": 1.0,
+          "low": 0.90818706741616,
+          "high": 0.9999999999999999
+        },
+        "hea-d04": {
+          "k": 37,
+          "n": 37,
+          "rate": 1.0,
+          "low": 0.9059390425448564,
+          "high": 1.0
+        }
+      },
+      "by_family": {
+        "credentials": {
+          "k": 111,
+          "n": 111,
+          "rate": 1.0,
+          "low": 0.9665487070887205,
+          "high": 1.0
+        },
+        "finance": {
+          "k": 71,
+          "n": 114,
+          "rate": 0.6228070175438597,
+          "low": 0.5312004830192322,
+          "high": 0.70640660989193
+        },
+        "health": {
+          "k": 75,
+          "n": 75,
+          "rate": 1.0,
+          "low": 0.9512744540953,
+          "high": 1.0
+        }
+      },
+      "latency_ms": {
+        "mean": 0.12836111014621565,
+        "p50": 0.11933300083910581,
+        "p95": 0.1943211516845622,
+        "n": 300
+      },
+      "by_category": {
+        "account_number": {
+          "k": 33,
+          "n": 38,
+          "rate": 0.868421052631579,
+          "low": 0.7267282994850112,
+          "high": 0.9424621712426856
+        },
+        "credit_card": {
+          "k": 0,
+          "n": 76,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.04811526823109757
+        },
+        "diagnosis": {
+          "k": 37,
+          "n": 37,
+          "rate": 1.0,
+          "low": 0.9059390425448564,
+          "high": 1.0
+        },
+        "email": {
+          "k": 0,
+          "n": 149,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.025134518351024853
+        },
+        "mrn": {
+          "k": 38,
+          "n": 38,
+          "rate": 1.0,
+          "low": 0.90818706741616,
+          "high": 0.9999999999999999
+        },
+        "name": {
+          "k": 150,
+          "n": 150,
+          "rate": 1.0,
+          "low": 0.9750288608542812,
+          "high": 1.0
+        },
+        "password": {
+          "k": 74,
+          "n": 74,
+          "rate": 1.0,
+          "low": 0.9506484964337834,
+          "high": 0.9999999999999998
+        },
+        "phone": {
+          "k": 0,
+          "n": 76,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.04811526823109757
+        },
+        "ssn": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "token": {
+          "k": 74,
+          "n": 74,
+          "rate": 1.0,
+          "low": 0.9506484964337834,
+          "high": 0.9999999999999998
+        }
+      },
+      "by_layer": {
+        "clean": {
+          "exact_leak": {
+            "k": 257,
+            "n": 300,
+            "rate": 0.8566666666666667,
+            "low": 0.8124985303950185,
+            "high": 0.8918158228732633
+          },
+          "normalized_leak": {
+            "k": 257,
+            "n": 300,
+            "rate": 0.8566666666666667,
+            "low": 0.8124985303950185,
+            "high": 0.8918158228732633
+          }
+        }
+      },
+      "span_leak": {
+        "k": 406,
+        "n": 750,
+        "rate": 0.5413333333333333
+      },
+      "by_obfuscation": {},
+      "span_leak_wilson_unadjusted": {
+        "k": 406,
+        "n": 750,
+        "rate": 0.5413333333333333,
+        "low": 0.5055509982773523,
+        "high": 0.5766943965111551
+      },
+      "span_leak_cluster_bootstrap": {
+        "estimate": 0.5413333333333333,
+        "low": 0.3421939449491818,
+        "high": 0.7252831010452961,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "entity_contract": [
+        "credit_card",
+        "email",
+        "phone",
+        "ssn"
+      ],
+      "in_scope": {
+        "categories": [
+          "credit_card",
+          "email",
+          "phone",
+          "ssn"
+        ],
+        "prompt_leak": {
+          "k": 0,
+          "n": 263,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.01439655585935626
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
+        "span_leak": {
+          "k": 0,
+          "n": 339,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.011205174634583434
+        }
+      },
+      "shared_scope": {
+        "categories": [
+          "credit_card",
+          "email",
+          "phone",
+          "ssn"
+        ],
+        "prompt_leak": {
+          "k": 0,
+          "n": 263,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.01439655585935626
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
+        "span_leak": {
+          "k": 0,
+          "n": 339,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.011205174634583434
+        }
+      }
+    },
+    {
+      "adapter": "presidio",
+      "leak": {
+        "k": 131,
+        "n": 300,
+        "rate": 0.43666666666666665,
+        "low": 0.38169301003457207,
+        "high": 0.4932418244318077
+      },
+      "normalized_leak": {
+        "k": 131,
+        "n": 300,
+        "rate": 0.43666666666666665,
+        "low": 0.38169301003457207,
+        "high": 0.4932418244318077
+      },
+      "exact_leak": {
+        "k": 131,
+        "n": 300,
+        "rate": 0.43666666666666665,
+        "low": 0.38169301003457207,
+        "high": 0.4932418244318077
+      },
+      "leak_cluster_bootstrap": {
+        "estimate": 0.43666666666666665,
+        "low": 0.13953488372093023,
+        "high": 0.7424749163879598,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "partial_exposure": {
+        "k": 0,
+        "n": 76,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.04811526823109757
+      },
+      "blocked_rate": {
+        "k": 0,
+        "n": 300,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.012643429997735661
+      },
+      "residual_given_block": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {
+        "cred-d02": {
+          "k": 35,
+          "n": 37,
+          "rate": 0.9459459459459459,
+          "low": 0.822950349364601,
+          "high": 0.9850493372294601
+        },
+        "cred-d04": {
+          "k": 35,
+          "n": 37,
+          "rate": 0.9459459459459459,
+          "low": 0.822950349364601,
+          "high": 0.9850493372294601
+        },
+        "cred-d05": {
+          "k": 37,
+          "n": 37,
+          "rate": 1.0,
+          "low": 0.9059390425448564,
+          "high": 1.0
+        },
+        "fin-d02": {
+          "k": 7,
+          "n": 38,
+          "rate": 0.18421052631578946,
+          "low": 0.0922164845325749,
+          "high": 0.33419168341511346
+        },
+        "fin-d04": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "fin-d06": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "hea-d02": {
+          "k": 17,
+          "n": 38,
+          "rate": 0.4473684210526316,
+          "low": 0.3014616531155089,
+          "high": 0.6029397082091058
+        },
+        "hea-d04": {
+          "k": 0,
+          "n": 37,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09406095745514377
+        }
+      },
+      "by_family": {
+        "credentials": {
+          "k": 107,
+          "n": 111,
+          "rate": 0.963963963963964,
+          "low": 0.9109886133681347,
+          "high": 0.9858989256421195
+        },
+        "finance": {
+          "k": 7,
+          "n": 114,
+          "rate": 0.06140350877192982,
+          "low": 0.03005889927445638,
+          "high": 0.12134434032853611
+        },
+        "health": {
+          "k": 17,
+          "n": 75,
+          "rate": 0.22666666666666666,
+          "low": 0.14661247942117506,
+          "high": 0.33335748567339424
+        }
+      },
+      "latency_ms": {
+        "mean": 32.672144346567315,
+        "p50": 5.5335750002996065,
+        "p95": 13.641500298945177,
+        "n": 300
+      },
+      "by_category": {
+        "account_number": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "credit_card": {
+          "k": 0,
+          "n": 76,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.04811526823109757
+        },
+        "diagnosis": {
+          "k": 0,
+          "n": 37,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09406095745514377
+        },
+        "email": {
+          "k": 0,
+          "n": 149,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.025134518351024853
+        },
+        "mrn": {
+          "k": 16,
+          "n": 38,
+          "rate": 0.42105263157894735,
+          "low": 0.2785227481181953,
+          "high": 0.5780792938687267
+        },
+        "name": {
+          "k": 0,
+          "n": 150,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.02497113914571871
+        },
+        "password": {
+          "k": 68,
+          "n": 74,
+          "rate": 0.918918918918919,
+          "low": 0.8341786176052061,
+          "high": 0.9623106631906667
+        },
+        "phone": {
+          "k": 9,
+          "n": 76,
+          "rate": 0.11842105263157894,
+          "low": 0.0635674711895292,
+          "high": 0.20999418088157157
+        },
+        "ssn": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "token": {
+          "k": 72,
+          "n": 74,
+          "rate": 0.972972972972973,
+          "low": 0.9067052877834563,
+          "high": 0.9925568034376904
+        }
+      },
+      "by_layer": {
+        "clean": {
+          "exact_leak": {
+            "k": 131,
+            "n": 300,
+            "rate": 0.43666666666666665,
+            "low": 0.38169301003457207,
+            "high": 0.4932418244318077
+          },
+          "normalized_leak": {
+            "k": 131,
+            "n": 300,
+            "rate": 0.43666666666666665,
+            "low": 0.38169301003457207,
+            "high": 0.4932418244318077
+          }
+        }
+      },
+      "span_leak": {
+        "k": 165,
+        "n": 750,
+        "rate": 0.22
+      },
+      "by_obfuscation": {},
+      "span_leak_wilson_unadjusted": {
+        "k": 165,
+        "n": 750,
+        "rate": 0.22,
+        "low": 0.19182089440051273,
+        "high": 0.2510328828386314
+      },
+      "span_leak_cluster_bootstrap": {
+        "estimate": 0.22,
+        "low": 0.05935251014088193,
+        "high": 0.40585134792303673,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "entity_contract": [
+        "account_number",
+        "address",
+        "credit_card",
+        "email",
+        "name",
+        "phone",
+        "ssn"
+      ],
+      "in_scope": {
+        "categories": [
+          "account_number",
+          "address",
+          "credit_card",
+          "email",
+          "name",
+          "phone",
+          "ssn"
+        ],
+        "prompt_leak": {
+          "k": 9,
+          "n": 300,
+          "rate": 0.03,
+          "low": 0.01586167320596457,
+          "high": 0.05602315099190695
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.03,
+          "low": 0.0,
+          "high": 0.07666666666666666,
+          "iterations": 2000,
+          "n_clusters": 8,
+          "seed": 0
+        },
+        "span_leak": {
+          "k": 9,
+          "n": 527,
+          "rate": 0.017077798861480076,
+          "low": 0.009010093511372682,
+          "high": 0.032135137005602624
+        }
+      },
+      "shared_scope": {
+        "categories": [
+          "credit_card",
+          "email",
+          "phone",
+          "ssn"
+        ],
+        "prompt_leak": {
+          "k": 9,
+          "n": 263,
+          "rate": 0.034220532319391636,
+          "low": 0.01810589534668,
+          "high": 0.06374640954131347
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.034220532319391636,
+          "low": 0.0,
+          "high": 0.08712949360525403,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
+        "span_leak": {
+          "k": 9,
+          "n": 339,
+          "rate": 0.02654867256637168,
+          "low": 0.014028826218525539,
+          "high": 0.049678728523956134
+        }
+      }
+    },
+    {
+      "adapter": "piiguard-union-presidio",
+      "leak": {
+        "k": 123,
+        "n": 300,
+        "rate": 0.41,
+        "low": 0.3558229870903305,
+        "high": 0.4664528303092618
+      },
+      "normalized_leak": {
+        "k": 123,
+        "n": 300,
+        "rate": 0.41,
+        "low": 0.3558229870903305,
+        "high": 0.4664528303092618
+      },
+      "exact_leak": {
+        "k": 123,
+        "n": 300,
+        "rate": 0.41,
+        "low": 0.3558229870903305,
+        "high": 0.4664528303092618
+      },
+      "leak_cluster_bootstrap": {
+        "estimate": 0.41,
+        "low": 0.11589403973509933,
+        "high": 0.7248322147651006,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "partial_exposure": {
+        "k": 0,
+        "n": 76,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.04811526823109757
+      },
+      "blocked_rate": {
+        "k": 0,
+        "n": 300,
+        "rate": 0.0,
+        "low": 0.0,
+        "high": 0.012643429997735661
+      },
+      "residual_given_block": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "control_blocked_rate": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "blocked_rate_cluster_bootstrap": {
+        "estimate": 0.0,
+        "low": 0.0,
+        "high": 0.0,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "control_blocked_rate_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "contract_false_positive": {
+        "k": 0,
+        "n": 0,
+        "rate": null,
+        "low": null,
+        "high": null
+      },
+      "contract_false_positive_cluster_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "false_positive_blocks": 0,
+      "control_fp_by_detected_type": {},
+      "control_fp_by_template": {},
+      "by_template": {
+        "cred-d02": {
+          "k": 35,
+          "n": 37,
+          "rate": 0.9459459459459459,
+          "low": 0.822950349364601,
+          "high": 0.9850493372294601
+        },
+        "cred-d04": {
+          "k": 35,
+          "n": 37,
+          "rate": 0.9459459459459459,
+          "low": 0.822950349364601,
+          "high": 0.9850493372294601
+        },
+        "cred-d05": {
+          "k": 37,
+          "n": 37,
+          "rate": 1.0,
+          "low": 0.9059390425448564,
+          "high": 1.0
+        },
+        "fin-d02": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "fin-d04": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "fin-d06": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "hea-d02": {
+          "k": 16,
+          "n": 38,
+          "rate": 0.42105263157894735,
+          "low": 0.2785227481181953,
+          "high": 0.5780792938687267
+        },
+        "hea-d04": {
+          "k": 0,
+          "n": 37,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09406095745514377
+        }
+      },
+      "by_family": {
+        "credentials": {
+          "k": 107,
+          "n": 111,
+          "rate": 0.963963963963964,
+          "low": 0.9109886133681347,
+          "high": 0.9858989256421195
+        },
+        "finance": {
+          "k": 0,
+          "n": 114,
+          "rate": 0.0,
+          "low": 3.469446951953614e-18,
+          "high": 0.03259969314741144
+        },
+        "health": {
+          "k": 16,
+          "n": 75,
+          "rate": 0.21333333333333335,
+          "low": 0.13580086342007996,
+          "high": 0.31880178289861477
+        }
+      },
+      "latency_ms": {
+        "mean": 5.530324926706574,
+        "p50": 5.2017884991073515,
+        "p95": 7.377506648481359,
+        "n": 300
+      },
+      "by_category": {
+        "account_number": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "credit_card": {
+          "k": 0,
+          "n": 76,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.04811526823109757
+        },
+        "diagnosis": {
+          "k": 0,
+          "n": 37,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09406095745514377
+        },
+        "email": {
+          "k": 0,
+          "n": 149,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.025134518351024853
+        },
+        "mrn": {
+          "k": 16,
+          "n": 38,
+          "rate": 0.42105263157894735,
+          "low": 0.2785227481181953,
+          "high": 0.5780792938687267
+        },
+        "name": {
+          "k": 0,
+          "n": 150,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.02497113914571871
+        },
+        "password": {
+          "k": 68,
+          "n": 74,
+          "rate": 0.918918918918919,
+          "low": 0.8341786176052061,
+          "high": 0.9623106631906667
+        },
+        "phone": {
+          "k": 0,
+          "n": 76,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.04811526823109757
+        },
+        "ssn": {
+          "k": 0,
+          "n": 38,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.09181293258383999
+        },
+        "token": {
+          "k": 72,
+          "n": 74,
+          "rate": 0.972972972972973,
+          "low": 0.9067052877834563,
+          "high": 0.9925568034376904
+        }
+      },
+      "by_layer": {
+        "clean": {
+          "exact_leak": {
+            "k": 123,
+            "n": 300,
+            "rate": 0.41,
+            "low": 0.3558229870903305,
+            "high": 0.4664528303092618
+          },
+          "normalized_leak": {
+            "k": 123,
+            "n": 300,
+            "rate": 0.41,
+            "low": 0.3558229870903305,
+            "high": 0.4664528303092618
+          }
+        }
+      },
+      "span_leak": {
+        "k": 156,
+        "n": 750,
+        "rate": 0.208
+      },
+      "by_obfuscation": {},
+      "span_leak_wilson_unadjusted": {
+        "k": 156,
+        "n": 750,
+        "rate": 0.208,
+        "low": 0.18047573337223885,
+        "high": 0.23850034860572575
+      },
+      "span_leak_cluster_bootstrap": {
+        "estimate": 0.208,
+        "low": 0.044093794842805595,
+        "high": 0.39717034828567555,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "entity_contract": [
+        "account_number",
+        "address",
+        "credit_card",
+        "email",
+        "name",
+        "phone",
+        "ssn"
+      ],
+      "in_scope": {
+        "categories": [
+          "account_number",
+          "address",
+          "credit_card",
+          "email",
+          "name",
+          "phone",
+          "ssn"
+        ],
+        "prompt_leak": {
+          "k": 0,
+          "n": 300,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.012643429997735661
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "iterations": 2000,
+          "n_clusters": 8,
+          "seed": 0
+        },
+        "span_leak": {
+          "k": 0,
+          "n": 527,
+          "rate": 0.0,
+          "low": 4.336808689942018e-19,
+          "high": 0.00723681037808642
+        }
+      },
+      "shared_scope": {
+        "categories": [
+          "credit_card",
+          "email",
+          "phone",
+          "ssn"
+        ],
+        "prompt_leak": {
+          "k": 0,
+          "n": 263,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.01439655585935626
+        },
+        "prompt_leak_cluster_bootstrap": {
+          "estimate": 0.0,
+          "low": 0.0,
+          "high": 0.0,
+          "iterations": 2000,
+          "n_clusters": 7,
+          "seed": 0
+        },
+        "span_leak": {
+          "k": 0,
+          "n": 339,
+          "rate": 0.0,
+          "low": 0.0,
+          "high": 0.011205174634583434
+        }
+      }
+    }
+  ],
+  "pairwise_mcnemar_holm": [
+    {
+      "adapter_a": "piiguard",
+      "adapter_b": "presidio",
+      "b": 128,
+      "c": 2,
+      "discordant": 130,
+      "p_value": 1.251313736450325e-35,
+      "diff_bootstrap": {
+        "estimate": 0.42,
+        "low": 0.14429530201342283,
+        "high": 0.7209762836748789,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
+      "p_holm": 2.50262747290065e-35,
+      "holm_family": "systems",
+      "fpr_p_holm": null
+    },
+    {
+      "adapter_a": "piiguard",
+      "adapter_b": "piiguard-union-presidio",
+      "b": 134,
+      "c": 0,
+      "discordant": 134,
+      "p_value": 9.183549615799121e-41,
+      "diff_bootstrap": {
+        "estimate": 0.44666666666666666,
+        "low": 0.14715719063545152,
+        "high": 0.7574750830564784,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "cluster_ci_excludes_0": true,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
+      "p_holm": 2.7550648847397363e-40,
+      "holm_family": "systems",
+      "fpr_p_holm": null
+    },
+    {
+      "adapter_a": "presidio",
+      "adapter_b": "piiguard-union-presidio",
+      "b": 8,
+      "c": 0,
+      "discordant": 8,
+      "p_value": 0.0078125,
+      "diff_bootstrap": {
+        "estimate": 0.02666666666666667,
+        "low": 0.0,
+        "high": 0.07333333333333333,
+        "iterations": 2000,
+        "n_clusters": 8,
+        "seed": 0
+      },
+      "cluster_ci_excludes_0": false,
+      "fpr_mcnemar": null,
+      "fpr_diff_bootstrap": {
+        "estimate": null,
+        "low": null,
+        "high": null,
+        "iterations": 2000,
+        "n_clusters": 0,
+        "seed": 0
+      },
+      "fpr_cluster_ci_excludes_0": null,
+      "p_holm": 0.0078125,
+      "holm_family": "systems",
+      "fpr_p_holm": null
+    }
+  ],
+  "holm_family": "all pairs of non-mock adapters; mock pairs reported unadjusted",
+  "pairwise_summary": {
+    "alpha": 0.05,
+    "n_pairs": 3,
+    "holm_significant": 3,
+    "holm_significant_and_cluster_ci_excludes_0": 2,
+    "cluster_ci_excludes_0": 2,
+    "fpr_cluster_ci_excludes_0": 0,
+    "fpr_holm_significant": 0,
+    "fpr_holm_significant_and_cluster_ci_excludes_0": 0
+  },
+  "rank_intervals": {
+    "piiguard": {
+      "rank": 3.0,
+      "low": 3.0,
+      "high": 3.0
+    },
+    "presidio": {
+      "rank": 2.0,
+      "low": 1.5,
+      "high": 2.0
+    },
+    "piiguard-union-presidio": {
+      "rank": 1.0,
+      "low": 1.0,
+      "high": 1.5
+    }
+  },
+  "shared_scope_categories": [
+    "credit_card",
+    "email",
+    "phone",
+    "ssn"
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.12.113+-x86_64-with-glibc2.41",
+    "cpu_model": "Intel(R) Xeon(R) Processor",
+    "cpu_count": 8,
+    "memory_gb": 15.6,
+    "gpu": "none used (CPU only)",
+    "packages": {
+      "presidio-analyzer": "2.2.366",
+      "presidio-anonymizer": "2.2.366",
+      "spacy": "3.8.18",
+      "en-core-web-lg": "3.8.0",
+      "piiguard": "0.1.0",
+      "nemoguardrails": "0.25.0",
+      "jsonschema": "4.26.0",
+      "pyarrow": "26.0.1"
+    }
+  },
+  "adapter_config": {
+    "piiguard": {
+      "adapter": "piiguard",
+      "piiguard_package": "0.1.0",
+      "guard_dir": "/workspace/external-cache/piiguard-clone/guard",
+      "rules_yaml_first_line": "version: 23",
+      "rules_yaml_sha256": "4369f4e8988280d4ef6b48721ae80352e33f82a74898d14e9fd164d6e486a4c0",
+      "config": "Guard.from_dir(guard/), learned rules only; no classifier, no LLM",
+      "entity_contract": [
+        "credit_card",
+        "email",
+        "phone",
+        "ssn"
+      ],
+      "disclosure": "piiguard is written by the benchmark author (reference row)."
+    },
+    "presidio": {
+      "adapter": "presidio",
+      "presidio_analyzer": "2.2.366",
+      "presidio_anonymizer": "2.2.366",
+      "spacy": "3.8.18",
+      "spacy_model": "en_core_web_lg 3.8.0",
+      "entities": [
+        "CREDIT_CARD",
+        "CRYPTO",
+        "DATE_TIME",
+        "EMAIL_ADDRESS",
+        "IBAN_CODE",
+        "IP_ADDRESS",
+        "LOCATION",
+        "MAC_ADDRESS",
+        "MEDICAL_LICENSE",
+        "NRP",
+        "PERSON",
+        "PHONE_NUMBER",
+        "UK_NHS",
+        "URL",
+        "US_BANK_NUMBER",
+        "US_DRIVER_LICENSE",
+        "US_ITIN",
+        "US_PASSPORT",
+        "US_SSN",
+        "UUID"
+      ],
+      "score_threshold": 0.0,
+      "config": "AnalyzerEngine() defaults, language=en, no entity filter, score_threshold=0.0; AnonymizerEngine() default replace-with-<ENTITY>",
+      "entity_contract": [
+        "account_number",
+        "address",
+        "credit_card",
+        "email",
+        "name",
+        "phone",
+        "ssn"
+      ]
+    },
+    "piiguard-union-presidio": {
+      "adapter": "piiguard-union-presidio",
+      "piiguard_package": "0.1.0",
+      "guard_dir": "/workspace/external-cache/piiguard-clone/guard",
+      "rules_yaml_first_line": "version: 23",
+      "rules_yaml_sha256": "4369f4e8988280d4ef6b48721ae80352e33f82a74898d14e9fd164d6e486a4c0",
+      "config": "Union of Guard.from_dir(guard/) learned rules and presidio AnalyzerEngine() defaults (all recognizers, threshold 0) on the original text; merged spans replaced with <PII>",
+      "entity_contract": [
+        "account_number",
+        "address",
+        "credit_card",
+        "email",
+        "name",
+        "phone",
+        "ssn"
+      ],
+      "disclosure": "piiguard is written by the benchmark author (reference row)."
+    }
+  },
+  "skipped_adapters": {},
+  "layer": "clean"
+}

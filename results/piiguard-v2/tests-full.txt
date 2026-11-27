@@ -1,0 +1,8 @@
+    if self.nim_url and not self.nim_base_url:
+
+tests/test_adapters.py::test_gliner_live_redacts_email_offline
+  /workspace/venvs/pgb/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py:190: UserWarning: The `resume_download` argument is deprecated and ignored in `snapshot_download`. Downloads always resume whenever possible.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+155 passed, 3 warnings in 30.37s

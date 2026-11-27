@@ -1,0 +1,17 @@
+{
+ "a": "h2-v2g-name2",
+ "b": "abl-v2h",
+ "scoring_fields": [
+  "blocked",
+  "exact_leak",
+  "normalized_leak",
+  "partial_exposure",
+  "false_positive",
+  "contract_false_positive",
+  "span_matches"
+ ],
+ "scoring_diffs": [],
+ "compared": 1000,
+ "output_text_diffs": 0,
+ "detected_types_diffs": 0
+}

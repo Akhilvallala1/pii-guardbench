@@ -1,0 +1,70 @@
+PII-GuardBench results (scorer v2)
+  prompts : data/external/gretel-en-v1/sample.jsonl
+  counts  : 500 total, 500 PII, 0 control
+  bootstrap: 2000 iterations, seed 0; PII clusters 500, control clusters 0 (metadata.cluster > metadata.template_id > id)
+  intervals: cluster-bootstrap 95% (reported); Wilson columns at the end are iid, secondary
+  blocked = share of PII prompts blocked; ctl blocked = share of no-PII controls blocked
+
+Adapter      Norm leak        Cluster 95%     Span leak         Cluster 95%     FPR        Cluster 95%  Exact leak       Partial        Blocked        Cluster 95%     Resid|block  Ctl blocked  Cluster 95%  Latency ms (mean/p50/p95)  Wilson (iid, secondary): leak  span            FPR
+-----------  ---------------  --------------  ----------------  --------------  ---------  -----------  ---------------  -------------  -------------  --------------  -----------  -----------  -----------  -------------------------  -----------------------------  --------------  ---
+piiguard     0.932 (466/500)  [0.910, 0.954]  0.724 (958/1324)  [0.699, 0.748]  n/a (0/0)  n/a          0.932 (466/500)  0.000 (0/190)  0.000 (0/500)  [0.000, 0.000]  n/a (0/0)    n/a (0/0)    n/a          0.27 / 0.23 / 0.54         [0.906, 0.951]                 [0.699, 0.747]  n/a
+piiguard-v2  0.806 (403/500)  [0.770, 0.842]  0.585 (774/1324)  [0.556, 0.612]  n/a (0/0)  n/a          0.806 (403/500)  0.000 (0/190)  0.000 (0/500)  [0.000, 0.000]  n/a (0/0)    n/a (0/0)    n/a          0.46 / 0.40 / 0.87         [0.769, 0.838]                 [0.558, 0.611]  n/a
+
+Leak by template family (normalized leak; Wilson, no clustering)
+Adapter      Family       Norm leak      Wilson 95%
+-----------  -----------  -------------  --------------
+piiguard     credentials  0.953 (81/85)  [0.885, 0.982]
+piiguard     finance      0.893 (50/56)  [0.785, 0.950]
+piiguard     health       0.960 (24/25)  [0.805, 0.993]
+piiguard-v2  credentials  0.718 (61/85)  [0.614, 0.802]
+piiguard-v2  finance      0.839 (47/56)  [0.722, 0.913]
+piiguard-v2  health       0.840 (21/25)  [0.653, 0.936]
+
+Layer breakdown (clean / hard obfuscation; controls have no leak)
+Adapter      Layer  Exact leak       Norm leak        Wilson 95%
+-----------  -----  ---------------  ---------------  --------------
+piiguard     clean  0.932 (466/500)  0.932 (466/500)  [0.906, 0.951]
+piiguard-v2  clean  0.806 (403/500)  0.806 (403/500)  [0.769, 0.838]
+
+In-scope entity contract (normalized leak on categories each system is configured for)
+Adapter      Configured categories                                                                 In-scope prompt leak  Cluster 95%     In-scope span leak  Shared-scope prompt leak  Cluster 95%     Shared-scope span leak
+-----------  ------------------------------------------------------------------------------------  --------------------  --------------  ------------------  ------------------------  --------------  ----------------------
+piiguard     credit_card,email,phone,ssn                                                           0.389 (124/319)       [0.335, 0.439]  0.291 (143/492)     0.389 (124/319)           [0.335, 0.439]  0.291 (143/492)
+piiguard-v2  account_number,api_key,credit_card,diagnosis,email,mrn,name,password,phone,ssn,token  0.741 (360/486)       [0.702, 0.780]  0.525 (608/1158)    0.379 (121/319)           [0.326, 0.429]  0.283 (139/492)
+  shared scope = credit_card,email,phone,ssn (intersection of declared contracts of non-mock adapters)
+
+Category breakdown (normalized leak)
+Adapter      Category        Leak rate        95% CI
+-----------  --------------  ---------------  --------------
+piiguard     account_number  0.576 (19/33)    [0.408, 0.728]
+piiguard     address         1.000 (147/147)  [0.975, 1.000]
+piiguard     api_key         1.000 (24/24)    [0.862, 1.000]
+piiguard     credit_card     0.279 (19/68)    [0.187, 0.396]
+piiguard     email           0.000 (0/120)    [0.000, 0.031]
+piiguard     mrn             1.000 (203/203)  [0.981, 1.000]
+piiguard     name            1.000 (198/198)  [0.981, 1.000]
+piiguard     password        1.000 (27/27)    [0.875, 1.000]
+piiguard     phone           0.625 (55/88)    [0.521, 0.719]
+piiguard     ssn             0.397 (56/141)   [0.320, 0.480]
+piiguard-v2  account_number  0.576 (19/33)    [0.408, 0.728]
+piiguard-v2  address         1.000 (147/147)  [0.975, 1.000]
+piiguard-v2  api_key         1.000 (24/24)    [0.862, 1.000]
+piiguard-v2  credit_card     0.279 (19/68)    [0.187, 0.396]
+piiguard-v2  email           0.000 (0/120)    [0.000, 0.031]
+piiguard-v2  mrn             0.517 (105/203)  [0.449, 0.585]
+piiguard-v2  name            0.869 (172/198)  [0.815, 0.909]
+piiguard-v2  password        0.444 (12/27)    [0.276, 0.627]
+piiguard-v2  phone           0.625 (55/88)    [0.521, 0.719]
+piiguard-v2  ssn             0.376 (53/141)   [0.300, 0.458]
+
+Paired McNemar exact tests on normalized leak (Holm over non-mock pairs; 'ref' = mock pair, unadjusted)
+Pair (A vs B)            only A leaks  only B leaks  p exact    p Holm     rate(A)-rate(B) [cluster-boot 95%]  cluster CI excl. 0  FPR(A)-FPR(B) [cluster-boot 95%]  FPR p exact  FPR p Holm
+-----------------------  ------------  ------------  ---------  ---------  ----------------------------------  ------------------  --------------------------------  -----------  ----------
+piiguard vs piiguard-v2  63            0             2.168e-19  2.168e-19  +0.126 [+0.096, +0.156]             yes                 n/a                               n/a          ref
+  summary (non-mock pairs, n=1): Holm-significant at 0.05: 1; of those, cluster CI excludes 0: 1; total pairs with leak cluster CI excluding 0: 1; FPR cluster CI excluding 0: 0; FPR Holm-significant (separate Holm family): 0; of those, FPR cluster CI excludes 0: 0
+
+Bootstrap rank intervals (1 = least leakage, normalized leak)
+Adapter      Rank  95% interval
+-----------  ----  ------------
+piiguard     2.0   [2.0, 2.0]
+piiguard-v2  1.0   [1.0, 1.0]

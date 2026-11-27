@@ -1,0 +1,17 @@
+{
+ "a": "abl-v2h",
+ "b": "v21",
+ "scoring_fields": [
+  "blocked",
+  "exact_leak",
+  "normalized_leak",
+  "partial_exposure",
+  "false_positive",
+  "contract_false_positive",
+  "span_matches"
+ ],
+ "scoring_diffs": [],
+ "compared": 3000,
+ "output_text_diffs": 20,
+ "detected_types_diffs": 40
+}

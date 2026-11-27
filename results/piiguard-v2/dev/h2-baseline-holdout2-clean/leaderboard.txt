@@ -1,0 +1,120 @@
+PII-GuardBench results (scorer v2)
+  prompts : data/dev/pgb-dev-v1/holdout2.jsonl
+  counts  : 300 total, 300 PII, 0 control
+  bootstrap: 2000 iterations, seed 0; PII clusters 8, control clusters 0 (metadata.cluster > metadata.template_id > id)
+  intervals: cluster-bootstrap 95% (reported); Wilson columns at the end are iid, secondary
+  blocked = share of PII prompts blocked; ctl blocked = share of no-PII controls blocked
+
+Adapter                  Norm leak        Cluster 95%     Span leak        Cluster 95%     FPR        Cluster 95%  Exact leak       Partial        Blocked        Cluster 95%     Resid|block  Ctl blocked  Cluster 95%  Latency ms (mean/p50/p95)  Wilson (iid, secondary): leak  span            FPR
+-----------------------  ---------------  --------------  ---------------  --------------  ---------  -----------  ---------------  -------------  -------------  --------------  -----------  -----------  -----------  -------------------------  -----------------------------  --------------  ---
+piiguard                 0.873 (262/300)  [0.620, 1.000]  0.589 (442/751)  [0.370, 0.826]  n/a (0/0)  n/a          0.873 (262/300)  0.000 (0/113)  0.000 (0/300)  [0.000, 0.000]  n/a (0/0)    n/a (0/0)    n/a          0.13 / 0.12 / 0.19         [0.831, 0.906]                 [0.553, 0.623]  n/a
+presidio                 0.327 (98/300)   [0.076, 0.628]  0.206 (155/751)  [0.029, 0.438]  n/a (0/0)  n/a          0.327 (98/300)   0.000 (0/113)  0.000 (0/300)  [0.000, 0.000]  n/a (0/0)    n/a (0/0)    n/a          4.97 / 4.66 / 5.77         [0.276, 0.382]                 [0.179, 0.237]  n/a
+piiguard-union-presidio  0.293 (88/300)   [0.046, 0.576]  0.192 (144/751)  [0.016, 0.425]  n/a (0/0)  n/a          0.293 (88/300)   0.000 (0/113)  0.000 (0/300)  [0.000, 0.000]  n/a (0/0)    n/a (0/0)    n/a          4.87 / 4.66 / 5.63         [0.245, 0.347]                 [0.165, 0.221]  n/a
+
+Leak by template family (normalized leak; Wilson, no clustering)
+Adapter                  Family       Norm leak        Wilson 95%
+-----------------------  -----------  ---------------  --------------
+piiguard                 credentials  1.000 (74/74)    [0.951, 1.000]
+piiguard                 finance      0.667 (76/114)   [0.576, 0.747]
+piiguard                 health       1.000 (112/112)  [0.967, 1.000]
+presidio                 credentials  1.000 (74/74)    [0.951, 1.000]
+presidio                 finance      0.018 (2/114)    [0.005, 0.062]
+presidio                 health       0.196 (22/112)   [0.133, 0.280]
+piiguard-union-presidio  credentials  1.000 (74/74)    [0.951, 1.000]
+piiguard-union-presidio  finance      0.000 (0/114)    [0.000, 0.033]
+piiguard-union-presidio  health       0.125 (14/112)   [0.076, 0.199]
+
+Leak by template (normalized leak; Wilson within one template)
+Adapter                  Template  Norm leak      Wilson 95%
+-----------------------  --------  -------------  --------------
+piiguard                 cred-h01  1.000 (37/37)  [0.906, 1.000]
+piiguard                 cred-h02  1.000 (37/37)  [0.906, 1.000]
+piiguard                 fin-h01   1.000 (38/38)  [0.908, 1.000]
+piiguard                 fin-h02   1.000 (38/38)  [0.908, 1.000]
+piiguard                 fin-h03   0.000 (0/38)   [0.000, 0.092]
+piiguard                 hea-h01   1.000 (38/38)  [0.908, 1.000]
+piiguard                 hea-h02   1.000 (37/37)  [0.906, 1.000]
+piiguard                 hea-h03   1.000 (37/37)  [0.906, 1.000]
+presidio                 cred-h01  1.000 (37/37)  [0.906, 1.000]
+presidio                 cred-h02  1.000 (37/37)  [0.906, 1.000]
+presidio                 fin-h01   0.053 (2/38)   [0.015, 0.173]
+presidio                 fin-h02   0.000 (0/38)   [0.000, 0.092]
+presidio                 fin-h03   0.000 (0/38)   [0.000, 0.092]
+presidio                 hea-h01   0.132 (5/38)   [0.058, 0.273]
+presidio                 hea-h02   0.459 (17/37)  [0.310, 0.616]
+presidio                 hea-h03   0.000 (0/37)   [0.000, 0.094]
+piiguard-union-presidio  cred-h01  1.000 (37/37)  [0.906, 1.000]
+piiguard-union-presidio  cred-h02  1.000 (37/37)  [0.906, 1.000]
+piiguard-union-presidio  fin-h01   0.000 (0/38)   [0.000, 0.092]
+piiguard-union-presidio  fin-h02   0.000 (0/38)   [0.000, 0.092]
+piiguard-union-presidio  fin-h03   0.000 (0/38)   [0.000, 0.092]
+piiguard-union-presidio  hea-h01   0.132 (5/38)   [0.058, 0.273]
+piiguard-union-presidio  hea-h02   0.243 (9/37)   [0.134, 0.401]
+piiguard-union-presidio  hea-h03   0.000 (0/37)   [0.000, 0.094]
+
+Layer breakdown (clean / hard obfuscation; controls have no leak)
+Adapter                  Layer  Exact leak       Norm leak        Wilson 95%
+-----------------------  -----  ---------------  ---------------  --------------
+piiguard                 clean  0.873 (262/300)  0.873 (262/300)  [0.831, 0.906]
+presidio                 clean  0.327 (98/300)   0.327 (98/300)   [0.276, 0.382]
+piiguard-union-presidio  clean  0.293 (88/300)   0.293 (88/300)   [0.245, 0.347]
+
+In-scope entity contract (normalized leak on categories each system is configured for)
+Adapter                  Configured categories                                    In-scope prompt leak  Cluster 95%     In-scope span leak  Shared-scope prompt leak  Cluster 95%     Shared-scope span leak
+-----------------------  -------------------------------------------------------  --------------------  --------------  ------------------  ------------------------  --------------  ----------------------
+piiguard                 credit_card,email,phone,ssn                              0.000 (0/188)         [0.000, 0.000]  0.000 (0/301)       0.000 (0/188)             [0.000, 0.000]  0.000 (0/301)
+presidio                 account_number,address,credit_card,email,name,phone,ssn  0.049 (11/226)        [0.000, 0.129]  0.022 (11/490)      0.059 (11/188)            [0.000, 0.155]  0.037 (11/301)
+piiguard-union-presidio  account_number,address,credit_card,email,name,phone,ssn  0.000 (0/226)         [0.000, 0.000]  0.000 (0/490)       0.000 (0/188)             [0.000, 0.000]  0.000 (0/301)
+  shared scope = credit_card,email,phone,ssn (intersection of declared contracts of non-mock adapters)
+
+Category breakdown (normalized leak)
+Adapter                  Category        Leak rate        95% CI
+-----------------------  --------------  ---------------  --------------
+piiguard                 account_number  0.789 (30/38)    [0.637, 0.889]
+piiguard                 api_key         1.000 (37/37)    [0.906, 1.000]
+piiguard                 credit_card     0.000 (0/76)     [0.000, 0.048]
+piiguard                 diagnosis       1.000 (38/38)    [0.908, 1.000]
+piiguard                 email           0.000 (0/75)     [0.000, 0.049]
+piiguard                 mrn             1.000 (75/75)    [0.951, 1.000]
+piiguard                 name            1.000 (151/151)  [0.975, 1.000]
+piiguard                 password        1.000 (37/37)    [0.906, 1.000]
+piiguard                 phone           0.000 (0/75)     [0.000, 0.049]
+piiguard                 ssn             0.000 (0/75)     [0.000, 0.049]
+piiguard                 token           1.000 (37/37)    [0.906, 1.000]
+presidio                 account_number  0.000 (0/38)     [0.000, 0.092]
+presidio                 api_key         0.946 (35/37)    [0.823, 0.985]
+presidio                 credit_card     0.000 (0/76)     [0.000, 0.048]
+presidio                 diagnosis       0.000 (0/38)     [0.000, 0.092]
+presidio                 email           0.000 (0/75)     [0.000, 0.049]
+presidio                 mrn             0.187 (14/75)    [0.115, 0.289]
+presidio                 name            0.000 (0/151)    [0.000, 0.025]
+presidio                 password        0.946 (35/37)    [0.823, 0.985]
+presidio                 phone           0.147 (11/75)    [0.084, 0.244]
+presidio                 ssn             0.000 (0/75)     [0.000, 0.049]
+presidio                 token           1.000 (37/37)    [0.906, 1.000]
+piiguard-union-presidio  account_number  0.000 (0/38)     [0.000, 0.092]
+piiguard-union-presidio  api_key         0.946 (35/37)    [0.823, 0.985]
+piiguard-union-presidio  credit_card     0.000 (0/76)     [0.000, 0.048]
+piiguard-union-presidio  diagnosis       0.000 (0/38)     [0.000, 0.092]
+piiguard-union-presidio  email           0.000 (0/75)     [0.000, 0.049]
+piiguard-union-presidio  mrn             0.187 (14/75)    [0.115, 0.289]
+piiguard-union-presidio  name            0.000 (0/151)    [0.000, 0.025]
+piiguard-union-presidio  password        0.946 (35/37)    [0.823, 0.985]
+piiguard-union-presidio  phone           0.000 (0/75)     [0.000, 0.049]
+piiguard-union-presidio  ssn             0.000 (0/75)     [0.000, 0.049]
+piiguard-union-presidio  token           1.000 (37/37)    [0.906, 1.000]
+
+Paired McNemar exact tests on normalized leak (Holm over non-mock pairs; 'ref' = mock pair, unadjusted)
+Pair (A vs B)                        only A leaks  only B leaks  p exact    p Holm     rate(A)-rate(B) [cluster-boot 95%]  cluster CI excl. 0  FPR(A)-FPR(B) [cluster-boot 95%]  FPR p exact  FPR p Holm
+-----------------------------------  ------------  ------------  ---------  ---------  ----------------------------------  ------------------  --------------------------------  -----------  ----------
+piiguard vs presidio                 164           0             8.553e-50  1.711e-49  +0.547 [+0.236, +0.847]             yes                 n/a                               n/a          ref
+piiguard vs piiguard-union-presidio  174           0             8.352e-53  2.506e-52  +0.580 [+0.249, +0.873]             yes                 n/a                               n/a          ref
+presidio vs piiguard-union-presidio  10            0             0.001953   0.001953   +0.033 [+0.000, +0.087]             no                  n/a                               n/a          ref
+  summary (non-mock pairs, n=3): Holm-significant at 0.05: 3; of those, cluster CI excludes 0: 2; total pairs with leak cluster CI excluding 0: 2; FPR cluster CI excluding 0: 0; FPR Holm-significant (separate Holm family): 0; of those, FPR cluster CI excludes 0: 0
+
+Bootstrap rank intervals (1 = least leakage, normalized leak)
+Adapter                  Rank  95% interval
+-----------------------  ----  ------------
+piiguard                 3.0   [3.0, 3.0]
+presidio                 2.0   [1.5, 2.0]
+piiguard-union-presidio  1.0   [1.0, 1.5]

@@ -1,0 +1,11 @@
+h2-baseline            holdout2 piiguard                           clean  262/300  hard   60/100  ctlFP   17/100  ctlCFP   17/100  inscope clean    0/188 hard    40/80
+h2-baseline            holdout2 presidio                           clean   98/300  hard   57/100  ctlFP   95/100  ctlCFP   31/100  inscope clean   11/226 hard    40/80
+h2-baseline            holdout2 piiguard-union-presidio            clean   88/300  hard   37/100  ctlFP   95/100  ctlCFP   31/100  inscope clean    0/226 hard    20/80
+h2-v2f-zw              holdout2 piiguard-v2                        clean  113/300  hard   40/100  ctlFP    0/100  ctlCFP    0/100  inscope clean  113/300 hard   40/100
+h2-v2f-zw              holdout2 piiguard-v2-union-filtered         clean  113/300  hard   40/100  ctlFP    0/100  ctlCFP    0/100  inscope clean  113/300 hard   40/100
+h2-v2g-name2           holdout2 piiguard-v2                        clean   76/300  hard   40/100  ctlFP    0/100  ctlCFP    0/100  inscope clean   76/300 hard   40/100
+h2-v2g-name2           holdout2 piiguard-v2-union-filtered         clean   76/300  hard   40/100  ctlFP    0/100  ctlCFP    0/100  inscope clean   76/300 hard   40/100
+u-v2f-zw               train    piiguard-v2-union-filtered         clean    0/300  hard    0/100  ctlFP    0/100  ctlCFP    0/100  inscope clean    0/300 hard    0/100
+u-v2f-zw               holdout  piiguard-v2-union-filtered         clean  112/300  hard    0/100  ctlFP    0/100  ctlCFP    0/100  inscope clean  112/300 hard    0/100
+u-v2g-name2            train    piiguard-v2-union-filtered         clean    0/300  hard    0/100  ctlFP    0/100  ctlCFP    0/100  inscope clean    0/300 hard    0/100
+u-v2g-name2            holdout  piiguard-v2-union-filtered         clean    0/300  hard    0/100  ctlFP    0/100  ctlCFP    0/100  inscope clean    0/300 hard    0/100

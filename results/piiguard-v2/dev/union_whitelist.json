@@ -1,0 +1,223 @@
+{
+  "rule": "in PRESIDIO_TO_CATEGORY and dev_control_hits <= 2/200",
+  "n_controls": 200,
+  "n_spans": 1721,
+  "types": [
+    {
+      "type": "CREDIT_CARD",
+      "category": "credit_card",
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 114,
+      "span_overlaps_by_category": {
+        "credit_card": 114
+      },
+      "keep": true
+    },
+    {
+      "type": "CRYPTO",
+      "category": null,
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 0,
+      "span_overlaps_by_category": {},
+      "keep": false
+    },
+    {
+      "type": "DATE_TIME",
+      "category": null,
+      "dev_control_hits": 74,
+      "dev_span_overlaps": 90,
+      "span_overlaps_by_category": {
+        "credit_card": 41,
+        "password": 8,
+        "phone": 6,
+        "ssn": 20,
+        "account_number": 12,
+        "mrn": 2,
+        "email": 1
+      },
+      "keep": false
+    },
+    {
+      "type": "EMAIL_ADDRESS",
+      "category": "email",
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 187,
+      "span_overlaps_by_category": {
+        "email": 187
+      },
+      "keep": true
+    },
+    {
+      "type": "IBAN_CODE",
+      "category": "account_number",
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 0,
+      "span_overlaps_by_category": {},
+      "keep": true
+    },
+    {
+      "type": "IP_ADDRESS",
+      "category": null,
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 0,
+      "span_overlaps_by_category": {},
+      "keep": false
+    },
+    {
+      "type": "LOCATION",
+      "category": "address",
+      "dev_control_hits": 9,
+      "dev_span_overlaps": 5,
+      "span_overlaps_by_category": {
+        "name": 1,
+        "mrn": 3,
+        "password": 1
+      },
+      "keep": false
+    },
+    {
+      "type": "MAC_ADDRESS",
+      "category": null,
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 0,
+      "span_overlaps_by_category": {},
+      "keep": false
+    },
+    {
+      "type": "MEDICAL_LICENSE",
+      "category": null,
+      "dev_control_hits": 5,
+      "dev_span_overlaps": 2,
+      "span_overlaps_by_category": {
+        "mrn": 2
+      },
+      "keep": false
+    },
+    {
+      "type": "NRP",
+      "category": null,
+      "dev_control_hits": 2,
+      "dev_span_overlaps": 0,
+      "span_overlaps_by_category": {},
+      "keep": false
+    },
+    {
+      "type": "PERSON",
+      "category": "name",
+      "dev_control_hits": 23,
+      "dev_span_overlaps": 341,
+      "span_overlaps_by_category": {
+        "name": 300,
+        "mrn": 9,
+        "password": 5,
+        "diagnosis": 18,
+        "credit_card": 2,
+        "token": 2,
+        "api_key": 5
+      },
+      "keep": false
+    },
+    {
+      "type": "PHONE_NUMBER",
+      "category": "phone",
+      "dev_control_hits": 5,
+      "dev_span_overlaps": 140,
+      "span_overlaps_by_category": {
+        "phone": 121,
+        "account_number": 17,
+        "mrn": 1,
+        "credit_card": 1
+      },
+      "keep": false
+    },
+    {
+      "type": "UK_NHS",
+      "category": null,
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 3,
+      "span_overlaps_by_category": {
+        "phone": 3
+      },
+      "keep": false
+    },
+    {
+      "type": "URL",
+      "category": null,
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 187,
+      "span_overlaps_by_category": {
+        "email": 187
+      },
+      "keep": false
+    },
+    {
+      "type": "US_BANK_NUMBER",
+      "category": "account_number",
+      "dev_control_hits": 8,
+      "dev_span_overlaps": 164,
+      "span_overlaps_by_category": {
+        "account_number": 76,
+        "credit_card": 27,
+        "mrn": 61
+      },
+      "keep": false
+    },
+    {
+      "type": "US_DRIVER_LICENSE",
+      "category": null,
+      "dev_control_hits": 80,
+      "dev_span_overlaps": 352,
+      "span_overlaps_by_category": {
+        "account_number": 76,
+        "mrn": 105,
+        "diagnosis": 112,
+        "credit_card": 40,
+        "api_key": 11,
+        "password": 8
+      },
+      "keep": false
+    },
+    {
+      "type": "US_ITIN",
+      "category": null,
+      "dev_control_hits": 6,
+      "dev_span_overlaps": 0,
+      "span_overlaps_by_category": {},
+      "keep": false
+    },
+    {
+      "type": "US_PASSPORT",
+      "category": null,
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 12,
+      "span_overlaps_by_category": {
+        "account_number": 12
+      },
+      "keep": false
+    },
+    {
+      "type": "US_SSN",
+      "category": "ssn",
+      "dev_control_hits": 20,
+      "dev_span_overlaps": 162,
+      "span_overlaps_by_category": {
+        "ssn": 150,
+        "account_number": 12
+      },
+      "keep": false
+    },
+    {
+      "type": "UUID",
+      "category": null,
+      "dev_control_hits": 0,
+      "dev_span_overlaps": 0,
+      "span_overlaps_by_category": {},
+      "keep": false
+    }
+  ],
+  "whitelist": [
+    "CREDIT_CARD",
+    "EMAIL_ADDRESS",
+    "IBAN_CODE"
+  ]
+}

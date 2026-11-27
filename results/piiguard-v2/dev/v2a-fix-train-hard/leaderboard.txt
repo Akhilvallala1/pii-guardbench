@@ -1,0 +1,62 @@
+PII-GuardBench results (scorer v2)
+  prompts : data/dev/pgb-dev-v1/train.jsonl
+  counts  : 100 total, 100 PII, 0 control
+  bootstrap: 2000 iterations, seed 0; PII clusters 5, control clusters 0 (metadata.cluster > metadata.template_id > id)
+  intervals: cluster-bootstrap 95% (reported); Wilson columns at the end are iid, secondary
+  blocked = share of PII prompts blocked; ctl blocked = share of no-PII controls blocked
+
+Adapter      Norm leak       Cluster 95%     Span leak       Cluster 95%     FPR        Cluster 95%  Exact leak      Partial       Blocked        Cluster 95%     Resid|block  Ctl blocked  Cluster 95%  Latency ms (mean/p50/p95)  Wilson (iid, secondary): leak  span            FPR
+-----------  --------------  --------------  --------------  --------------  ---------  -----------  --------------  ------------  -------------  --------------  -----------  -----------  -----------  -------------------------  -----------------------------  --------------  ---
+piiguard-v2  0.400 (40/100)  [0.000, 0.800]  0.400 (40/100)  [0.000, 0.800]  n/a (0/0)  n/a          0.400 (40/100)  0.000 (0/40)  0.000 (0/100)  [0.000, 0.000]  n/a (0/0)    n/a (0/0)    n/a          0.14 / 0.13 / 0.22         [0.309, 0.498]                 [0.309, 0.498]  n/a
+
+Leak by template family (normalized leak; Wilson, no clustering)
+Adapter      Family       Norm leak      Wilson 95%
+-----------  -----------  -------------  --------------
+piiguard-v2  credentials  1.000 (40/40)  [0.912, 1.000]
+piiguard-v2  finance      0.000 (0/20)   [0.000, 0.161]
+piiguard-v2  health       0.000 (0/40)   [0.000, 0.088]
+
+Leak by template (normalized leak; Wilson within one template)
+Adapter      Template  Norm leak      Wilson 95%
+-----------  --------  -------------  --------------
+piiguard-v2  hard-d01  0.000 (0/20)   [0.000, 0.161]
+piiguard-v2  hard-d03  0.000 (0/20)   [0.000, 0.161]
+piiguard-v2  hard-d05  0.000 (0/20)   [0.000, 0.161]
+piiguard-v2  hard-d07  1.000 (20/20)  [0.839, 1.000]
+piiguard-v2  hard-d08  1.000 (20/20)  [0.839, 1.000]
+
+Layer breakdown (clean / hard obfuscation; controls have no leak)
+Adapter      Layer  Exact leak      Norm leak       Wilson 95%
+-----------  -----  --------------  --------------  --------------
+piiguard-v2  hard   0.400 (40/100)  0.400 (40/100)  [0.309, 0.498]
+
+Hard-layer breakdown by obfuscation (normalized leak)
+Adapter      Obfuscation    Norm leak      Wilson 95%
+-----------  -------------  -------------  --------------
+piiguard-v2  base64         1.000 (20/20)  [0.839, 1.000]
+piiguard-v2  dashed_digits  0.000 (0/20)   [0.000, 0.161]
+piiguard-v2  leetspeak_alt  1.000 (20/20)  [0.839, 1.000]
+piiguard-v2  spaced_digits  0.000 (0/40)   [0.000, 0.088]
+
+In-scope entity contract (normalized leak on categories each system is configured for)
+Adapter      Configured categories        In-scope prompt leak  Cluster 95%     In-scope span leak  Shared-scope prompt leak  Cluster 95%     Shared-scope span leak
+-----------  ---------------------------  --------------------  --------------  ------------------  ------------------------  --------------  ----------------------
+piiguard-v2  credit_card,email,phone,ssn  0.000 (0/60)          [0.000, 0.000]  0.000 (0/60)        0.000 (0/60)              [0.000, 0.000]  0.000 (0/60)
+  shared scope = credit_card,email,phone,ssn (intersection of declared contracts of non-mock adapters)
+
+Category breakdown (normalized leak)
+Adapter      Category     Leak rate      95% CI
+-----------  -----------  -------------  --------------
+piiguard-v2  api_key      1.000 (20/20)  [0.839, 1.000]
+piiguard-v2  credit_card  0.000 (0/20)   [0.000, 0.161]
+piiguard-v2  password     1.000 (20/20)  [0.839, 1.000]
+piiguard-v2  phone        0.000 (0/20)   [0.000, 0.161]
+piiguard-v2  ssn          0.000 (0/20)   [0.000, 0.161]
+
+Paired McNemar exact tests on normalized leak (Holm over non-mock pairs; 'ref' = mock pair, unadjusted)
+  (needs at least two adapters)
+
+Bootstrap rank intervals (1 = least leakage, normalized leak)
+Adapter      Rank  95% interval
+-----------  ----  ------------
+piiguard-v2  1.0   [1.0, 1.0]

@@ -1,0 +1,213 @@
+baseline               train    piiguard                           clean  300/300  hard   40/100  ctlFP    0/100  ctlCFP    0/100  inscope clean    0/150 hard     0/60
+    clean  cat account_number  34/38
+    clean  cat api_key         74/74
+    clean  cat credit_card     0/38
+    clean  cat diagnosis       75/75
+    clean  cat email           0/38
+    clean  cat mrn             112/112
+    clean  cat name            152/152
+    clean  cat password        37/37
+    clean  cat phone           0/38
+    clean  cat ssn             0/112
+    clean  cat token           37/37
+    clean  tpl cred-d01        37/37
+    clean  tpl cred-d03        37/37
+    clean  tpl fin-d01         38/38
+    clean  tpl fin-d03         38/38
+    clean  tpl fin-d05         38/38
+    clean  tpl hea-d01         38/38
+    clean  tpl hea-d03         37/37
+    clean  tpl hea-d05         37/37
+    hard   cat api_key         20/20
+    hard   cat credit_card     0/20
+    hard   cat password        20/20
+    hard   cat phone           0/20
+    hard   cat ssn             0/20
+    hard   tpl hard-d01        0/20
+    hard   tpl hard-d03        0/20
+    hard   tpl hard-d05        0/20
+    hard   tpl hard-d07        20/20
+    hard   tpl hard-d08        20/20
+    control tpl ctl-d01    raw 0/20 contract 0/20
+    control tpl ctl-d03    raw 0/20 contract 0/20
+    control tpl ctl-d05    raw 0/20 contract 0/20
+    control tpl ctl-d07    raw 0/20 contract 0/20
+    control tpl ctl-d09    raw 0/20 contract 0/20
+    control fp by type {}
+baseline               train    presidio                           clean  104/300  hard   65/100  ctlFP   71/100  ctlCFP   23/100  inscope clean    5/226 hard    33/60
+    clean  cat account_number  0/38
+    clean  cat api_key         71/74
+    clean  cat credit_card     0/38
+    clean  cat diagnosis       0/75
+    clean  cat email           0/38
+    clean  cat mrn             26/112
+    clean  cat name            1/152
+    clean  cat password        30/37
+    clean  cat phone           4/38
+    clean  cat ssn             0/112
+    clean  cat token           37/37
+    clean  tpl cred-d01        36/37
+    clean  tpl cred-d03        37/37
+    clean  tpl fin-d01         0/38
+    clean  tpl fin-d03         4/38
+    clean  tpl fin-d05         1/38
+    clean  tpl hea-d01         9/38
+    clean  tpl hea-d03         6/37
+    clean  tpl hea-d05         11/37
+    hard   cat api_key         20/20
+    hard   cat credit_card     20/20
+    hard   cat password        12/20
+    hard   cat phone           0/20
+    hard   cat ssn             13/20
+    hard   tpl hard-d01        20/20
+    hard   tpl hard-d03        0/20
+    hard   tpl hard-d05        13/20
+    hard   tpl hard-d07        12/20
+    hard   tpl hard-d08        20/20
+    control tpl ctl-d01    raw 11/20 contract 1/20
+    control tpl ctl-d03    raw 20/20 contract 0/20
+    control tpl ctl-d05    raw 20/20 contract 20/20
+    control tpl ctl-d07    raw 20/20 contract 2/20
+    control tpl ctl-d09    raw 0/20 contract 0/20
+    control fp by type {"DATE_TIME": 30, "MEDICAL_LICENSE": 5, "NRP": 2, "PERSON": 22, "PHONE_NUMBER": 1, "US_DRIVER_LICENSE": 18}
+baseline               train    piiguard-union-presidio            clean  100/300  hard   32/100  ctlFP   71/100  ctlCFP   23/100  inscope clean    1/226 hard     0/60
+    clean  cat account_number  0/38
+    clean  cat api_key         71/74
+    clean  cat credit_card     0/38
+    clean  cat diagnosis       0/75
+    clean  cat email           0/38
+    clean  cat mrn             26/112
+    clean  cat name            1/152
+    clean  cat password        30/37
+    clean  cat phone           0/38
+    clean  cat ssn             0/112
+    clean  cat token           37/37
+    clean  tpl cred-d01        36/37
+    clean  tpl cred-d03        37/37
+    clean  tpl fin-d01         0/38
+    clean  tpl fin-d03         0/38
+    clean  tpl fin-d05         1/38
+    clean  tpl hea-d01         9/38
+    clean  tpl hea-d03         6/37
+    clean  tpl hea-d05         11/37
+    hard   cat api_key         20/20
+    hard   cat credit_card     0/20
+    hard   cat password        12/20
+    hard   cat phone           0/20
+    hard   cat ssn             0/20
+    hard   tpl hard-d01        0/20
+    hard   tpl hard-d03        0/20
+    hard   tpl hard-d05        0/20
+    hard   tpl hard-d07        12/20
+    hard   tpl hard-d08        20/20
+    control tpl ctl-d01    raw 11/20 contract 1/20
+    control tpl ctl-d03    raw 20/20 contract 0/20
+    control tpl ctl-d05    raw 20/20 contract 20/20
+    control tpl ctl-d07    raw 20/20 contract 2/20
+    control tpl ctl-d09    raw 0/20 contract 0/20
+    control fp by type {"presidio:DATE_TIME": 30, "presidio:MEDICAL_LICENSE": 5, "presidio:NRP": 2, "presidio:PERSON": 22, "presidio:PHONE_NUMBER": 1, "presidio:US_DRIVER_LICENSE": 18}
+baseline               holdout  piiguard                           clean  257/300  hard   80/100  ctlFP   20/100  ctlCFP   20/100  inscope clean    0/263 hard    40/40
+    clean  cat account_number  33/38
+    clean  cat credit_card     0/76
+    clean  cat diagnosis       37/37
+    clean  cat email           0/149
+    clean  cat mrn             38/38
+    clean  cat name            150/150
+    clean  cat password        74/74
+    clean  cat phone           0/76
+    clean  cat ssn             0/38
+    clean  cat token           74/74
+    clean  tpl cred-d02        37/37
+    clean  tpl cred-d04        37/37
+    clean  tpl cred-d05        37/37
+    clean  tpl fin-d02         33/38
+    clean  tpl fin-d04         0/38
+    clean  tpl fin-d06         38/38
+    clean  tpl hea-d02         38/38
+    clean  tpl hea-d04         37/37
+    hard   cat account_number  0/20
+    hard   cat api_key         20/20
+    hard   cat credit_card     20/20
+    hard   cat password        20/20
+    hard   cat ssn             20/20
+    hard   tpl hard-d02        20/20
+    hard   tpl hard-d04        20/20
+    hard   tpl hard-d06        20/20
+    hard   tpl hard-d09        0/20
+    hard   tpl hard-d10        20/20
+    control tpl ctl-d02    raw 20/20 contract 20/20
+    control tpl ctl-d04    raw 0/20 contract 0/20
+    control tpl ctl-d06    raw 0/20 contract 0/20
+    control tpl ctl-d08    raw 0/20 contract 0/20
+    control tpl ctl-d10    raw 0/20 contract 0/20
+    control fp by type {"ssn": 20}
+baseline               holdout  presidio                           clean  131/300  hard   76/100  ctlFP  100/100  ctlCFP   35/100  inscope clean    9/300 hard    49/60
+    clean  cat account_number  0/38
+    clean  cat credit_card     0/76
+    clean  cat diagnosis       0/37
+    clean  cat email           0/149
+    clean  cat mrn             16/38
+    clean  cat name            0/150
+    clean  cat password        68/74
+    clean  cat phone           9/76
+    clean  cat ssn             0/38
+    clean  cat token           72/74
+    clean  tpl cred-d02        35/37
+    clean  tpl cred-d04        35/37
+    clean  tpl cred-d05        37/37
+    clean  tpl fin-d02         7/38
+    clean  tpl fin-d04         0/38
+    clean  tpl fin-d06         0/38
+    clean  tpl hea-d02         17/38
+    clean  tpl hea-d04         0/37
+    hard   cat account_number  18/20
+    hard   cat api_key         8/20
+    hard   cat credit_card     17/20
+    hard   cat password        19/20
+    hard   cat ssn             14/20
+    hard   tpl hard-d02        14/20
+    hard   tpl hard-d04        17/20
+    hard   tpl hard-d06        8/20
+    hard   tpl hard-d09        18/20
+    hard   tpl hard-d10        19/20
+    control tpl ctl-d02    raw 20/20 contract 20/20
+    control tpl ctl-d04    raw 20/20 contract 7/20
+    control tpl ctl-d06    raw 20/20 contract 0/20
+    control tpl ctl-d08    raw 20/20 contract 8/20
+    control tpl ctl-d10    raw 20/20 contract 0/20
+    control fp by type {"DATE_TIME": 44, "LOCATION": 9, "PERSON": 1, "PHONE_NUMBER": 2, "US_BANK_NUMBER": 4, "US_DRIVER_LICENSE": 41, "US_SSN": 20}
+baseline               holdout  piiguard-union-presidio            clean  123/300  hard   58/100  ctlFP  100/100  ctlCFP   35/100  inscope clean    0/300 hard    31/60
+    clean  cat account_number  0/38
+    clean  cat credit_card     0/76
+    clean  cat diagnosis       0/37
+    clean  cat email           0/149
+    clean  cat mrn             16/38
+    clean  cat name            0/150
+    clean  cat password        68/74
+    clean  cat phone           0/76
+    clean  cat ssn             0/38
+    clean  cat token           72/74
+    clean  tpl cred-d02        35/37
+    clean  tpl cred-d04        35/37
+    clean  tpl cred-d05        37/37
+    clean  tpl fin-d02         0/38
+    clean  tpl fin-d04         0/38
+    clean  tpl fin-d06         0/38
+    clean  tpl hea-d02         16/38
+    clean  tpl hea-d04         0/37
+    hard   cat account_number  0/20
+    hard   cat api_key         8/20
+    hard   cat credit_card     17/20
+    hard   cat password        19/20
+    hard   cat ssn             14/20
+    hard   tpl hard-d02        14/20
+    hard   tpl hard-d04        17/20
+    hard   tpl hard-d06        8/20
+    hard   tpl hard-d09        0/20
+    hard   tpl hard-d10        19/20
+    control tpl ctl-d02    raw 20/20 contract 20/20
+    control tpl ctl-d04    raw 20/20 contract 7/20
+    control tpl ctl-d06    raw 20/20 contract 0/20
+    control tpl ctl-d08    raw 20/20 contract 8/20
+    control tpl ctl-d10    raw 20/20 contract 0/20
+    control fp by type {"piiguard:ssn": 20, "presidio:DATE_TIME": 44, "presidio:LOCATION": 9, "presidio:PERSON": 1, "presidio:PHONE_NUMBER": 2, "presidio:US_BANK_NUMBER": 4, "presidio:US_DRIVER_LICENSE": 41, "presidio:US_SSN": 20}
